@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function Test() {
+export default function Home({ navigation, route }) {
     return(
         <View>
-            <Text style={[styles.sectionTitle]}>Stop Smoke App</Text>
+            <Text style={[styles.sectionTitle]}>This is home and this screen navigated from {route.params.name}</Text>
         </View>
     );
 }
