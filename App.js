@@ -7,48 +7,26 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Test from './src/pages';
+import { SafeAreaView } from 'react-native';
 
+const Stack = createNativeStackNavigator();
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+const App = ()  => {
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Test />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Test"
+        component={Test}
+        options={{ title: 'Welcome' }}
+      />
+      {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
+    </Stack.Navigator>
+  </NavigationContainer>
   );
 };
 
