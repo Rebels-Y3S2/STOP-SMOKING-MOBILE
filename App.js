@@ -11,6 +11,7 @@
  import { createNativeStackNavigator } from '@react-navigation/native-stack';
  import Test from './src/pages/test';
  import Home from './src/pages/home';
+import CreateReminder from './src/pages/Reminder Management/CreateReminder';
  
  const Stack = createNativeStackNavigator();
  
@@ -25,6 +26,7 @@
          // options={{ title: 'Welcome' }}
        />
        <Stack.Screen name="Home" component={Home} />
+       <Stack.Screen name="CreateReminder" component={CreateReminder}/>
      </Stack.Navigator>
    </NavigationContainer>
    );
