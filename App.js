@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Test from './src/pages/test';
 import Home from './src/pages/home';
+import CreateReminder from './src/pages/Reminder Management/CreateReminder';
 import { Button, StyleSheet } from 'react-native';
 
 const Stack = createNativeStackNavigator();
@@ -29,6 +30,10 @@ const App = () => {
           name="Home" 
           component={Home} 
           options={getNavigatorStyles('Home')} />
+        <Stack.Screen 
+          name="CreateReminder" 
+          component={CreateReminder}
+          options={getNavigatorStyles('Reminder')} />
       </Stack.Navigator>
     </NavigationContainer>
   );

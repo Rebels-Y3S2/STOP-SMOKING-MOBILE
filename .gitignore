@@ -67,3 +67,5 @@ buck-out/
 /vendor/bundle/
 
 .expo/web/cache
+#expo cache
+/.expo/web/cache
