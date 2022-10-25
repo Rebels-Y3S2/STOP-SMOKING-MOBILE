@@ -2,6 +2,7 @@ import { Button } from '@react-native-material/core';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PopupContainer from '../components/Contaner/PopupContainer';
+import ChallengeProgress from '../components/ChallengeProgress/ChallengeProgress';
 import BigHeaderBackground from '../components/HeaderBackground/HeaderBackground';
 
 const styles = StyleSheet.create({
@@ -18,7 +19,7 @@ export default function Home({ navigation, route }) {
         <View>
             <BigHeaderBackground />
             <PopupContainer firstContainer>
-                <Text style={[styles.sectionTitle]}>This is home and this screen navigated from {route.params.name}</Text>
+                <ChallengeProgress />
             </PopupContainer>
             <PopupContainer>
                 <Text style={[styles.sectionTitle]}>This is home and this screen navigated from {route.params.name}</Text>
