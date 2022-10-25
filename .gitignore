@@ -66,6 +66,5 @@ buck-out/
 /ios/Pods/
 /vendor/bundle/
 
-.expo/web/cache
 #expo cache
-/.expo/web/cache
+.expo/web/cache
