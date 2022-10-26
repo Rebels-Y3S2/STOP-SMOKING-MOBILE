@@ -39,7 +39,6 @@ const App = () => {
           name="Reminders" 
           component={Reminders}
           options={getNavigatorStyles('Reminders')} />
-
       </Stack.Navigator>
       <AppFooter/>
     </NavigationContainer>
