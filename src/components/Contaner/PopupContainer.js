@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     ContainerStylesForFirstContainer: {
       backgroundColor: '#FFFFFF',
       border: '1px solid #FFFFFF',
-      borderRadius: '12px',
+      borderRadius: 12,
       elevation: 9,
       marginTop: -220,
       marginHorizontal: 30,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     ContainerStyles: {
         backgroundColor: '#FFFFFF',
         border: '1px solid #FFFFFF',
-        borderRadius: '12px',
+        borderRadius: 12,
         elevation: 9,
         marginTop: 37,
         marginHorizontal: 30,

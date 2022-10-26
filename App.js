@@ -11,8 +11,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Test from './src/pages/test';
 import Home from './src/pages/home';
-import CreateReminder from './src/pages/Reminder Management/CreateReminder';
-import { Button, StyleSheet } from 'react-native';
+import CreateReminder from './src/pages/Reminder Management/Create Reminder/CreateReminder';
+import AppFooter from './src/components/AppFooter/AppFooter';
+import Reminders from './src/pages/Reminder Management/Reminders/Reminders';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,9 +34,16 @@ const App = () => {
         <Stack.Screen 
           name="CreateReminder" 
           component={CreateReminder}
-          options={getNavigatorStyles('Reminder')} />
+          options={getNavigatorStyles('Create Reminder')} />
+        <Stack.Screen 
+          name="Reminders" 
+          component={Reminders}
+          options={getNavigatorStyles('Reminders')} />
+
       </Stack.Navigator>
+      <AppFooter/>
     </NavigationContainer>
+    
   );
 };
 
@@ -50,7 +58,7 @@ function getNavigatorStyles(componentName) {
       font: 'Roboto',
       fontStyle: 'normal',
       fontWeight: '500',
-      fontSize: '20px',
+      fontSize: 20,
       lineHeight: '24px',
       letterSpacing: '0.15px',
       color: '#FFFFFF'
