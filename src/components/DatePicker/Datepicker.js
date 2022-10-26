@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
-import { StyleSheet,View } from 'react-native'
+import { View } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import { TextInput } from '@react-native-material/core'
+import { styles } from './DatePickerStyles';
 
 export default function Datepicker(props) {
     const [date, setDate] = useState(new Date());
@@ -18,19 +20,30 @@ export default function Datepicker(props) {
         let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
         let fTime = 'Hours' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
         props.setText(fDate)
-        setText(fDate)
+        props.setText(fTime)
+        if(props.mode === 'date'){
+          setText(fDate)
+        }else{
+          setText(fTime)
+        }
     }
 
     const showMode = (currentMode) => {
         setShow(true);
         setMode(currentMode);
       };
+
   return (
     <View>
         <View>
             <TextInput variant="outlined" label={props.lable} value={text} style={{ margin: 16 }}></TextInput>
-            <Entypo name='calendar'size={30} onPress={()=> showMode('date')} style={styles.calendar} />
+            {
+              props.mode === 'date' ?
+              <MaterialIcons name='date-range'size={30} onPress={()=> showMode(props.mode)} style={styles.icon} />:
+              <AntDesign name='clockcircleo'size={30} onPress={()=> showMode(props.mode)} style={styles.icon} />
+            }
         </View>
+        <View style={{marginTop:'5%'}}></View>
         {
             show && (
             <DateTimePicker
@@ -46,31 +59,3 @@ export default function Datepicker(props) {
     </View>
   )
 }
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 10,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor : '#A8E9CA'
-    },
-    title: {
-      textAlign: 'left',
-      fontSize: 20,
-      fontWeight: 'bold',
-    },
-    datePickerStyle: {
-      width: 230,
-    },
-    text: {
-      textAlign: 'left',
-      width: 230,
-      fontSize: 16,
-      color : "#000"
-    },
-    calendar:{
-        textAlign:'right',
-        marginRight:25,
-        marginTop:-65
-    }
-  })
