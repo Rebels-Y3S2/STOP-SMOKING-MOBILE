@@ -1,10 +1,10 @@
 import React from "react";
-import { View, Button, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
-const Home = ({ navigation }) => {
+const Challenges = () => {
   return (
     <View style={styles.center}>
-      <Text>This is the Home screen</Text>
+      <Text>This is the Challenges screen</Text>
     </View>
   );
 };
@@ -16,4 +16,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-export default Home;
+export default Challenges;

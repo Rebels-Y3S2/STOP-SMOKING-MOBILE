@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import PopupContainer from '../components/Contaner/PopupContainer';
-import ChallengeProgress from '../components/ChallengeProgress/ChallengeProgress';
-import BigHeaderBackground from '../components/HeaderBackground/HeaderBackground';
+import PopupContainer from '../../components/Contaner/PopupContainer';
+import ChallengeProgress from '../../components/ChallengeProgress/ChallengeProgress';
+import BigHeaderBackground from '../../components/HeaderBackground/HeaderBackground';
 
-export default function ChallengeView({ route }) {
+export default function ChallengeView() {
     return (
         <View>
             <ScrollView>
@@ -16,7 +16,7 @@ export default function ChallengeView({ route }) {
                     </View>
                 </PopupContainer>
                 <PopupContainer>
-                    <Text>This is home and this screen navigated from {route.params.name}</Text>
+                    <Text>Oh ye Challenges</Text>
                 </PopupContainer>
             </ScrollView>
         </View>
