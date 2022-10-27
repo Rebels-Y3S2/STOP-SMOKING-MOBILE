@@ -8,67 +8,76 @@
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Test from './src/pages/test';
-import Home from './src/pages/home';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text, View } from 'react-native';
+import Icon from '@expo/vector-icons/MaterialCommunityIcons'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { StyleSheet } from 'react-native'
 import CreateReminder from './src/pages/Reminder Management/Create Reminder/CreateReminder';
-import AppFooter from './src/components/AppFooter/AppFooter';
 import Reminders from './src/pages/Reminder Management/Reminders/Reminders';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import UpdateReminder from './src/pages/Reminder Management/Update Reminder/UpdateReminder';
+import { MainStackNavigator } from './src/navigation/stackNavigator';
 
-const Stack = createNativeStackNavigator();
+
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
 
 const App = () => {
+  const Tab = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator();
+
+  function AppBar() {
+    return (
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+              if (route.name === 'Home') {
+                iconName = focused
+                  ? 'home'
+                  : 'home';
+              } else if (route.name === 'Challenges') {
+                iconName = focused ? 'tour' : 'tour';
+              } else if (route.name === 'Reminders') {
+                iconName = focused ? 'alarm' : 'alarm';
+              } else if (route.name === 'Diary') {
+                iconName = focused ? 'assignment' : 'assignment';
+              }
+              return <MaterialIcons name={iconName} size={30} color={color} />;
+            },
+            headerShown: false,
+            tabBarActiveTintColor: '#1658CD',
+            tabBarInactiveTintColor: '#7B8BA2',
+        })}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Challenges" component={SettingsScreen} />
+        <Tab.Screen name="Reminders" component={Reminders} options={getNavigatorStyles('Reminders')}/>
+        <Tab.Screen name="Diary" component={SettingsScreen} />
+      </Tab.Navigator>
+    );
+  }
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Test"
-          component={Test}
-          options={getNavigatorStyles('Welcome')}
-        />
-        <Stack.Screen 
-          name="Home" 
-          component={Home} 
-          options={getNavigatorStyles('Home')} />
-        <Stack.Screen 
-          name="CreateReminder" 
-          component={CreateReminder}
-          options={getNavigatorStyles('Create Reminder')} />
-        <Stack.Screen 
-          name="Reminders" 
-          component={Reminders}
-          options={getNavigatorStyles('Reminders')} />
-        <Stack.Screen 
-          name="UpdateReminder" 
-          component={UpdateReminder}
-          options={getNavigatorStyles('Edit Reminder')} />
-      </Stack.Navigator>
-      <AppFooter/>
+      <MainStackNavigator />
     </NavigationContainer>
-    
   );
 };
-
-function getNavigatorStyles(componentName) {
-  return {
-    title: componentName,
-    headerStyle: {
-      backgroundColor: '#1658CD',
-      borderColor: '#1658CD'
-    },
-    headerTitleStyle: {
-      font: 'Roboto',
-      fontStyle: 'normal',
-      fontWeight: '500',
-      fontSize: 20,
-      lineHeight: '24px',
-      letterSpacing: '0.15px',
-      color: '#FFFFFF'
-    }
-  };
-}
-
 
 export default App;
