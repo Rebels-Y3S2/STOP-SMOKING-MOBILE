@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         marginLeft:'15%',
         font: 'Roboto',
         fontStyle: 'normal',
-        fontSize: 7.5,
+        fontSize: 6.5,
         lineHeight: 16,
         textAlign: 'center'
     },

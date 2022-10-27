@@ -1,14 +1,14 @@
 import { Button, Text, TextInput } from '@react-native-material/core'
 import React, { useState } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, StyleSheet } from 'react-native'
 import Datepicker from '../../../components/DatePicker/Datepicker.js'
 import DropDown from '../../../components/DropDown/DropDown.js'
 import CheckBox from 'expo-checkbox';
 import BigHeaderBackground from '../../../components/HeaderBackground/HeaderBackground.js'
 import PopupContainer from '../../../components/Contaner/PopupContainer.js'
-import { styles } from './CreateReminderStyles.js'
+import { styles } from './UpdateReminderStyles.js'
 
-export default function CreateReminder() {
+export default function UpdateReminder() {
   const [reminder, setReminder] = useState({
     reminderTitle:'',
     startDate:'',
@@ -37,14 +37,15 @@ export default function CreateReminder() {
     { label: 'Item 7', value: '7' },
     { label: 'Item 8', value: '8' },
   ];
-
+  const [isEditable, setIsEditable] = useState(false);
+  
   return (
     <View>
       <ScrollView>
         <BigHeaderBackground/>
         <PopupContainer  firstContainer>
           <TextInput variant="outlined" placeholder='Reminder Title' style={{ margin: 16 }} onChange={handleChange}></TextInput>
-          <Text variant='subtitle 2' style={styles.textLable}>Reminder Title</Text>
+          <Text variant='subtitle 2' style={styles.textLable}>Enter new Reminder Title</Text>
           
           <Datepicker
             setText={setSDate}
@@ -64,7 +65,7 @@ export default function CreateReminder() {
             mode='time' 
           />
 
-          <TextInput variant="outlined" placeholder='Custom Quote' editable={customQuoteCheck} style={{ margin: 16 }}></TextInput>
+          <TextInput variant="outlined" placeholder='Custom Quote' style={{ margin: 16 }} editable={customQuoteCheck}></TextInput>
           <Text variant='subtitle 2' style={styles.textLable}>Custom Quote</Text>
           <CheckBox style={styles.checkbox}
             testID='quote'
@@ -92,8 +93,8 @@ export default function CreateReminder() {
           />
 
           <Button title="Cancel" style={styles.button} variant="outlined" color='#5B5B5B' />
-          <Button title="Save" style={styles.button} color="#1658CD" />
-          
+          <Button title="Edit" style={styles.button} color="#1658CD" />
+          <View style={{marginTop:'5%'}} />
         </PopupContainer>
         <View style={{marginBottom:'20%'}}></View>
       </ScrollView>

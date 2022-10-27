@@ -26,6 +26,10 @@ export const styles = StyleSheet.create({
     placeholderStyle: {
       fontSize: 16,
     },
+    disabledPlaceholderStyle: {
+      fontSize: 16,
+      color: '#d3d3d3',
+    },
     selectedTextStyle: {
       fontSize: 16,
     },

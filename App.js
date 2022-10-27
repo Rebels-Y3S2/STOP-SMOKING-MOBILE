@@ -14,6 +14,7 @@ import Home from './src/pages/home';
 import CreateReminder from './src/pages/Reminder Management/Create Reminder/CreateReminder';
 import AppFooter from './src/components/AppFooter/AppFooter';
 import Reminders from './src/pages/Reminder Management/Reminders/Reminders';
+import UpdateReminder from './src/pages/Reminder Management/Update Reminder/UpdateReminder';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,10 @@ const App = () => {
           name="Reminders" 
           component={Reminders}
           options={getNavigatorStyles('Reminders')} />
+        <Stack.Screen 
+          name="UpdateReminder" 
+          component={UpdateReminder}
+          options={getNavigatorStyles('Edit Reminder')} />
       </Stack.Navigator>
       <AppFooter/>
     </NavigationContainer>
