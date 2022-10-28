@@ -13,9 +13,9 @@ export const styles = StyleSheet.create({
         fontWeight: '500',
         color: '#000000',
         marginLeft:'3%',
+        marginBottom:'3%'
     },
     children:{
-        marginTop:'3%',
-        marginLeft:'3%',
+        marginLeft:'8%',
     }
 });
