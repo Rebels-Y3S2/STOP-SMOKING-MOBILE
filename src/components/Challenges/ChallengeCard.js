@@ -1,8 +1,12 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from '@react-navigation/native'
 
 export default function ChallengeCard({ image, title, duration, type }) {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.cardContainer}>
+      <TouchableOpacity onPress={() => navigation.navigate('CreateReminder')}>
       <View style={styles.contentContainer}>
         <Image
           style={styles.imageStyles}
@@ -14,6 +18,7 @@ export default function ChallengeCard({ image, title, duration, type }) {
           <Text>Type : {type}</Text>
         </View>
       </View>
+      </TouchableOpacity>
     </View>
   );
 }
