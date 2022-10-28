@@ -1,24 +1,39 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import PopupContainer from '../../components/Contaner/PopupContainer';
-import ChallengeProgress from '../../components/ChallengeProgress/ChallengeProgress';
-import BigHeaderBackground from '../../components/HeaderBackground/HeaderBackground';
+import React from "react";
+import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
+import PopupContainer from "../../components/Contaner/PopupContainer";
+import ChallengeProgress from "../../components/Challenges/ChallengeProgress";
+import BigHeaderBackground from "../../components/HeaderBackground/HeaderBackground";
+import Todo from "../../components/Challenges/Todo";
+
+const todo = [
+    'Dont smoke',
+    'Drink water',
+    'eat well'
+];
 
 export default function ChallengeView() {
-    return (
-        <View>
-            <ScrollView>
-                <BigHeaderBackground />
-                <PopupContainer firstContainer>
-                    <View>
-                        <ChallengeProgress title={'No more cigs'} progress={54} />
-                    </View>
-                </PopupContainer>
-                <PopupContainer>
-                    <Text>Oh ye Challenges</Text>
-                </PopupContainer>
-            </ScrollView>
-        </View>
-    );
+  return (
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <BigHeaderBackground />
+        <PopupContainer firstContainer>
+          <View>
+            <ChallengeProgress title={"No more cigs"} progress={54} />
+          </View>
+        </PopupContainer>
+        <PopupContainer>
+          <Todo title={"Today's challenge"} todoList={todo} />
+        </PopupContainer>
+        </ScrollView>
+    </SafeAreaView>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  scrollView: {
+ 
+  }
+});
