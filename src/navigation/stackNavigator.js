@@ -7,8 +7,8 @@ import BottomTabNavigator from "./TabNavigator";
 import Reminders from "../pages/Reminder Management/Reminders/Reminders";
 import CreateReminder from "../pages/Reminder Management/Create Reminder/CreateReminder";
 import UpdateReminder from "../pages/Reminder Management/Update Reminder/UpdateReminder";
-import ChallengeView from "../pages/Challenge Management/ChallengeView";
 import DiaryRecords from "../pages/Diary Management/Records/DiaryRecords";
+import Challenges from "../pages/Challenge Management/challengesList/Challenges";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -30,7 +30,7 @@ const HomeStackNavigator = () => {
 const ChallengesStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="ChallengesScreen" component={ChallengeView} options={getNavigatorStyles('Challenges')} />
+      <Stack.Screen name="ChallengesScreen" component={Challenges} options={getNavigatorStyles('Challenges')} />
     </Stack.Navigator>
   );
 }
