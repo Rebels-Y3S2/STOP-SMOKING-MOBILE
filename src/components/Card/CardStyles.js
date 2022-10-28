@@ -1,0 +1,21 @@
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+    containerStyles: {
+        padding:10,
+        width:'90%',
+        marginLeft:'5%',
+        marginTop:'5%'
+    },
+    title:{
+        font: 'Roboto',
+        fontStyle: 'normal',
+        fontWeight: '500',
+        color: '#000000',
+        marginLeft:'3%',
+    },
+    children:{
+        marginTop:'3%',
+        marginLeft:'3%',
+    }
+});
