@@ -1,15 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
+import Hr from "../HorizontalLine/Hr";
 
 export default function Todo({ title, todoList }) {
   return (
     <View>
       <Text style={styles.titleStyles}>Oh ye Challenges</Text>
-      <View
-        style={{
-          borderBottomColor: "#00000036",
-          borderBottomWidth: StyleSheet.hairlineWidth,
-        }}
-      />
+      <Hr />
       <View style={styles.todoListContainerStyles}>
         {todoList.map((item, index) => (
           <Text style={styles.todoStyles}>
@@ -27,17 +23,16 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 17,
     fontSize: 18,
-    font: 'Roboto',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    color: '#434343'
+    font: "Roboto",
+    fontStyle: "normal",
+    fontWeight: "500",
+    color: "#434343",
   },
   todoListContainerStyles: {
     marginVertical: 46.5,
-    marginHorizontal: 18
+    marginHorizontal: 18,
   },
   todoStyles: {
-    padding: 7
-  }
-
+    padding: 7,
+  },
 });
