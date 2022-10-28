@@ -31,5 +31,8 @@ export const styles = StyleSheet.create({
         marginRight:25,
         marginTop:-65,
         color:'#7B7A7A'
+    },
+    input:{
+      margin:'5%',
     }
   })
