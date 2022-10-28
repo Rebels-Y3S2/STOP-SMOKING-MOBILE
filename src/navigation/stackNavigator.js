@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from "../pages/Home";
+import Home from "../pages/home.js";
 import Diary from "../pages/Diary";
 import Splash from "../pages/Splash";
 import BottomTabNavigator from "./TabNavigator";
@@ -53,7 +53,7 @@ const DiaryStackNavigator = () => {
   );
 }
 
-export default MainStackNavigator = () => {
+const MainStackNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Splash" component={Splash} />
@@ -61,7 +61,7 @@ export default MainStackNavigator = () => {
         </Stack.Navigator>
     );
 }
-export { HomeStackNavigator, DiaryStackNavigator, RemindersStackNavigator, ChallengesStackNavigator };
+export { HomeStackNavigator, DiaryStackNavigator, RemindersStackNavigator, ChallengesStackNavigator, MainStackNavigator };
 
 function getNavigatorStyles(componentName) {
   return {

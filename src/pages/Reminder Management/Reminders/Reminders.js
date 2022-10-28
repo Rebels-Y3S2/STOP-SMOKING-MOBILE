@@ -48,8 +48,8 @@ export default function Reminders() {
       diary:''
     },
     {   
-      rid:3, 
-      reminderTitle:'Reminder 03',
+      rid:4, 
+      reminderTitle:'Reminder 04',
       startDate:'12/10/2022',
       endDate:'18/10/2022',
       customQuote:'',
@@ -61,7 +61,7 @@ export default function Reminders() {
     <View style={{position:"absolute", width:'100%', height:"100%"}}>
       {
         reminderArr.map((row) =>(
-          <>
+          <View key={row.rid}>
             <Card 
             title={row.reminderTitle}
             children={
@@ -79,7 +79,7 @@ export default function Reminders() {
               </>
             }
           />
-          </>
+          </View>
         ))
       }
       <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate('CreateReminder')}/>

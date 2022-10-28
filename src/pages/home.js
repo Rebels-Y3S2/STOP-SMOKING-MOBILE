@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Button, Text, StyleSheet } from "react-native";
 
-const Home = ({ navigation }) => {
+const Home = () => {
   return (
     <View style={styles.center}>
       <Text>This is the Home screen</Text>
