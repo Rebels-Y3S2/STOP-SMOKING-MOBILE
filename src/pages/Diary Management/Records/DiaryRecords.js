@@ -1,7 +1,7 @@
 import { HStack, Provider, Text } from '@react-native-material/core'
 import { useNavigation } from '@react-navigation/native'
 import React, { createRef, useState } from 'react'
-import { View, Pressable   } from 'react-native'
+import { View, Pressable, TextInput   } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Card from '../../../components/Card/Card'
@@ -12,81 +12,53 @@ import moment from 'moment';
 import { SearchBar } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler'
 import { ButtonGroup } from 'react-native-elements'
+import CheckBox from 'expo-checkbox';
+import { addDiary, editDiaryRecordById, fetchAllRecMock, fetchDiaryRecords } from '../../../api/diary.api'
+import MessageToast from '../../../components/DialogBox/MessageDialog'
+import DialogV2 from '../Create and Edit/DialogV2'
+import { useEffect } from 'react'
 
 export default function DiaryRecords() {
   const input = createRef();
   const navigation = useNavigation()
   const [show, setShow] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState(false);
   const [liked, setLiked] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [recordResponseList, setRecordResponseList] = useState([
-    {    
-        _id:1,
-        title:'I did not smoke',
-        description:'Stop smoke is a such good app. Today I did not smoke at all. Now a days I am following the challenges properly. Today is a stress free day for me. Evening meditation gave me a relaxed mind.',
-        isFavorite: 0,
-        userId:'123',
-        createdAt: '2022-10-28'
-    },
-    {    
-        _id:2,
-        title:'Record 02',
-        description:'Description ddd ssksk snnns sss',
-        isFavorite: 1,
-        userId:'123',
-        createdAt: '2022-10-27'
-    },
-    {    
-        _id:3,
-        title:'Record 03',
-        description:'Description',
-        isFavorite: 0,
-        userId:'123',
-        createdAt: '2022-10-26'
-    },
-    {    
-        _id:4,
-        title:'Record 04',
-        description:'Description',
-        isFavorite: 0,
-        userId:'123',
-        createdAt: '2022-10-25'
-    },
-    {    
-        _id:5,
-        title:'Record 03',
-        description:'Description',
-        isFavorite: 0,
-        userId:'123',
-        createdAt: '2022-10-26'
-    },
-    {    
-        _id:6,
-        title:'Record 04',
-        description:'Description',
-        isFavorite: 0,
-        userId:'123',
-        createdAt: '2022-10-25'
-    },
-    {    
-        _id:7,
-        title:'Record 03',
-        description:'Description',
-        isFavorite: 0,
-        userId:'123',
-        createdAt: '2022-10-26'
-    },
-    {    
-        _id:8,
-        title:'Record 04',
-        description:'Description',
-        isFavorite: 0,
-        userId:'123',
-        createdAt: '2022-10-25'
-    },
-  ])
+  const [recordResponseList, setRecordResponseList] = useState([])
+  const [record, setRecord] = React.useState({});
 
   const [search, setSearch] = useState("");
+
+  const [recordTitle, setRecordTitile] = useState("");
+  const [recordDesc, setRecordDesc] = useState("");
+  const [action, setAction] = useState({parentKey: "add", id: 'new'})
+
+  useEffect(() => {
+    getAllDiaryResponses();
+  }, []);
+
+  const getAllDiaryResponses = () => {
+    const userId = '635b10baf383232439911869'
+    // fetchDiaryRecords(userId).then((data) => {
+    //     setRecordResponseList(data)
+    //     console.log(data)
+    // })
+    fetchAllRecMock().then((data) => {
+        // setRecordResponseList(data?.data || [])
+        console.log(data.data)
+    })
+  }
+
+  const handlRecordTitle = (e) =>{
+    setRecordTitile(e.nativeEvent.text)
+  }
+
+  const handlRecordDescription = (e) =>{
+    setRecordDesc(e.nativeEvent.text)
+  }
 
 const updateSearch = (search) => {
   setSearch(search);
@@ -112,9 +84,53 @@ const tabBtn2 = () => {
 
 const buttons = [{ element: tabBtn1 }, { element: tabBtn2 }]
 
+const handleSubmit = async (event) => {
+    const diary = {
+        userId:'635b10baf383232439911869',
+        title: recordTitle,
+        description: recordDesc,
+        isFavourite: 0
+    }
+    if (action.parentKey === "add") {
+        addDiary(diary)
+          .then((res) => {
+            setShowAdd(false);
+            setMessage(res.data);
+            console.log(res.data);
+            setRecordDesc("");
+            setRecordTitile("");
+            if(res.data.data) {
+                setShowToast(true);
+            } else {
+                setShowToast(true);
+            }
+          }).catch((error) =>{
+            console.log(error);
+            setShowAdd(false);
+        })
+    } else if (action.parentKey === "edit") {
+        editDiaryRecordById(diary)
+        .then((res) => {
+            setShowAdd(false);
+            setMessage(res.data);
+            console.log(res.data);
+            setRecordDesc("");
+            setRecordTitile("");
+            if(res.data.data) {
+                setShowToast(true);
+            } else {
+                setShowToast(true);
+            }
+          }).catch((error) =>{
+            console.log(error);
+            setShowAdd(false);
+        })
+    }
+}
+
   return (
     <View style={styles.scrollView}>
-        <View style={styles.search}>
+        <View style={show || showAdd? styles.search1 : styles.search2}>
         <ButtonGroup
             buttons={buttons}
             selectedIndex={selectedIndex}
@@ -138,7 +154,13 @@ const buttons = [{ element: tabBtn1 }, { element: tabBtn2 }]
         </View>
         <ScrollView style={styles.scrollView}>
             <View style={styles.cardContainer}>
-      {recordResponseList.map((row, index) => (
+      {recordResponseList || [].filter((rec) => {
+            if (search === "") {
+                return rec;
+            } else if (rec.title.toLowerCase().includes(search.toLowerCase())) {
+               return rec;
+            }
+        }).map((row, index) => (
           <View key={row._id}>
             <Card 
                 style={styles.card}
@@ -167,7 +189,7 @@ const buttons = [{ element: tabBtn1 }, { element: tabBtn2 }]
                     </View>
                     <View>
                         <HStack m={2} spacing={5}>
-                            <MaterialIcons name='edit'size={28} onPress={() => navigation.navigate('UpdateReminder')}  />
+                            <MaterialIcons name='edit'size={28} onPress={()=> {setShowAdd(true); setAction({parentKey: "edit", id: row._id}); }} />
                             <MaterialCommunityIcons name='delete-outline'size={28} onPress={()=> setShow(true)}  />
                         </HStack>
                     </View>
@@ -181,17 +203,40 @@ const buttons = [{ element: tabBtn1 }, { element: tabBtn2 }]
       }
       </View>
       </ScrollView>
-      <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate('CreateReminder')}/>
+      <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={()=> {setShowAdd(true); setAction({parentKey: "add", id: 'new'});}}/>
           {
             show &&
             <Provider>
-            <DialogBox 
-              show={show} 
-              setShow={setShow}
-              title='Delete Reminder'
-              message='Are you sure to delete the reminder'
-            />
+                <DialogBox
+                    show={show} 
+                    setShow={setShow}
+                    title='Delete Reminder'
+                    message='Are you sure to delete the reminder'
+                />
             </Provider>
+          }
+          {
+            showAdd &&
+            <Provider>
+                <DialogV2
+                    show={showAdd} 
+                    setShow={setShowAdd}
+                    handlRecordTitle={handlRecordTitle}
+                    handlRecordDescription={handlRecordDescription}
+                    record={record}
+                    handleSubmit={handleSubmit}
+                    action={action}
+                    recordTitle={recordTitle}
+                    recordDesc={recordDesc}
+                />
+            </Provider>
+          }
+          {
+            <MessageToast
+                showToast={showToast}
+                setShowToast={setShowToast}
+                data={message}
+            />
           }
     </View>
   );
