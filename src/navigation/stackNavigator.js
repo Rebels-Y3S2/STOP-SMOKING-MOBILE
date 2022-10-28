@@ -7,7 +7,7 @@ import BottomTabNavigator from "./TabNavigator";
 import Reminders from "../pages/Reminder Management/Reminders/Reminders";
 import CreateReminder from "../pages/Reminder Management/Create Reminder/CreateReminder";
 import UpdateReminder from "../pages/Reminder Management/Update Reminder/UpdateReminder";
-import ChallengeView from "../pages/Challenge Management/ChallengeView";
+import DiaryRecords from "../pages/Diary Management/Records/DiaryRecords";
 import Challenges from "../pages/Challenge Management/challengesList/Challenges";
 
 const Stack = createNativeStackNavigator();
@@ -48,7 +48,7 @@ const RemindersStackNavigator = () => {
 const DiaryStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="DiaryScreen" component={Diary} options={getNavigatorStyles('DiaryScreen')} />
+      <Stack.Screen name="DiaryScreen" component={DiaryRecords} options={getNavigatorStyles('Diary')} />
     </Stack.Navigator>
   );
 }
