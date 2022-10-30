@@ -4,14 +4,18 @@ import BigHeaderBackground from "../components/HeaderBackground/HeaderBackground
 import PopupContainer from "../components/Contaner/PopupContainer.js";
 import { homestyles } from "./HomeStyles.js";
 import { Image } from 'react-native-elements';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { useNavigation } from '@react-navigation/native'
 
 const Home = () => {
+  const navigation = useNavigation();
+
   return (
     <View>
       <ScrollView>
         <BigHeaderBackground/>
         <PopupContainer firstContainer style={homestyles.popupcontainerMargin}>
-          <Text variant='subtitle 2' style={homestyles.welcomephrase}>Hey John !</Text>
+          <Text variant='subtitle 2' style={homestyles.welcomephrase}>Hey John ! <MaterialIcons name='person' size={25} onPress={() => navigation.navigate('ViewProfile')}/></Text>
           <Text variant='subtitle 2' style={homestyles.imageinstruction}>Click the image to navigate to your challenge</Text>
           <Image
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu_lhDKyIPN98vfAYrx1vLeVoIbjXt6N2siWtu4cx3hm0n-YBrvzl25lngvIILvdSElz4&usqp=CAU" }}

@@ -9,6 +9,7 @@ import CreateReminder from "../pages/Reminder Management/Create Reminder/CreateR
 import UpdateReminder from "../pages/Reminder Management/Update Reminder/UpdateReminder";
 import DiaryRecords from "../pages/Diary Management/Records/DiaryRecords";
 import Challenges from "../pages/Challenge Management/challengesList/Challenges";
+import ViewProfile from "../pages/UserProfile/ViewProfile.js";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -23,6 +24,7 @@ const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="HomeScreen" component={Home} options={getNavigatorStyles('Home')} />
+      <Stack.Screen name="ViewProfile" component={ViewProfile} options={getNavigatorStyles('User Profile')} />
     </Stack.Navigator>
   );
 }

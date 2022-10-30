@@ -40,7 +40,6 @@ export const homestyles = StyleSheet.create({
         marginLeft: 12,
         marginRight: 12,
         marginTop: 20,
-        font: 'Roboto',
     },
     instructionTitle: {
         fontSize: 18,
@@ -62,5 +61,5 @@ export const homestyles = StyleSheet.create({
         marginRight: 30,
         marginBottom: 30,
         font: 'Roboto',
-    }
+    },
 })
