@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { MainStackNavigator } from './src/navigation/stackNavigator.js';
+import { MainStackNavigator } from './src/navigation/StackNavigator.js';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const App = () => {
