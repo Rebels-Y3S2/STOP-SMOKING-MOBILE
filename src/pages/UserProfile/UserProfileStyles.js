@@ -11,6 +11,25 @@ export const userProfileStyles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 8,
     },
+    inputContainerUpdateProfile: {
+        height: 50,
+        width:'91%',
+        margin:'5%',
+        backgroundColor:'white',
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 8,
+    },
+    inputContainerDropDown: {
+        height: 50,
+        width:'91%',
+        margin:'5%',
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 8,
+    },
     textLableContainer:{
         marginLeft:'5%',
         marginTop:'-3%',
@@ -46,6 +65,17 @@ export const userProfileStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    cancelbuttonContainer: {
+        marginTop: 30,
+        marginLeft: 30,
+        marginRight: 30,
+    },
+    editbuttonContainer: {
+        marginTop: 20,
+        marginLeft: 30,
+        marginRight: 30,
+        marginBottom: 40
+    },
     iconContainer: {
         marginLeft: 50,
     },
@@ -55,5 +85,15 @@ export const userProfileStyles = StyleSheet.create({
         color: "#ffffff",
         marginRight: 50, 
         font: 'Roboto',
-    }
+    },
+    cancelbuttonTextContent: {
+        marginLeft: 80,
+        fontSize: 18,
+        color: "#000000",
+        marginRight: 80, 
+        font: 'Roboto',
+    },
+    placeholderStyles: {
+        fontSize: 16,
+    },
 })

@@ -10,6 +10,7 @@ import UpdateReminder from "../pages/Reminder Management/Update Reminder/UpdateR
 import DiaryRecords from "../pages/Diary Management/Records/DiaryRecords";
 import Challenges from "../pages/Challenge Management/challengesList/Challenges";
 import ViewProfile from "../pages/UserProfile/ViewProfile.js";
+import UpdateProfile from "../pages/UserProfile/UpdateProfile.js";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -25,6 +26,7 @@ const HomeStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="HomeScreen" component={Home} options={getNavigatorStyles('Home')} />
       <Stack.Screen name="ViewProfile" component={ViewProfile} options={getNavigatorStyles('User Profile')} />
+      <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={getNavigatorStyles('Edit Profile')} />
     </Stack.Navigator>
   );
 }
