@@ -10,6 +10,7 @@ import Card from '../../../components/Card/Card'
 import DialogBox from '../../../components/DialogBox/DialogBox'
 import { styles } from './RemindersStyles'
 import { useIsFocused } from '@react-navigation/native'
+import PushNotifications from '../../../components/PushNotifications/PushNotifications'
 
 export default function Reminders() {
   const isFocused = useIsFocused();
@@ -46,9 +47,14 @@ export default function Reminders() {
                 <View>
                   <HStack m={2} spacing={100} >
                     <Text style={styles.lable}>From :{row.startDate}</Text>
-                    <HStack m={2} spacing={5}>
+                    <HStack m={3} spacing={5}>
                       <MaterialIcons name='edit'size={30} onPress={() => navigation.navigate('UpdateReminder')}  />
                       <MaterialIcons name='delete'size={30} onPress={()=> setShow(true)}  />
+                      <PushNotifications 
+                        title={row.reminderTitle}
+                        body={row.customQuote}
+                        startTime={row.startTime}
+                        identifier={row._id}/>
                     </HStack>
                   </HStack>
                     <Text style={styles.lable}>To     :{row.endDate}</Text>
@@ -72,6 +78,7 @@ export default function Reminders() {
             />
             </Provider>
           }
+          
     </View>
 
   ):(
@@ -79,7 +86,7 @@ export default function Reminders() {
         <Text>No reminders to display!</Text>
         <Text> Click on the plus icon to create a new reminder!</Text>
         <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate('CreateReminder')}/>
-      
+        
     </View>
   )
 }
