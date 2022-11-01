@@ -6,6 +6,7 @@ import Constants from 'expo-constants';
 import storage from "@react-native-async-storage/async-storage";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { fetchReminder } from '../../api/reminder.api';
+import CommonConstants from '../../util/CommonConstants';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -108,6 +109,10 @@ export default function PushNotifications(props) {
   }
   
   return (
-        <MaterialIcons name='notifications'size={30} onPress={onClick}/>
+        <MaterialIcons 
+          name={CommonConstants.NOTIFICATION_MATERIAL_ICON} 
+          size={30} 
+          onPress={onClick}
+        />
   );
 }

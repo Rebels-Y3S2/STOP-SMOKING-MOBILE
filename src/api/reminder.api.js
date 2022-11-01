@@ -8,3 +8,6 @@ export const fetchReminders = (userId) => apiInstance.get(`/reminders/users/${us
 
 // Fetch reminder details realting to the provided reminderId
 export const fetchReminder = (id) => apiInstance.get(`/reminders/${id}`);
+
+// Delete reminder details realting to the provided reminderId
+export const deleteReminder = (id) => apiInstance.delete(`/reminders/${id}`);
