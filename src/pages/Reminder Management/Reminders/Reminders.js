@@ -11,7 +11,7 @@ import { styles } from './RemindersStyles'
 import { useIsFocused } from '@react-navigation/native'
 import PushNotifications from '../../../components/PushNotifications/PushNotifications'
 import {CommonConstants} from '../../../util/Constants/CommonConstants'
-import { ReminderMessages, ReminderTitles } from '../../../util/Constants/ReminderConstants'
+import { ReminderConstants } from '../../../util/Constants/ReminderConstants'
 
 export default function Reminders({route}) {
   const isFocused = useIsFocused();
@@ -30,7 +30,6 @@ export default function Reminders({route}) {
       route.params.success = false
     } 
   }
-  console.log(route.params)
 
   useEffect(() =>{
     if(isFocused){
@@ -111,8 +110,8 @@ export default function Reminders({route}) {
           show={show} 
           setShow={setShow}
           id={deleteId}
-          title={ReminderTitles.DELETE_REMINDER_TITLE}
-          message={ReminderMessages.DELETE_REMINDER_CONFIRMATION} 
+          title={ReminderConstants.DELETE_REMINDER_TITLE}
+          message={ReminderConstants.DELETE_REMINDER_CONFIRMATION} 
           handleAction={handleDelete}
         />
         </Provider>

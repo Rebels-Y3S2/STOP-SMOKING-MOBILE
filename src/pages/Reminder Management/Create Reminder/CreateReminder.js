@@ -9,7 +9,7 @@ import PopupContainer from '../../../components/Contaner/PopupContainer.js'
 import { styles } from './CreateReminderStyles.js'
 import { addReminder } from '../../../api/reminder.api.js'
 import { useNavigation } from '@react-navigation/native'
-import { ReminderLables, ReminderTestID, ReminderTitles } from '../../../util/Constants/ReminderConstants.js'
+import { ReminderConstants } from '../../../util/Constants/ReminderConstants.js'
 import { Colors, CommonConstants } from '../../../util/Constants/CommonConstants.js'
 
 export default function CreateReminder() {
@@ -75,7 +75,7 @@ export default function CreateReminder() {
       console.log(res.data)
       navigation.navigate(CommonConstants.REMINDERS_PATH, 
         {
-          title:ReminderTitles.REMINDER_CREATE_SUCCESS, 
+          title:ReminderConstants.REMINDER_CREATE_SUCCESS, 
           type:CommonConstants.CREATE, success:true
         }
       )
@@ -90,57 +90,57 @@ export default function CreateReminder() {
         <BigHeaderBackground/>
         <PopupContainer  firstContainer>
           <TextInput 
-            placeholder={ReminderLables.REMINDER_TITLE_LABLE}
+            placeholder={ReminderConstants.REMINDER_TITLE_LABEL}
             style={styles.input} 
             onChange={handlReminderTitle}
           />
-          <Text variant='subtitle 2' style={styles.textLable}>{ReminderLables.REMINDER_TITLE_LABLE}</Text>
+          <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.REMINDER_TITLE_LABEL}</Text>
           
           <Datepicker
             setText={setSDate}
-            lable={ReminderLables.START_DATE_LABLE}
+            lable={ReminderConstants.START_DATE_LABEL}
             mode={CommonConstants.DATE} 
           />
 
           <Datepicker
             setText={setEDate} 
-            lable={ReminderLables.END_DATE_LABLE} 
+            lable={ReminderConstants.END_DATE_LABEL} 
             mode={CommonConstants.DATE}
           />
 
           <Datepicker
             setText={setSTime} 
-            lable={ReminderLables.START_TIME_LABLE}
+            lable={ReminderConstants.START_TIME_LABEL}
             mode={CommonConstants.TIME} 
           />
 
           <TextInput 
-            placeholder={ReminderLables.CUSTOM_QUOTE_LABLE} 
+            placeholder={ReminderConstants.CUSTOM_QUOTE_LABEL} 
             editable={customQuoteCheck} 
             onChange={handleCustomQuote} 
             style={styles.input}
           />
-          <Text variant='subtitle 2' style={styles.textLable}>{ReminderLables.CUSTOM_QUOTE_LABLE} </Text>
+          <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.CUSTOM_QUOTE_LABEL} </Text>
           <CheckBox style={styles.checkbox}
-            testID={ReminderTestID.QUOTE_TEST_ID}
+            testID={ReminderConstants.QUOTE_TEST_ID}
             disabled={false}
             value={customQuoteCheck}
             onValueChange={(quoteChk) => setCustomQuoteCheck(quoteChk)}
           />
 
           <DropDown setValue={setChallenge} data={data} disable={challengeCheck}/>
-          <Text variant='subtitle 2' style={styles.textLable}>{ReminderLables.SELECT_CHALLENGE_LABLE}</Text>
+          <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_CHALLENGE_LABEL}</Text>
           <CheckBox style={styles.checkbox}
-            testID={ReminderTestID.CHALLENGE_TEST_ID}
+            testID={ReminderConstants.CHALLENGE_TEST_ID}
             disabled={false}
             value={challengeCheck}
             onValueChange={(challengeChk) => setChallengeCheck(challengeChk)}
           />
 
           <DropDown setValue={setDiary} data={data} disable={diaryCheck}/>
-          <Text variant='subtitle 2' style={styles.textLable}>{ReminderLables.SELECT_DIARY_LABLE}</Text>
+          <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_DIARY_LABEL}</Text>
           <CheckBox style={styles.checkbox}
-            testID={ReminderTestID.DIARY_TEST_ID}
+            testID={ReminderConstants.DIARY_TEST_ID}
             disabled={false}
             value={diaryCheck}
             onValueChange={(diaryChk) => setDiaryCheck(diaryChk)}
