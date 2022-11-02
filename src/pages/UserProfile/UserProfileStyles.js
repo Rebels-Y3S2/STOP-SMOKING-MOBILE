@@ -114,5 +114,27 @@ export const userProfileStyles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 285,
         color: "#6F6E6E"
+    },
+    loginpageImageContainer: {
+        width: 250, 
+        height: 200,
+        marginLeft: 40,
+        marginRight: 40,
+        marginTop: 50,
+        borderRadius: 15,
+        marginBottom: 60,
+    },
+    loginbuttonContainer: {
+        marginTop: 15,
+        marginLeft: 30,
+        marginRight: 30,
+        marginBottom: 10
+    },
+    forgotPasswordStyle: {
+        fontSize: 16,
+        font: 'Roboto',
+        textAlign: 'center',
+        color: "#407A9C",
+        marginBottom: 50
     }
 })

@@ -4,10 +4,9 @@ import { View, Text, ScrollView, TextInput, Button } from "react-native";
 import PopupContainer from "../../components/Contaner/PopupContainer.js";
 import { userProfileStyles } from "./UserProfileStyles.js";
 import { Image } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
-import { HStack, Provider } from '@react-native-material/core'
+import { Provider } from '@react-native-material/core'
 import DialogBoxQuickGuide from '../../components/DialogBox/DialogBoxQuickGuide';
 import DropDownPicker from 'react-native-dropdown-picker';
 
