@@ -2,8 +2,7 @@ import { HStack, Provider} from '@react-native-material/core'
 import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { View, Text, FlatList} from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { View, Text, FlatList, Alert} from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { deleteReminder, fetchReminders } from '../../../api/reminder.api'
 import Card from '../../../components/Card/Card'
@@ -11,15 +10,27 @@ import DialogBox from '../../../components/DialogBox/DialogBox'
 import { styles } from './RemindersStyles'
 import { useIsFocused } from '@react-navigation/native'
 import PushNotifications from '../../../components/PushNotifications/PushNotifications'
-import CommonConstants from '../../../util/CommonConstants'
+import {CommonConstants} from '../../../util/Constants/CommonConstants'
+import { ReminderMessages, ReminderTitles } from '../../../util/Constants/ReminderConstants'
 
-export default function Reminders() {
+export default function Reminders({route}) {
   const isFocused = useIsFocused();
   const navigation = useNavigation()
   const userId = '635b10baf383232439911869' // Will be replaced soon when auth is implemented.
   const [show, setShow] = useState(false);
   const [reminderArray, setReminderArray] = useState([]);
   const [deleteId, setDeleteId] = useState();
+
+  if(route.params){
+    if(route.params.type === CommonConstants.CREATE && route.params.success === true){
+      Alert.alert(CommonConstants.CREATE_SUCCESS_ALERT_TITLE, route.params.title)
+      route.params.success = false
+    }else if(route.params.type === CommonConstants.UPDATE && route.params.success === true) {
+      Alert.alert(CommonConstants.UPDATE_SUCCESS_ALERT_TITLE, route.params.title)
+      route.params.success = false
+    } 
+  }
+  console.log(route.params)
 
   useEffect(() =>{
     if(isFocused){
@@ -66,7 +77,7 @@ export default function Reminders() {
                   <MaterialIcons 
                     name={CommonConstants.EDIT_MATERIAL_ICON} 
                     size={30} 
-                    onPress={() => navigation.navigate(CommonConstants.UPDATE_REMINDER_PATH)} 
+                    onPress={() => navigation.navigate(CommonConstants.UPDATE_REMINDER_PATH, {itemId: item._id})} 
                   />
                   <MaterialIcons 
                     name={CommonConstants.DELETE_MATERIAL_ICON} 
@@ -100,13 +111,12 @@ export default function Reminders() {
           show={show} 
           setShow={setShow}
           id={deleteId}
-          title={CommonConstants.DELETE_REMINDER_TITLE}
-          message={CommonConstants.DELETE_REMINDER_CONFIRMATION} 
+          title={ReminderTitles.DELETE_REMINDER_TITLE}
+          message={ReminderMessages.DELETE_REMINDER_CONFIRMATION} 
           handleAction={handleDelete}
         />
         </Provider>
-      }
-          
+      }  
     </>
 
   ):(

@@ -6,7 +6,7 @@ import Constants from 'expo-constants';
 import storage from "@react-native-async-storage/async-storage";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { fetchReminder } from '../../api/reminder.api';
-import CommonConstants from '../../util/CommonConstants';
+import {CommonConstants} from '../../util/Constants/CommonConstants';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

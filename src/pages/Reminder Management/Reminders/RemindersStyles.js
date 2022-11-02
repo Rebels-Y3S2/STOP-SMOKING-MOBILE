@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     icon:{
         position:'absolute',
-        top:630,
+        top:560,
         left:"80%",
         color: '#1658CD',
         backgroundColor:'white',

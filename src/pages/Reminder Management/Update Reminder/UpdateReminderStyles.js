@@ -45,6 +45,16 @@ export const styles = StyleSheet.create({
       width: 200,
       marginLeft:'22%',
       marginTop:20
-    }
+    },
+    input: {
+      height:'7%',
+      width:'91%',
+      margin:'5%',
+      backgroundColor:'white',
+      borderColor: 'gray',
+      borderWidth: 1,
+      borderRadius: 5,
+      paddingHorizontal: 8,
+    },
   })
   

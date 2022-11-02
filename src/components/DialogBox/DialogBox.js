@@ -8,7 +8,7 @@ import {
   Text,
 } from "@react-native-material/core";
 import { View } from "react-native";
-import CommonConstants from "../../util/CommonConstants";
+import {CommonConstants} from "../../util/Constants/CommonConstants";
 
 export default function DialogBox({handleAction, setShow, show, title, message}){
   const [visible, setVisible] = useState(false);
