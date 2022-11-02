@@ -96,4 +96,23 @@ export const userProfileStyles = StyleSheet.create({
     placeholderStyles: {
         fontSize: 16,
     },
+    privacyPolicy: {
+        fontSize: 16,
+        font: 'Roboto',
+        textAlign: 'center',
+        color: "#407A9C",
+        marginTop: -25
+    },
+    agreement: {
+        fontSize: 14,
+        font: 'Roboto',
+        textAlign: 'center',
+        marginTop: 5,
+        marginBottom: 40
+    },
+    quickGuide: {
+        marginTop: 10,
+        marginLeft: 285,
+        color: "#6F6E6E"
+    }
 })

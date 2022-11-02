@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { View, Text, ScrollView, TextInput } from "react-native";
 import BigHeaderBackground from "../../components/HeaderBackground/HeaderBackground.js";
 import PopupContainer from "../../components/Contaner/PopupContainer.js";
@@ -19,11 +19,11 @@ const ViewProfile = () => {
       <ScrollView>
         <BigHeaderBackground />
         <PopupContainer firstContainer>
-        <HStack m={2} spacing={5}>
+          <HStack m={2} spacing={5}>
             <MaterialIcons name='edit' size={30} onPress={() => navigation.navigate('UpdateProfile')} />
             <MaterialIcons name='delete' size={30} onPress={() => setShow(true)} />
-        </HStack>
-        
+          </HStack>
+
           <Image
             source={{ uri: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bWFufGVufDB8fDB8fA%3D%3D&w=1000&q=80" }}
             style={userProfileStyles.userImageContainer}
@@ -55,16 +55,16 @@ const ViewProfile = () => {
         </View>
       </ScrollView>
       {
-            show &&
-            <Provider>
-            <DialogBoxUserDeletion 
-              show={show} 
-              setShow={setShow}
-              title='Delete Profile'
-              message='Are you sure to delete your profile'  
-            />
-            </Provider>
-          }
+        show &&
+        <Provider>
+          <DialogBoxUserDeletion
+            show={show}
+            setShow={setShow}
+            title='Delete Profile'
+            message='Are you sure to delete your profile'
+          />
+        </Provider>
+      }
     </View>
   );
 }

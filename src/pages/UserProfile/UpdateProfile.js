@@ -6,18 +6,13 @@ import { userProfileStyles } from "./UserProfileStyles.js";
 import DropDownPicker from 'react-native-dropdown-picker';
 
 const UpdateProfile = () => {
-    const data = [
-        { label: 'Normal (3 -5 times per week)', value: '1' },
-        { label: 'Average (10 - 15 times per week)', value: '2' },
-        { label: 'Extreme (20 -30 times per week)', value: '3' },
-        { label: 'Other', value: '4' },
-    ];
-
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: 'Apple', value: 'apple' },
-        { label: 'Banana', value: 'banana' }
+        { label: 'Normal (3 - 5 times per week)', value: 'normal' },
+        { label: 'Average (10 - 15 times per week)', value: 'average' },
+        { label: 'Extereme (20 - 25 times per week)', value: 'extereme' },
+        { label: 'Other', value: 'other' },
     ]);
 
     return (
@@ -47,7 +42,6 @@ const UpdateProfile = () => {
 
                     <View style={userProfileStyles.cancelbuttonContainer}>
                         <Button
-                            onPress={() => Alert.alert('Button with adjusted color pressed')}
                             title="Cancel"
                             color="#B6B3B3"
                         >
@@ -56,7 +50,6 @@ const UpdateProfile = () => {
 
                     <View style={userProfileStyles.editbuttonContainer}>
                         <Button
-                            onPress={() => Alert.alert('Button with adjusted color pressed')}
                             title="Edit"
                         >
                         </Button>
