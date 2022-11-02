@@ -1,67 +1,44 @@
-import { HStack, Provider, Text } from '@react-native-material/core'
+import { HStack, Provider} from '@react-native-material/core'
 import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
-import { View} from 'react-native'
+import { useEffect } from 'react'
+import { View, Text} from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { fetchReminders } from '../../../api/reminder.api'
 import Card from '../../../components/Card/Card'
 import DialogBox from '../../../components/DialogBox/DialogBox'
 import { styles } from './RemindersStyles'
+import { useIsFocused } from '@react-navigation/native'
 
 export default function Reminders() {
+  const isFocused = useIsFocused();
   const navigation = useNavigation()
+  const userId = '635b10baf383232439911869' // Will be replaced soon when auth is implemented.
   const [show, setShow] = useState(false);
-  const [reminder, setReminder] = useState({
-    reminderTitle:'Reminder 01',
-    startDate:'12/10/2022',
-    endDate:'18/10/2022',
-    customQuote:'',
-    challenge:'',
-    diary:''
-  })
-  const [reminderArr, setReminderArr] = useState([
-    {    
-      rid:1,
-      reminderTitle:'Reminder 01',
-      startDate:'12/10/2022',
-      endDate:'18/10/2022',
-      customQuote:'',
-      challenge:'',
-      diary:''
+  const [reminderArr, setReminderArr] = useState([]);
+
+  useEffect(() =>{
+    if(isFocused){
+      getReminderDetails()
     }
-    ,
-    {   
-      rid:2, 
-      reminderTitle:'Reminder 02',
-      startDate:'12/10/2022',
-      endDate:'18/10/2022',
-      customQuote:'',
-      challenge:'',
-      diary:''
-    },
-    {   
-      rid:3, 
-      reminderTitle:'Reminder 03',
-      startDate:'12/10/2022',
-      endDate:'18/10/2022',
-      customQuote:'',
-      challenge:'',
-      diary:''
-    },
-    {   
-      rid:4, 
-      reminderTitle:'Reminder 04',
-      startDate:'12/10/2022',
-      endDate:'18/10/2022',
-      customQuote:'',
-      challenge:'',
-      diary:''
-    }
-  ])
-  return (
+  }, [isFocused])
+
+  const getReminderDetails = () =>{
+    fetchReminders(userId)
+    .then((res) =>{
+      setReminderArr(res.data.data)
+    }).catch((error) =>{
+      console.log(error)
+    })
+  }
+
+  return reminderArr ?(
     <View style={{position:"absolute", width:'100%', height:"100%"}}>
+       <ScrollView>
       {
         reminderArr.map((row) =>(
-          <View key={row.rid}>
+          <View key={row._id}>
             <Card 
             title={row.reminderTitle}
             children={
@@ -82,6 +59,7 @@ export default function Reminders() {
           </View>
         ))
       }
+          </ScrollView>
       <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate('CreateReminder')}/>
           {
             show &&
@@ -95,7 +73,15 @@ export default function Reminders() {
             </Provider>
           }
     </View>
-  );
+
+  ):(
+    <View style={styles.message}>
+        <Text>No reminders to display!</Text>
+        <Text> Click on the plus icon to create a new reminder!</Text>
+        <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate('CreateReminder')}/>
+      
+    </View>
+  )
 }
 
 
