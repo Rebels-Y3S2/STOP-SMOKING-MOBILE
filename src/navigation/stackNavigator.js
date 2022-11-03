@@ -11,8 +11,6 @@ import DiaryRecords from "../pages/Diary Management/Records/DiaryRecords";
 import Challenges from "../pages/Challenge Management/challengesList/Challenges";
 import ViewProfile from "../pages/UserProfile/ViewProfile.js";
 import UpdateProfile from "../pages/UserProfile/UpdateProfile.js";
-import AlertDialog from "../components/AlertDialog/AlertDialog.js";
-import { CommonConstants } from "../util/Constants/CommonConstants.js";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -44,9 +42,9 @@ const ChallengesStackNavigator = () => {
 const RemindersStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name={CommonConstants.REMINDERS_PATH} component={Reminders} options={getNavigatorStyles('Reminders')} />
-      <Stack.Screen name={CommonConstants.CREATE_REMINDER_PATH} component={CreateReminder} options={getNavigatorStyles('Create Reminder')} />
-      <Stack.Screen name={CommonConstants.UPDATE_REMINDER_PATH} component={UpdateReminder} options={getNavigatorStyles('Edit Reminder')} />
+      <Stack.Screen name="RemindersScreen" component={Reminders} options={getNavigatorStyles('Reminders')} />
+      <Stack.Screen name="CreateReminder" component={CreateReminder} options={getNavigatorStyles('Create Reminder')} />
+      <Stack.Screen name="UpdateReminder" component={UpdateReminder} options={getNavigatorStyles('Edit Reminder')} />
     </Stack.Navigator>
   );
 }
