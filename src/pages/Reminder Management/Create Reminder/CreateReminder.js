@@ -41,8 +41,10 @@ export default function CreateReminder() {
   return (
     <View>
       <ScrollView>
+        
         <BigHeaderBackground/>
         <PopupContainer  firstContainer>
+        <View style={{paddingBottom: 16}}>
           <TextInput variant="outlined" placeholder='Reminder Title' style={{ margin: 16 }} onChange={handleChange}></TextInput>
           <Text variant='subtitle 2' style={styles.textLable}>Reminder Title</Text>
           
@@ -93,9 +95,9 @@ export default function CreateReminder() {
 
           <Button title="Cancel" style={styles.button} variant="outlined" color='#5B5B5B' />
           <Button title="Save" style={styles.button} color="#1658CD" />
-          
+          </View>
         </PopupContainer>
-        <View style={{marginBottom:'20%'}}></View>
+       
       </ScrollView>
     </View>
   );
