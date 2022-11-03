@@ -1,1 +1,1 @@
-const BASE_URL = 'https://stop-smoke.herokuapp.com';
+const BASE_URL = 'http://localhost:3001/api';

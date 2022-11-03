@@ -1,5 +1,8 @@
 import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import ChallengeCard from "../../../components/Challenges/ChallengeCard";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { useNavigation } from "@react-navigation/native";
+
 
 const challenges = [
   {
@@ -45,6 +48,7 @@ const challenges = [
 ];
 
 export default function Challenges() {
+  const navigation = useNavigation()
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -57,6 +61,7 @@ export default function Challenges() {
           />
         ))}
       </ScrollView>
+      <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate('CreateChallenge')}/>
     </SafeAreaView>
   );
 }
@@ -66,4 +71,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {},
+  icon:{
+    position: 'absolute',
+    left: '80%',
+    top: 600,
+    color: '#1658CD',
+    boxShadow:'-8px 4px 24px rgba(0, 0, 0, 0.25)',
+    zIndex: 1000,
+},
 });

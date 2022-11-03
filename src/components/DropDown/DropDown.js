@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import {Dropdown} from 'react-native-element-dropdown'
 import { styles } from './DropDownStyles';
 
-export default function DropDown({disable = true, data = []}) {
-    const [value, setValue] = useState(null);
+export default function DropDown({disable = true, data = [], setValue, placeholder}) {
+    const [value, setValue_] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
+    const placeholderValue = placeholder ? placeholder : 'Select item';
     
   return (
     <Dropdown
@@ -19,10 +20,10 @@ export default function DropDown({disable = true, data = []}) {
           disable={!disable}
           valueField="value"
           disabled={disable}
-          placeholder={!isFocus ? 'Select item' : '...'}
+          placeholder={!isFocus ? placeholderValue : '...'}
           value={value}
           onChange={item => {
-            setValue(item.value);
+            setValue_(item.value);
             props.setValue(item.value)
             setIsFocus(false);
           }}

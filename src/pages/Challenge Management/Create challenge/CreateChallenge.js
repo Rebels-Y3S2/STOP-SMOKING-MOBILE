@@ -1,4 +1,4 @@
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import ChallengeForm from "../../../components/Challenges/ChallengeForm";
 import ChallengeImage from "../../../components/Challenges/ChallengeImage";
 import PopupContainer from "../../../components/Contaner/PopupContainer";

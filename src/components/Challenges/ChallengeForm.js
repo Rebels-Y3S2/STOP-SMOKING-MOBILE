@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import DropDown from "../DropDown/DropDown";
 
 export default function ChallengeForm() {
+    // const 
     const data = [
         { label: 'Item 1', value: '1' },
         { label: 'Item 2', value: '2' },
@@ -15,7 +16,9 @@ export default function ChallengeForm() {
 
     return (
         <View>
-            <DropDown data={data}/>
+            <DropDown data={data} placeholder={'Choose an option'}/>
+            <Text>sss</Text>
+            <DropDown data={data} placeholder={'Choose an option'}/>
         </View>
     )
 }
