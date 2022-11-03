@@ -115,6 +115,13 @@ export const userProfileStyles = StyleSheet.create({
         marginLeft: 285,
         color: "#6F6E6E"
     },
+    cameraIcon: {
+        marginTop: -65,
+        marginLeft: 285,
+        color: "#6F6E6E",
+        marginLeft: 190,
+        marginBottom: 30,
+    },
     loginpageImageContainer: {
         width: 250, 
         height: 200,

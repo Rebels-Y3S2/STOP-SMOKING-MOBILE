@@ -4,6 +4,7 @@ import BigHeaderBackground from "../../components/HeaderBackground/HeaderBackgro
 import PopupContainer from "../../components/Contaner/PopupContainer.js";
 import { userProfileStyles } from "./UserProfileStyles.js";
 import DropDownPicker from 'react-native-dropdown-picker';
+import DropDown from '../../components/DropDown/DropDown';
 
 const UpdateProfile = () => {
     const [open, setOpen] = useState(false);
