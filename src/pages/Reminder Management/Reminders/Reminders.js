@@ -2,21 +2,34 @@ import { HStack, Provider} from '@react-native-material/core'
 import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { View, Text} from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { View, Text, FlatList, Alert} from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import { fetchReminders } from '../../../api/reminder.api'
+import { deleteReminder, fetchReminders } from '../../../api/reminder.api'
 import Card from '../../../components/Card/Card'
 import DialogBox from '../../../components/DialogBox/DialogBox'
 import { styles } from './RemindersStyles'
 import { useIsFocused } from '@react-navigation/native'
+import PushNotifications from '../../../components/PushNotifications/PushNotifications'
+import {CommonConstants} from '../../../util/Constants/CommonConstants'
+import { ReminderConstants } from '../../../util/Constants/ReminderConstants'
 
-export default function Reminders() {
+export default function Reminders({route}) {
   const isFocused = useIsFocused();
   const navigation = useNavigation()
   const userId = '635b10baf383232439911869' // Will be replaced soon when auth is implemented.
   const [show, setShow] = useState(false);
-  const [reminderArr, setReminderArr] = useState([]);
+  const [reminderArray, setReminderArray] = useState([]);
+  const [deleteId, setDeleteId] = useState();
+
+  if(route.params){
+    if(route.params.type === CommonConstants.CREATE && route.params.success === true){
+      Alert.alert(CommonConstants.CREATE_SUCCESS_ALERT_TITLE, route.params.title)
+      route.params.success = false
+    }else if(route.params.type === CommonConstants.UPDATE && route.params.success === true) {
+      Alert.alert(CommonConstants.UPDATE_SUCCESS_ALERT_TITLE, route.params.title)
+      route.params.success = false
+    } 
+  }
 
   useEffect(() =>{
     if(isFocused){
@@ -27,59 +40,94 @@ export default function Reminders() {
   const getReminderDetails = () =>{
     fetchReminders(userId)
     .then((res) =>{
-      setReminderArr(res.data.data)
+      setReminderArray(res.data.data)
     }).catch((error) =>{
       console.log(error)
     })
   }
 
-  return reminderArr ?(
-    <View style={{position:"absolute", width:'100%', height:"100%"}}>
-       <ScrollView>
-      {
-        reminderArr.map((row) =>(
-          <View key={row._id}>
-            <Card 
-            title={row.reminderTitle}
-            children={
-              <>
-                <View>
-                  <HStack m={2} spacing={100} >
-                    <Text style={styles.lable}>From :{row.startDate}</Text>
-                    <HStack m={2} spacing={5}>
-                      <MaterialIcons name='edit'size={30} onPress={() => navigation.navigate('UpdateReminder')}  />
-                      <MaterialIcons name='delete'size={30} onPress={()=> setShow(true)}  />
-                    </HStack>
-                  </HStack>
-                    <Text style={styles.lable}>To     :{row.endDate}</Text>
-                </View>
-              </>
-            }
-          />
-          </View>
-        ))
-      }
-          </ScrollView>
-      <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate('CreateReminder')}/>
-          {
-            show &&
-            <Provider>
-            <DialogBox 
-              show={show} 
-              setShow={setShow}
-              title='Delete Reminder'
-              message='Are you sure to delete the reminder'  
-            />
-            </Provider>
+  const handleDeleteId = (id) =>{
+    setDeleteId(id)
+    setShow(true);
+  }
+
+  const handleDelete = () =>{
+    deleteReminder(deleteId)
+    .then((res) =>{
+      console.log(res.data);
+      getReminderDetails(userId)
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+
+  return reminderArray ?(
+    <>
+      <FlatList
+        data={reminderArray}
+        renderItem={({ item }) => 
+        <Card 
+          title={item.reminderTitle}
+          children={
+            <View>
+              <HStack m={2} spacing={100} >
+                <Text style={styles.lable}>From :{item.startDate}</Text>
+                <HStack m={3} spacing={5}>
+                  <MaterialIcons 
+                    name={CommonConstants.EDIT_MATERIAL_ICON} 
+                    size={30} 
+                    onPress={() => navigation.navigate(CommonConstants.UPDATE_REMINDER_PATH, {itemId: item._id})} 
+                  />
+                  <MaterialIcons 
+                    name={CommonConstants.DELETE_MATERIAL_ICON} 
+                    size={30} 
+                    onPress={()=> handleDeleteId(item._id)}  
+                  />
+                  <PushNotifications 
+                    title={item.reminderTitle}
+                    body={item.customQuote}
+                    startTime={item.startTime}
+                    identifier={item._id}/>
+                </HStack>
+              </HStack>
+                <Text style={styles.lable}>To     :{item.endDate}</Text>
+            </View>
           }
-    </View>
+        />
+        }
+        keyExtractor={(item) => item._id}
+      />
+      <MaterialIcons 
+        name={CommonConstants.ADD_MATERIAL_ICON} 
+        size={60} 
+        style={styles.icon}  
+        onPress={() => navigation.navigate(CommonConstants.CREATE_REMINDER_PATH)}
+      />
+      {
+        show &&
+        <Provider>
+        <DialogBox 
+          show={show} 
+          setShow={setShow}
+          id={deleteId}
+          title={ReminderConstants.DELETE_REMINDER_TITLE}
+          message={ReminderConstants.DELETE_REMINDER_CONFIRMATION} 
+          handleAction={handleDelete}
+        />
+        </Provider>
+      }  
+    </>
 
   ):(
     <View style={styles.message}>
         <Text>No reminders to display!</Text>
         <Text> Click on the plus icon to create a new reminder!</Text>
-        <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate('CreateReminder')}/>
-      
+        <MaterialIcons 
+          name={CommonConstants.ADD_MATERIAL_ICON} 
+          size={60} 
+          style={styles.icon}  
+          onPress={() => navigation.navigate(CommonConstants.CREATE_REMINDER_PATH)}
+        />
     </View>
   )
 }

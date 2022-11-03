@@ -33,6 +33,10 @@ export const styles = StyleSheet.create({
     selectedTextStyle: {
       fontSize: 16,
     },
+    disabledSelectedTextStyle: {
+      fontSize: 16,
+      color: '#d3d3d3',
+    },
     iconStyle: {
       width: 20,
       height: 20,

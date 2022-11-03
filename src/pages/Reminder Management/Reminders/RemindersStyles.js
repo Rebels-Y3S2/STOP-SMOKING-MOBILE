@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     icon:{
         position:'absolute',
-        top:600,
+        top:560,
         left:"80%",
         color: '#1658CD',
         backgroundColor:'white',
@@ -23,5 +23,10 @@ export const styles = StyleSheet.create({
         bottom: 0,
         justifyContent: "center",
         alignItems: "center",
+    },
+    reminderWrapper:{
+        position:"absolute", 
+        width:'100%', 
+        height:"100%"
     }
 });
