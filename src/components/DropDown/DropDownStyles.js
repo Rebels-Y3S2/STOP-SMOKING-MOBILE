@@ -4,10 +4,10 @@ export const styles = StyleSheet.create({
     dropdown: {
       height: 57,
       width:'91%',
-      margin:'4%',
+      margin:'5%',
       backgroundColor:'white',
       borderColor: 'gray',
-      borderWidth: 0.5,
+      borderWidth: 1,
       borderRadius: 5,
       paddingHorizontal: 8,
     },

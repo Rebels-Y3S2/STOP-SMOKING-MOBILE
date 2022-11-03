@@ -23,6 +23,7 @@ export default function DropDown({disable = true, data = []}) {
           value={value}
           onChange={item => {
             setValue(item.value);
+            props.setValue(item.value)
             setIsFocus(false);
           }}
         />

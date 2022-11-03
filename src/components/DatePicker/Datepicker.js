@@ -18,12 +18,14 @@ export default function Datepicker(props) {
         setDate(currentDate);
         let tempDate = new Date(currentDate);
         let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
-        let fTime = 'Hours' + tempDate.getHours() + '| Minutes: ' + tempDate.getMinutes();
-        props.setText(fDate)
-        props.setText(fTime)
+        let fTime = tempDate.getHours() + ':' + tempDate.getMinutes() + ' hrs';
+
+
         if(props.mode === 'date'){
+          props.setText(fDate)
           setText(fDate)
         }else{
+          props.setText(fTime)
           setText(fTime)
         }
     }
@@ -36,7 +38,7 @@ export default function Datepicker(props) {
   return (
     <View>
         <View>
-            <TextInput variant="outlined" label={props.lable} value={text} style={{ margin: 16 }}></TextInput>
+            <TextInput variant="outlined" label={props.lable} value={text} style={styles.input}></TextInput>
             {
               props.mode === 'date' ?
               <MaterialIcons name='date-range'size={30} onPress={()=> showMode(props.mode)} style={styles.icon} />:
