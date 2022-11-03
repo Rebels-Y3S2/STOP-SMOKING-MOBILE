@@ -15,7 +15,7 @@ import { fetchDiaryRecordById } from "../../../api/diary.api";
 import { useEffect } from "react";
 // import Dialog from "react-native-dialog";
 
-export default function DialogV2(props){
+export default function ManageDiaryRecords(props){
   const [visible, setVisible] = useState(false);
   const dismissHandler = () =>{
     props.setShow(false)
@@ -26,17 +26,15 @@ export default function DialogV2(props){
     setShow,
     handlRecordTitle,
     handlRecordDescription,
-    record,
     handleSubmit,
     action,
-    recordTitle,
-    recordDesc
   } = props;
 
-  console.log(action)
+  const [diaryRecord, setDiaryRecord] = useState({})
+
   useEffect(() => {
-    fetchDiaryRecordById(action.id).then((data) => {
-      console.log(data)
+    fetchDiaryRecordById(action.id).then((res) => {
+      setDiaryRecord(res.data.data)
     })
   }, []);
 
@@ -44,8 +42,8 @@ export default function DialogV2(props){
     <>
     <View>
       <Dialog visible={show} onDismiss={dismissHandler} style={{zIndex: 1000}}>
-        <HStack>
-          <View><DialogHeader title={"Create Diary"} /></View>
+        <HStack spacing={action.parentKey === "add"? 0 : 25}>
+          <View><DialogHeader title={action.parentKey === "add" ? "Create Diary" : "Edit Diary"} /></View>
           <View style={styles.closeIcon}><MaterialCommunityIcons name='close'size={18} onPress={()=> setShow(false)} /></View>
         </HStack>
         <Divider />
@@ -56,7 +54,7 @@ export default function DialogV2(props){
               placeholder='Diary Title'
               style={styles.title}
               onChange={handlRecordTitle}
-              value={recordTitle? recordTitle : 'ddd'}
+              defaultValue={diaryRecord?.title || ""}
               required
             />
             <Text variant='subtitle 2' style={styles.textLable}>Diary Title</Text>
@@ -67,7 +65,7 @@ export default function DialogV2(props){
               placeholder='Diary Description'
               style={styles.des}
               onChange={handlRecordDescription}
-              value={recordDesc}
+              defaultValue={diaryRecord?.description || ""}
               required
             />
             <Text variant='subtitle 2' style={styles.textLable}>Diary Description</Text>

@@ -9,7 +9,6 @@ import CreateReminder from "../pages/Reminder Management/Create Reminder/CreateR
 import UpdateReminder from "../pages/Reminder Management/Update Reminder/UpdateReminder";
 import DiaryRecords from "../pages/Diary Management/Records/DiaryRecords";
 import Challenges from "../pages/Challenge Management/challengesList/Challenges";
-import AlertDialog from "../components/AlertDialog/AlertDialog.js";
 import { CommonConstants } from "../util/Constants/CommonConstants.js";
 
 const Stack = createNativeStackNavigator();
