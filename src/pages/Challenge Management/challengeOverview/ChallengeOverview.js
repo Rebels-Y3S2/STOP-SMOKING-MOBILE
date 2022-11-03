@@ -2,11 +2,14 @@ import React from "react";
 import { StyleSheet, SafeAreaView, ScrollView, Text } from "react-native";
 import PopupContainer from "../../../components/Contaner/PopupContainer";
 import BigHeaderBackground from "../../../components/HeaderBackground/HeaderBackground";
-import Overview from "../../../components/Challenges/Overview";
-import DateList from "../../../components/Challenges/DateList";
+import Overview from "../../../components/Challenges/ChallengeOverview/Overview";
+import DateList from "../../../components/Challenges/DateList/DateList";
 import Hr from "../../../components/HorizontalLine/Hr";
+import styles from "./styles";
+import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
 
-export default function ChallengeOverview() {
+export default function ChallengeOverview({route}) {
+  console.log(route)
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -21,7 +24,7 @@ export default function ChallengeOverview() {
         </PopupContainer>
         <PopupContainer></PopupContainer>
         <Text style={styles.dateListTitleStyles}>
-          These are the challnges you will have to do
+          {ChallengeConstants.DATE_LIST_TITLE}
         </Text>
         <DateList />
         <Hr />
@@ -39,14 +42,3 @@ export default function ChallengeOverview() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollView: {},
-  dateListTitleStyles: {
-    marginHorizontal: 30,
-    marginBottom: 10,
-    fontSize: 16,
-  },
-});

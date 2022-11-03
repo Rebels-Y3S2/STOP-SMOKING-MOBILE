@@ -1,15 +1,11 @@
 import React from "react";
 import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import PopupContainer from "../../components/Contaner/PopupContainer";
-import ChallengeProgress from "../../components/Challenges/ChallengeProgress";
+import ChallengeProgress from "../../components/Challenges/ChallengeProgress/ChallengeProgress";
 import BigHeaderBackground from "../../components/HeaderBackground/HeaderBackground";
-import Todo from "../../components/Challenges/Todo";
+import Todo from "../../components/Challenges/Todo/Todo";
 
-const todo = [
-    'Dont smoke',
-    'Drink water',
-    'eat well'
-];
+const todo = ["Dont smoke", "Drink water", "eat well"];
 
 export default function ChallengeView() {
   return (
@@ -24,16 +20,14 @@ export default function ChallengeView() {
         <PopupContainer>
           <Todo title={"Today's challenge"} todoList={todo} />
         </PopupContainer>
-        </ScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
-  scrollView: {
- 
-  }
+  scrollView: {},
 });

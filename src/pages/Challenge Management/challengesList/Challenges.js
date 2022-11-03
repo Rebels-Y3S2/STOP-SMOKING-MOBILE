@@ -1,7 +1,9 @@
-import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import ChallengeCard from "../../../components/Challenges/ChallengeCard";
+import { SafeAreaView, ScrollView } from "react-native";
+import ChallengeCard from "../../../components/Challenges/ChallengeCard/ChallengeCard";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from "@react-navigation/native";
+import styles from "./styles";
+import { CommonConstants } from "../../../util/Constants/CommonConstants";
 
 
 const challenges = [
@@ -54,6 +56,7 @@ export default function Challenges() {
       <ScrollView style={styles.scrollView}>
         {challenges.map((challenge, id) => (
           <ChallengeCard
+            id={challenge._id}
             title={challenge.title}
             image={challenge.image}
             duration={challenge.duration}
@@ -61,22 +64,8 @@ export default function Challenges() {
           />
         ))}
       </ScrollView>
-      <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate('CreateChallenge')}/>
+      <MaterialIcons name='add-circle' size={60} style={styles.icon}  onPress={() => navigation.navigate(CommonConstants.CREATE_CHALLENGE_PATH)}/>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollView: {},
-  icon:{
-    position: 'absolute',
-    left: '80%',
-    top: 600,
-    color: '#1658CD',
-    boxShadow:'-8px 4px 24px rgba(0, 0, 0, 0.25)',
-    zIndex: 1000,
-},
-});

@@ -1,3 +1,4 @@
+import axios from "axios";
 import apiInstance from "./apiInstance";
 
-export const addReminder = (data) => apiInstance.post(`/challenges`, data);
+export const addChallenge = (data) => apiInstance.post(`challenges`, data);

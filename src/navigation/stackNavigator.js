@@ -9,9 +9,10 @@ import CreateReminder from "../pages/Reminder Management/Create Reminder/CreateR
 import UpdateReminder from "../pages/Reminder Management/Update Reminder/UpdateReminder";
 import DiaryRecords from "../pages/Diary Management/Records/DiaryRecords";
 import Challenges from "../pages/Challenge Management/challengesList/Challenges";
-import AlertDialog from "../components/AlertDialog/AlertDialog.js";
+// import AlertDialog from "../components/AlertDialog/AlertDialog.js";
 import CreateChallenge from "../pages/Challenge Management/Create challenge/CreateChallenge.js";
 import { CommonConstants } from "../util/Constants/CommonConstants.js";
+import ChallengeOverview from "../pages/Challenge Management/challengeOverview/ChallengeOverview.js";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -35,6 +36,7 @@ const ChallengesStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="ChallengesScreen" component={Challenges} options={getNavigatorStyles('Challenges')} />
       <Stack.Screen name="CreateChallenge" component={CreateChallenge} options={getNavigatorStyles('Create Challenge')} />
+      <Stack.Screen name="ChallengeOverview" component={ChallengeOverview} options={getNavigatorStyles('Challenge Overview')} />
     </Stack.Navigator>
   );
 }
