@@ -10,6 +10,8 @@ export const CommonConstants = {
     SAVE:"Save",
     UPDATE:"Update",
     CREATE:"Create",
+    START:"Start",
+    OPEN:"Open",
 
     //Icon Names
     EDIT_MATERIAL_ICON:"edit",
@@ -25,7 +27,7 @@ export const CommonConstants = {
     CREATE_CHALLENGE_PATH: "CreateChallenge",
     CHALLENGE_OVERVIEW_PATH: "ChallengeOverview",
     CHALLENGES_SCREEN_PATH: "ChallengesScreen",
-    CHALLENGE_PROGRESS_PATH: "",
+    CHALLENGE_PROGRESS_PATH: "ChallengeProgress",
 
     //Alert
     CREATE_SUCCESS_ALERT_TITLE:"Create Success",

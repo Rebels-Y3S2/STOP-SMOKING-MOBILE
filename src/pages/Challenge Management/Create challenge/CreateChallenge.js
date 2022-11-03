@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
+import { addChallenge } from "../../../api/challenge.api";
 import ChallengeForm from "../../../components/Challenges/ChallengeForm/ChallengeForm";
 import ChallengeImage from "../../../components/Challenges/ChallengeImage";
 import PopupContainer from "../../../components/Contaner/PopupContainer";
@@ -11,6 +12,14 @@ export default function CreateChallenge() {
 
   function handleSaveChallenge(challengeObj) {
     console.log(challengeObj);
+    addChallenge(challengeObj)
+      .then(res => {
+        console.log(res)
+        navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   function handleCancel() {

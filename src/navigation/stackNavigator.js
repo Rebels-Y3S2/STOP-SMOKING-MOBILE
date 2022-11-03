@@ -13,6 +13,7 @@ import Challenges from "../pages/Challenge Management/challengesList/Challenges"
 import CreateChallenge from "../pages/Challenge Management/Create challenge/CreateChallenge.js";
 import { CommonConstants } from "../util/Constants/CommonConstants.js";
 import ChallengeOverview from "../pages/Challenge Management/challengeOverview/ChallengeOverview.js";
+import ChallengeView from "../pages/Challenge Management/challengeView/ChallengeView.js";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -34,9 +35,10 @@ const HomeStackNavigator = () => {
 const ChallengesStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="ChallengesScreen" component={Challenges} options={getNavigatorStyles('Challenges')} />
-      <Stack.Screen name="CreateChallenge" component={CreateChallenge} options={getNavigatorStyles('Create Challenge')} />
-      <Stack.Screen name="ChallengeOverview" component={ChallengeOverview} options={getNavigatorStyles('Challenge Overview')} />
+      <Stack.Screen name={CommonConstants.CHALLENGES_SCREEN_PATH} component={Challenges} options={getNavigatorStyles('Challenges')} />
+      <Stack.Screen name={CommonConstants.CREATE_CHALLENGE_PATH} component={CreateChallenge} options={getNavigatorStyles('Create Challenge')} />
+      <Stack.Screen name={CommonConstants.CHALLENGE_OVERVIEW_PATH} component={ChallengeOverview} options={getNavigatorStyles('Challenge Overview')} />
+      <Stack.Screen name={CommonConstants.CHALLENGE_PROGRESS_PATH} component={ChallengeView} options={getNavigatorStyles('Challenge Progress')} />
     </Stack.Navigator>
   );
 }

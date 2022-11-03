@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
-import PopupContainer from "../../components/Contaner/PopupContainer";
-import ChallengeProgress from "../../components/Challenges/ChallengeProgress/ChallengeProgress";
-import BigHeaderBackground from "../../components/HeaderBackground/HeaderBackground";
-import Todo from "../../components/Challenges/Todo/Todo";
+import PopupContainer from "../../../components/Contaner/PopupContainer";
+import ChallengeProgress from "../../../components/Challenges/ChallengeProgress/ChallengeProgress";
+import BigHeaderBackground from "../../../components/HeaderBackground/HeaderBackground";
+import Todo from "../../../components/Challenges/Todo/Todo";
 
 const todo = ["Dont smoke", "Drink water", "eat well"];
 

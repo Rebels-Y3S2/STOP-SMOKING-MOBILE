@@ -5,6 +5,7 @@ import DropDown from "../../DropDown/DropDown";
 import { Button } from "react-native-paper";
 import styles from "./styles";
 import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
+import { CommonConstants } from "../../../util/Constants/CommonConstants";
 
 export default function ChallengeForm({ onSave, onCancel }) {
   const [type, setSmokingType] = useState(0);
@@ -36,7 +37,7 @@ export default function ChallengeForm({ onSave, onCancel }) {
         setValue={setSmokingType}
       />
       <Text variant="subtitle 2" style={styles.textLable}>
-        How often do you smoke?
+        {CommonConstants.SMOKING_TYPE_SPAN}
       </Text>
 
       <DropDown
@@ -45,17 +46,16 @@ export default function ChallengeForm({ onSave, onCancel }) {
         setValue={setDuration}
       />
       <Text variant="subtitle 2" style={styles.textLable}>
-        How long do you want to follow this challenge
+        {ChallengeConstants.CHALLENGE_DURATION_SPAN}
       </Text>
 
       <Button mode="outlined" onPress={onCancel} style={styles.button1}>
-        {" "}
+        {CommonConstants.CANCEL}
         Cancel
       </Button>
 
       <Button mode="contained" onPress={handleOnSave} style={styles.button2}>
-        {" "}
-        Save
+        {CommonConstants.SAVE}
       </Button>
     </View>
   );
