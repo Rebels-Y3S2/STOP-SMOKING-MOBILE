@@ -87,6 +87,7 @@ export default function CreateReminder() {
   return (
     <View>
       <ScrollView>
+        
         <BigHeaderBackground/>
         <PopupContainer  firstContainer>
           <TextInput 

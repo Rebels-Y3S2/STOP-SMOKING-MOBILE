@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
-import Hr from "../HorizontalLine/Hr";
+import Hr from "../../HorizontalLine/Hr";
+import styles from "./styles";
 
 export default function Todo({ title, todoList }) {
   return (
@@ -18,21 +19,3 @@ export default function Todo({ title, todoList }) {
   );
 }
 
-const styles = StyleSheet.create({
-  titleStyles: {
-    marginVertical: 20,
-    marginHorizontal: 17,
-    fontSize: 18,
-    font: "Roboto",
-    fontStyle: "normal",
-    fontWeight: "500",
-    color: "#434343",
-  },
-  todoListContainerStyles: {
-    marginVertical: 46.5,
-    marginHorizontal: 18,
-  },
-  todoStyles: {
-    padding: 7,
-  },
-});
