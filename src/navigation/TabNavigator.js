@@ -1,7 +1,7 @@
 import React from "react";
 import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomeStackNavigator, DiaryStackNavigator, RemindersStackNavigator, ChallengesStackNavigator } from "./stackNavigator.js";
+import { HomeStackNavigator, DiaryStackNavigator, RemindersStackNavigator, ChallengesStackNavigator } from "./StackNavigator.js";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Tab = createBottomTabNavigator();
