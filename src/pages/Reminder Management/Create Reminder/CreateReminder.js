@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ReminderConstants } from '../../../util/Constants/ReminderConstants.js';
 import { Colors, CommonConstants } from '../../../util/Constants/CommonConstants.js';
 import { styles } from './CreateReminderStyles.js';
+import { fetchDiaryRecords } from '../../../api/diary.api.js';
 
 export default function CreateReminder() {
   // Navigation
@@ -33,6 +34,8 @@ export default function CreateReminder() {
 
   const [challenges] = useState([])
   const [challengeDropDown, setChallengeDropDown] = useState([])
+  const [diaries] = useState([])
+  const [diaryDropDown, setDiaryDropdown] = useState([])
 
   const data = [ // Will be replaced soon when diary API s are integrated
     { label: 'Item 1', value: '1' },
@@ -66,6 +69,7 @@ export default function CreateReminder() {
    */
   useEffect(() =>{
     getChallengesDetails()
+    getDiaryDetails()
   }, [])
 
 
@@ -113,6 +117,27 @@ export default function CreateReminder() {
         challenges.push(challengeObj) // Store challengeObj in challenges array
       }
       setChallengeDropDown(challenges) // set the challengeDropDown data 
+    }).catch((error) =>{
+      console.log(error)
+    })
+  }
+
+  /**
+ * Fetch diary details relating to the userId
+ */
+   const getDiaryDetails = () =>{
+    fetchDiaryRecords("635b10baf383232439911869")
+    .then((res)=>{
+      console.log(res.data.data)
+      //Loops the response and isolate the titlle and id and assign to diaryObj
+      for(let i = 0; i<res.data.data.length; i++ ){
+        const diaryObj = {
+          label:res.data.data[i].title,
+          value:res.data.data[i]._id
+        }
+        diaries.push(diaryObj) // Store diaryObj in diary array
+      }
+      setDiaryDropdown(diaries) // set the diaryDropDown data 
     }).catch((error) =>{
       console.log(error)
     })
@@ -171,7 +196,7 @@ export default function CreateReminder() {
             onValueChange={(challengeChk) => setChallengeCheck(challengeChk)}
           />
 
-          <DropDown setValue={setDiary} data={data} disable={diaryCheck}/>
+          <DropDown setValue={setDiary} data={diaryDropDown} disable={diaryCheck}/>
           <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_DIARY_LABEL}</Text>
           <CheckBox style={styles.checkbox}
             testID={ReminderConstants.DIARY_TEST_ID}

@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native'
 import { ReminderConstants } from '../../../util/Constants/ReminderConstants.js'
 import {CommonConstants, Colors } from '../../../util/Constants/CommonConstants.js'
 import { styles } from './UpdateReminderStyles.js'
+import { fetchDiaryRecords } from '../../../api/diary.api.js'
 
 export default function UpdateReminder({route}) {
   // Navigation values
@@ -37,6 +38,9 @@ export default function UpdateReminder({route}) {
   const [challengeName, setChallengeName] = useState('')
   const [challenges, setChallenges] = useState([])
   const [challengeDropDown, setChallengeDropDown] = useState([])
+  const [diaryTitle, setDiaryTitle] = useState('')
+  const [diaries, setDiaries] = useState([])
+  const [diaryDropDown, setDiaryDropDown] = useState([])
 
   const data = [ // Will be replaced soon when diary API s are integrated
     { label: 'Item 1', value: '1' },
@@ -55,6 +59,7 @@ export default function UpdateReminder({route}) {
   useEffect(() =>{
     getReminderDetails()
     getChallengesDetails()
+    getDiaryDetails()
   },[])
 
   /**
@@ -77,10 +82,11 @@ export default function UpdateReminder({route}) {
    * Fetch the reminder details relating to the reminderId
    */
   const getReminderDetails = () =>{
-    fetchReminder(itemId)
+    fetchReminder(reminderId)
     .then((res) =>{
       setReminder(res.data.data)
       setChallengeName(res.data.data.challenge.name)
+      setDiaryTitle(res.data.data.diary.title)
     }).catch((error) =>{
       console.log(error);
     })
@@ -101,6 +107,27 @@ export default function UpdateReminder({route}) {
         challenges.push(challengeObj) // Store challengeObj in challenges array
       }
       setChallengeDropDown(challenges) // set the challengeDropDown data 
+    }).catch((error) =>{
+      console.log(error)
+    })
+  }
+
+    /**
+ * Fetch diary details relating to the userId
+ */
+  const getDiaryDetails = () =>{
+  fetchDiaryRecords("635b10baf383232439911869")
+    .then((res)=>{
+      console.log(res.data.data)
+      //Loops the response and isolate the title and id and assign to diaryObj
+      for(let i = 0; i<res.data.data.length; i++ ){
+        const diaryObj = {
+          label:res.data.data[i].title,
+          value:res.data.data[i]._id
+        }
+        diaries.push(diaryObj) // Store diaryObj in diary array
+      }
+      setDiaryDropDown(diaries) // set the diaryDropDown data 
     }).catch((error) =>{
       console.log(error)
     })
@@ -190,7 +217,7 @@ export default function UpdateReminder({route}) {
           onValueChange={(challengeChk) => setChallengeCheck(challengeChk)}
         />
 
-        <DropDown placeholder={reminder.diary} setValue={setDiary} data={data} disable={diaryCheck}/>
+        <DropDown placeholder={diaryTitle} setValue={setDiary} data={diaryDropDown} disable={diaryCheck}/>
         <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_DIARY_LABEL}</Text>
         <CheckBox style={styles.checkbox}
           testID={ReminderConstants.DIARY_TEST_ID}
