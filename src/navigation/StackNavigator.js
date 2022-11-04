@@ -17,6 +17,8 @@ import { CommonConstants } from "../util/Constants/CommonConstants.js";
 import ChallengeOverview from "../pages/Challenge Management/challengeOverview/ChallengeOverview.js";
 import ChallengeView from "../pages/Challenge Management/challengeView/ChallengeView.js";
 import EditChallenge from "../pages/Challenge Management/editchallenge/EditChallenge.js";
+import { useTranslation } from "react-i18next";
+import { ReminderConstants } from "../util/Constants/ReminderConstants.js";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -26,6 +28,8 @@ const screenOptionStyle = {
   headerTintColor: "white",
   headerBackTitle: "Back",
 };
+
+
 
 const HomeStackNavigator = () => {
   return (
@@ -50,11 +54,12 @@ const ChallengesStackNavigator = () => {
 }
 
 const RemindersStackNavigator = () => {
+  const { t } = useTranslation();
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name={CommonConstants.REMINDERS_PATH} component={Reminders} options={getNavigatorStyles('Reminders')} />
-      <Stack.Screen name={CommonConstants.CREATE_REMINDER_PATH} component={CreateReminder} options={getNavigatorStyles('Create Reminder')} />
-      <Stack.Screen name={CommonConstants.UPDATE_REMINDER_PATH} component={UpdateReminder} options={getNavigatorStyles('Edit Reminder')} />
+      <Stack.Screen name={CommonConstants.REMINDERS_PATH} component={Reminders} options={getNavigatorStyles(t(ReminderConstants.REMINDERS_TITLE))} />
+      <Stack.Screen name={CommonConstants.CREATE_REMINDER_PATH} component={CreateReminder} options={getNavigatorStyles(t(ReminderConstants.CREATE_REMINDER_TITLE))} />
+      <Stack.Screen name={CommonConstants.UPDATE_REMINDER_PATH} component={UpdateReminder} options={getNavigatorStyles(t(ReminderConstants.EDIT_REMINDER_TITLE))} />
     </Stack.Navigator>
   );
 }

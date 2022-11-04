@@ -13,10 +13,14 @@ import { ReminderConstants } from '../../../util/Constants/ReminderConstants.js'
 import { Colors, CommonConstants } from '../../../util/Constants/CommonConstants.js';
 import { styles } from './CreateReminderStyles.js';
 import { fetchDiaryRecords } from '../../../api/diary.api.js';
+import { useTranslation } from 'react-i18next';
 
 export default function CreateReminder() {
   // Navigation
   const navigation = useNavigation();
+
+  // Translation
+  const { t } = useTranslation();
 
   // Reminder Data
   const [reminderTitle, setReminderTitle] = useState('');
@@ -28,32 +32,21 @@ export default function CreateReminder() {
   const [diary, setDiary] = useState(null);
 
   // Checkbox data
-  const [customQuoteCheck, setCustomQuoteCheck] = useState(false)
-  const [challengeCheck, setChallengeCheck] = useState(false)
-  const [diaryCheck, setDiaryCheck] = useState(false)
+  const [customQuoteCheck, setCustomQuoteCheck] = useState(false);
+  const [challengeCheck, setChallengeCheck] = useState(false);
+  const [diaryCheck, setDiaryCheck] = useState(false);
 
-  const [challenges] = useState([])
-  const [challengeDropDown, setChallengeDropDown] = useState([])
-  const [diaries] = useState([])
-  const [diaryDropDown, setDiaryDropdown] = useState([])
-
-  const data = [ // Will be replaced soon when diary API s are integrated
-    { label: 'Item 1', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
-  ]; 
+  const [challenges] = useState([]);
+  const [challengeDropDown, setChallengeDropDown] = useState([]);
+  const [diaries] = useState([]);
+  const [diaryDropDown, setDiaryDropdown] = useState([]);
 
   /**
    * Takes the reminder title value from the text input field and assign in to reminderTitle const
    * @param {*} e 
    */
   const handlReminderTitle = (e) =>{
-    setReminderTitle(e.nativeEvent.text)
+    setReminderTitle(e.nativeEvent.text);
   }
 
   /**
@@ -61,15 +54,15 @@ export default function CreateReminder() {
    * @param {*} e 
    */
   const handleCustomQuote = (e) =>{
-    setCustomQuote(e.nativeEvent.text)
+    setCustomQuote(e.nativeEvent.text);
   }
   
   /**
    *  Will be called when the screen is loaded
    */
   useEffect(() =>{
-    getChallengesDetails()
-    getDiaryDetails()
+    getChallengesDetails();
+    getDiaryDetails();
   }, [])
 
 
@@ -90,7 +83,6 @@ export default function CreateReminder() {
     }
     addReminder(reminder)
     .then((res) =>{
-      console.log(res.data)
       navigation.navigate(CommonConstants.REMINDERS_PATH, 
         {
           title:ReminderConstants.REMINDER_CREATE_SUCCESS, 
@@ -98,7 +90,7 @@ export default function CreateReminder() {
         }
       )
     }).catch((error) =>{
-      console.log(error)
+      console.log(error);
     })
   }
 
@@ -114,11 +106,11 @@ export default function CreateReminder() {
           label:res.data.data[i].name,
           value:res.data.data[i]._id
         }
-        challenges.push(challengeObj) // Store challengeObj in challenges array
+        challenges.push(challengeObj); // Store challengeObj in challenges array
       }
-      setChallengeDropDown(challenges) // set the challengeDropDown data 
+      setChallengeDropDown(challenges); // set the challengeDropDown data 
     }).catch((error) =>{
-      console.log(error)
+      console.log(error);
     })
   }
 
@@ -128,18 +120,17 @@ export default function CreateReminder() {
    const getDiaryDetails = () =>{
     fetchDiaryRecords("635b10baf383232439911869")
     .then((res)=>{
-      console.log(res.data.data)
       //Loops the response and isolate the titlle and id and assign to diaryObj
       for(let i = 0; i<res.data.data.length; i++ ){
         const diaryObj = {
           label:res.data.data[i].title,
           value:res.data.data[i]._id
         }
-        diaries.push(diaryObj) // Store diaryObj in diary array
+        diaries.push(diaryObj); // Store diaryObj in diary array
       }
-      setDiaryDropdown(diaries) // set the diaryDropDown data 
+      setDiaryDropdown(diaries); // set the diaryDropDown data 
     }).catch((error) =>{
-      console.log(error)
+      console.log(error);
     })
   }
 
@@ -149,37 +140,37 @@ export default function CreateReminder() {
         <BigHeaderBackground/>
         <PopupContainer  firstContainer>
           <TextInput 
-            placeholder={ReminderConstants.REMINDER_TITLE_LABEL}
+            placeholder={t(ReminderConstants.REMINDER_TITLE_LABEL)}
             style={styles.input} 
             onChange={handlReminderTitle}
           />
-          <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.REMINDER_TITLE_LABEL}</Text>
+          <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.REMINDER_TITLE_LABEL)}</Text>
           
           <Datepicker
             setText={setSDate}
-            lable={ReminderConstants.START_DATE_LABEL}
+            lable={t(ReminderConstants.START_DATE_LABEL)}
             mode={CommonConstants.DATE} 
           />
 
           <Datepicker
             setText={setEDate} 
-            lable={ReminderConstants.END_DATE_LABEL} 
+            lable={t(ReminderConstants.END_DATE_LABEL)} 
             mode={CommonConstants.DATE}
           />
 
           <Datepicker
             setText={setSTime} 
-            lable={ReminderConstants.START_TIME_LABEL}
+            lable={t(ReminderConstants.START_TIME_LABEL)}
             mode={CommonConstants.TIME} 
           />
 
           <TextInput 
-            placeholder={ReminderConstants.CUSTOM_QUOTE_LABEL} 
+            placeholder={t(ReminderConstants.CUSTOM_QUOTE_LABEL)} 
             editable={customQuoteCheck} 
             onChange={handleCustomQuote} 
             style={styles.input}
           />
-          <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.CUSTOM_QUOTE_LABEL} </Text>
+          <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.CUSTOM_QUOTE_LABEL)} </Text>
           <CheckBox style={styles.checkbox}
             testID={ReminderConstants.QUOTE_TEST_ID}
             disabled={false}
@@ -188,7 +179,7 @@ export default function CreateReminder() {
           />
 
           <DropDown setValue={setChallenge} data={challengeDropDown} disable={challengeCheck}/>
-          <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_CHALLENGE_LABEL}</Text>
+          <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_CHALLENGE_LABEL)}</Text>
           <CheckBox style={styles.checkbox}
             testID={ReminderConstants.CHALLENGE_TEST_ID}
             disabled={false}
@@ -197,7 +188,7 @@ export default function CreateReminder() {
           />
 
           <DropDown setValue={setDiary} data={diaryDropDown} disable={diaryCheck}/>
-          <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_DIARY_LABEL}</Text>
+          <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_DIARY_LABEL)}</Text>
           <CheckBox style={styles.checkbox}
             testID={ReminderConstants.DIARY_TEST_ID}
             disabled={false}
@@ -205,11 +196,11 @@ export default function CreateReminder() {
             onValueChange={(diaryChk) => setDiaryCheck(diaryChk)}
           />
 
-          <Button title={CommonConstants.CANCEL} style={styles.button} onPress={() => navigation.goBack()} variant="outlined" color={Colors.GRAY} />
-          <Button title={CommonConstants.SAVE} style={styles.button} onPress={handleSubmit} color={Colors.BLUE} />
-          <View style={{marginBottom:'-10%'}}></View>
+          <Button title={t(CommonConstants.CANCEL)} style={styles.button} onPress={() => navigation.goBack()} variant="outlined" color={Colors.GRAY} />
+          <Button title={t(CommonConstants.SAVE)} style={styles.button} onPress={handleSubmit} color={Colors.BLUE} />
+          <View style={{marginBottom:10}}></View>
         </PopupContainer>
-        <View style={{marginBottom:'50%'}}></View>
+        <View style={{marginBottom:125}}></View>
       </ScrollView>
     </View>
   );

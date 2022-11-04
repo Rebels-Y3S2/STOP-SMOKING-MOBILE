@@ -16,6 +16,6 @@ export const styles = StyleSheet.create({
         marginBottom:'3%'
     },
     children:{
-        marginLeft:'8%',
+        marginLeft:'3%',
     }
 });
