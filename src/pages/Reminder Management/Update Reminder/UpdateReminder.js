@@ -1,33 +1,36 @@
-import { Button, Text, TextInput } from '@react-native-material/core'
-import React, { useState } from 'react'
-import { View, ScrollView, StyleSheet } from 'react-native'
+import { Button, Text } from '@react-native-material/core'
+import React, { useEffect, useState } from 'react'
+import { View, ScrollView, TextInput } from 'react-native'
 import Datepicker from '../../../components/DatePicker/Datepicker.js'
 import DropDown from '../../../components/DropDown/DropDown.js'
 import CheckBox from 'expo-checkbox';
 import BigHeaderBackground from '../../../components/HeaderBackground/HeaderBackground.js'
 import PopupContainer from '../../../components/Contaner/PopupContainer.js'
 import { styles } from './UpdateReminderStyles.js'
+import { fetchReminder, updateReminder } from '../../../api/reminder.api.js'
+import { useNavigation } from '@react-navigation/native'
+import { ReminderConstants } from '../../../util/Constants/ReminderConstants.js'
+import {CommonConstants, Colors } from '../../../util/Constants/CommonConstants.js'
 
-export default function UpdateReminder() {
-  const [reminder, setReminder] = useState({
-    reminderTitle:'',
-    startDate:'',
-    endDate:'',
-    customQuote:'',
-    challenge:'',
-    diary:''
-  })
-  const handleChange = (e) =>{
-    setReminder({...reminder, [e.target.name]: e.target.value})
-  }
+export default function UpdateReminder({route}) {
+  const [reminderTitle, setReminderTitle] = useState('');
   const [sDate, setSDate] = useState('')
   const [eDate, setEDate] = useState('')
-  const [sTime,setSTime] = useState('')
+  const [sTime,setSTime] = useState(null)
+  const [customQuote, setCustomQuote] = useState('');
+  const [challenge, setChallenge] = useState('')
+  const [diary, setDiary] = useState('')
+
   const [customQuoteCheck, setCustomQuoteCheck] = useState(false)
   const [challengeCheck, setChallengeCheck] = useState(false)
   const [diaryCheck, setDiaryCheck] = useState(false)
 
-  const data = [
+  const navigation = useNavigation()
+  const {itemId} = route.params;
+
+  const [reminder, setReminder] = useState({})
+
+  const data = [ // Will be replaced soon when challenge and diary API s are integrated
     { label: 'Item 1', value: '1' },
     { label: 'Item 2', value: '2' },
     { label: 'Item 3', value: '3' },
@@ -37,68 +40,124 @@ export default function UpdateReminder() {
     { label: 'Item 7', value: '7' },
     { label: 'Item 8', value: '8' },
   ];
-  const [isEditable, setIsEditable] = useState(false);
+
+  const handlReminderTitle = (e) =>{
+    setReminderTitle(e.nativeEvent.text)
+  }
+
+  const handleCustomQuote = (e) =>{
+    setCustomQuote(e.nativeEvent.text)
+  }
+
+  useEffect(() =>{
+    getReminderDetails()
+  },[])
+  
+  const getReminderDetails = () =>{
+    fetchReminder(itemId)
+    .then((res) =>{
+      setReminder(res.data.data)
+    }).catch((error) =>{
+      console.log(error);
+    })
+  }
+
+  const handleSubmit = () =>{
+    const newReminder = {
+      userId:'635b10baf383232439911869', //Will be replaced once user auth is integrated
+      reminderTitle:reminderTitle === '' ? reminder.reminderTitle : reminderTitle,
+      startDate:sDate === '' ? reminder.startDate : sDate,
+      endDate:eDate === '' ? reminder.endDate : eDate,
+      startTime: sTime === null ? reminder.startTime : sTime.split(' ')[0],
+      customQuote:customQuote === '' ? reminder.customQuote : customQuote,
+      challenge:challenge === '' ? reminder.challenge : challenge,
+      diary:diary === '' ? reminder.diary : diary
+    }
+    updateReminder(itemId, newReminder)
+    .then((res) =>{
+      console.log(res.data)
+      navigation.navigate(CommonConstants.REMINDERS_PATH, 
+        {
+          title:ReminderConstants.REMINDER_EDIT_SUCCESS, 
+          type:CommonConstants.UPDATE, success:true
+        }
+      )
+    }).catch((error) =>{
+      console.log(error)
+    })
+  }
   
   return (
     <View>
-      <ScrollView>
-        <BigHeaderBackground/>
-        <PopupContainer  firstContainer>
-          <TextInput variant="outlined" placeholder='Reminder Title' style={{ margin: 16 }} onChange={handleChange}></TextInput>
-          <Text variant='subtitle 2' style={styles.textLable}>Enter new Reminder Title</Text>
-          
-          <Datepicker
-            setText={setSDate}
-            lable='Start Date'
-            mode='date' 
-          />
+    <ScrollView>
+      <BigHeaderBackground/>
+      <PopupContainer  firstContainer>
+        <TextInput 
+          placeholder={ReminderConstants.REMINDER_TITLE_LABEL} 
+          style={styles.input} 
+          defaultValue={reminder.reminderTitle} 
+          onChange={handlReminderTitle} 
+        />
+        <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.REMINDER_TITLE_LABEL}</Text>
+        
+        <Datepicker
+          setText={setSDate}
+          lable={sDate === '' ? 'Starts on:  ' + reminder.startDate: ReminderConstants.START_DATE_LABEL}
+          mode={CommonConstants.DATE} 
+        />
 
-          <Datepicker
-            setText={setEDate} 
-            lable='End Date' 
-            mode='date'
-          />
+        <Datepicker
+          setText={setEDate} 
+          lable={eDate === '' ? 'Ends on:  ' + reminder.endDate : ReminderConstants.END_DATE_LABEL} 
+          mode={CommonConstants.DATE}
+        />
 
-          <Datepicker
-            setText={setSTime} 
-            lable='Start Time'
-            mode='time' 
-          />
+        <Datepicker
+          setText={setSTime} 
+          lable={sTime === null ? 'Notifies at : ' + reminder.startTime + 'hrs' : ReminderConstants.START_TIME_LABEL}
+          mode={CommonConstants.TIME} 
+        />
 
-          <TextInput variant="outlined" placeholder='Custom Quote' style={{ margin: 16 }} editable={customQuoteCheck}></TextInput>
-          <Text variant='subtitle 2' style={styles.textLable}>Custom Quote</Text>
-          <CheckBox style={styles.checkbox}
-            testID='quote'
-            disabled={false}
-            value={customQuoteCheck}
-            onValueChange={(quoteChk) => setCustomQuoteCheck(quoteChk)}
-          />
+        <TextInput 
+          placeholder={ReminderConstants.CUSTOM_QUOTE_LABEL} 
+          editable={customQuoteCheck} 
+          onChange={handleCustomQuote} 
+          style={styles.input}
+          defaultValue={reminder.customQuote}
+        />
+        <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.CUSTOM_QUOTE_LABEL}</Text>
+        <CheckBox style={styles.checkbox}
+          testID={ReminderConstants.QUOTE_TEST_ID}
+          disabled={false}
+          value={customQuoteCheck}
+          onValueChange={(quoteChk) => setCustomQuoteCheck(quoteChk)}
+        />
 
-          <DropDown data={data} disable={challengeCheck}/>
-          <Text variant='subtitle 2' style={styles.textLable}>Select Challenge</Text>
-          <CheckBox style={styles.checkbox}
-            testID='challenge'
-            disabled={false}
-            value={challengeCheck}
-            onValueChange={(challengeChk) => setChallengeCheck(challengeChk)}
-          />
+        <DropDown defaultValue={reminder.challenge} setValue={setChallenge} data={data} disable={challengeCheck}/>
+        <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_CHALLENGE_LABEL}</Text>
+        <CheckBox style={styles.checkbox}
+          testID={ReminderConstants.CHALLENGE_TEST_ID}
+          disabled={false}
+          value={challengeCheck}
+          onValueChange={(challengeChk) => setChallengeCheck(challengeChk)}
+        />
 
-          <DropDown data={data} disable={diaryCheck}/>
-          <Text variant='subtitle 2' style={styles.textLable}>Select Diary</Text>
-          <CheckBox style={styles.checkbox}
-            testID='diary'
-            disabled={false}
-            value={diaryCheck}
-            onValueChange={(diaryChk) => setDiaryCheck(diaryChk)}
-          />
+        <DropDown defaultValue={reminder.diary} setValue={setDiary} data={data} disable={diaryCheck}/>
+        <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_DIARY_LABEL}</Text>
+        <CheckBox style={styles.checkbox}
+          testID={ReminderConstants.DIARY_TEST_ID}
+          disabled={false}
+          value={diaryCheck}
+          onValueChange={(diaryChk) => setDiaryCheck(diaryChk)}
+        />
 
-          <Button title="Cancel" style={styles.button} variant="outlined" color='#5B5B5B' />
-          <Button title="Edit" style={styles.button} color="#1658CD" />
-          <View style={{marginTop:'5%'}} />
-        </PopupContainer>
-        <View style={{marginBottom:'20%'}}></View>
-      </ScrollView>
-    </View>
+        <Button title={CommonConstants.CANCEL} style={styles.button} onPress={() => navigation.goBack()} variant="outlined" color={Colors.GRAY} />
+        <Button title={CommonConstants.EDIT} style={styles.button} onPress={handleSubmit} color={Colors.BLUE} />
+        <View style={{marginBottom:'-10%'}}></View>
+      </PopupContainer>
+      <View style={{marginBottom:'50%'}}></View>
+    </ScrollView>
+  </View>
   );
 }
 

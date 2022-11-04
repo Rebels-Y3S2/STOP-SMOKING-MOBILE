@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     dropdown: {
-      height:'7%',
+      height: 57,
       width:'91%',
       margin:'5%',
       backgroundColor:'white',
@@ -32,6 +32,10 @@ export const styles = StyleSheet.create({
     },
     selectedTextStyle: {
       fontSize: 16,
+    },
+    disabledSelectedTextStyle: {
+      fontSize: 16,
+      color: '#d3d3d3',
     },
     iconStyle: {
       width: 20,
