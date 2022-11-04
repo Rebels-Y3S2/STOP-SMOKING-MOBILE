@@ -12,13 +12,16 @@ import moment from 'moment';
 import { SearchBar } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler'
 import { ButtonGroup } from 'react-native-elements'
+import useMap from '../../../hooks/useMap'
 
 export default function DiaryRecords() {
   const input = createRef();
   const navigation = useNavigation()
   const [show, setShow] = useState(false);
-  const [liked, setLiked] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const [likeMap, { set }] = useMap([[]]);
+
   const [recordResponseList, setRecordResponseList] = useState([
     {    
         _id:1,
@@ -87,6 +90,18 @@ export default function DiaryRecords() {
   ])
 
   const [search, setSearch] = useState("");
+
+const getLike = (index) => {
+    if (likeMap.has(index)) {
+        return likeMap.get(index); 
+    } else {
+        return false;
+    }
+} 
+
+const handleLike = (index, value) => {
+    set(index, value);
+}
 
 const updateSearch = (search) => {
   setSearch(search);
@@ -157,11 +172,11 @@ const buttons = [{ element: tabBtn1 }, { element: tabBtn2 }]
                   </HStack>
                   <HStack m={0} spacing={240} style={styles.btns}>
                     <View>
-                        <Pressable key={index} onPress={(e) => setLiked((isLiked) => !isLiked)} value={row.isFavorite}>
+                        <Pressable key={index} onPress={(e) => handleLike(index, !getLike(index))} value={row.isFavorite}>
                             <MaterialCommunityIcons
-                                name={liked? 'heart' : 'heart-outline'}
+                                name={getLike(index) ? 'heart' : 'heart-outline'}
                                 size={28}
-                                color={liked? '#759CFF' : '#759CFF'}
+                                color={getLike(index) ? '#759CFF' : '#759CFF'}
                             />
                         </Pressable>
                     </View>
