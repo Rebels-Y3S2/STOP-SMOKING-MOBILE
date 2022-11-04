@@ -10,7 +10,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { MainStackNavigator } from './src/navigation/StackNavigator.js';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import './src/localization/i18n';
 
 const App = () => {
   return (

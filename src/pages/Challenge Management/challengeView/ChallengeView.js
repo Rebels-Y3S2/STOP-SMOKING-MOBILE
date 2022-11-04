@@ -6,10 +6,8 @@ import BigHeaderBackground from "../../../components/HeaderBackground/HeaderBack
 import Todo from "../../../components/Challenges/Todo/Todo";
 import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
 import styles from "./styles";
-import { useTranslation } from 'react-i18next'
 
 export default function ChallengeView({ route }) {
-  const { t } = useTranslation();
   const { daysLeft, name, completed, tasks, onGoingDate } = route.params;
 
   // Will change these with API keep this here for now - approve karapn @dulshan
@@ -39,7 +37,7 @@ export default function ChallengeView({ route }) {
           </View>
         </PopupContainer>
         <PopupContainer>
-          <Todo title={`${t(ChallengeConstants.DAY)} ${onGoingDate}`} todoList={todo} />
+          <Todo title={`${ChallengeConstants.DAY} ${onGoingDate}`} todoList={todo} />
         </PopupContainer>
       </ScrollView>
     </SafeAreaView>

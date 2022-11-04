@@ -3,11 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { ChallengeConstants } from '../../../util/Constants/ChallengeConstants';
 import styles from './styles';
-import { useTranslation } from 'react-i18next'
 
 export default function ChallengeProgress({ name, daysLeft, completed }) {
-  const { t } = useTranslation();
-
   return (
     <View>
       <Text style={styles.titleStyles}>{name}</Text>
@@ -28,7 +25,7 @@ export default function ChallengeProgress({ name, daysLeft, completed }) {
                   {daysLeft}
                 </Text>
                 <Text>
-                  {t(ChallengeConstants.DAYS_LEFT)}
+                  {ChallengeConstants.DAYS_LEFT}
                 </Text>
               </View>
             )

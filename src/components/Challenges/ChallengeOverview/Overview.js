@@ -9,14 +9,12 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Hr from "../../HorizontalLine/Hr";
 import styles from "./styles";
 import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
-import { useTranslation } from 'react-i18next'
 
 export default function Overview({ title, description, onClick, isStarted, onDelete, onEdit }) {
-  const { t } = useTranslation();
   return (
     <View>
       <View style={styles.titleContainer}>
-        <Text style={styles.titleStyles}>{t(ChallengeConstants.CHALLENGE_OVERVIEW)}</Text>
+        <Text style={styles.titleStyles}>{ChallengeConstants.CHALLENGE_OVERVIEW}</Text>
 
         <HStack m={20} spacing={5}>
           <MaterialIcons
@@ -39,7 +37,7 @@ export default function Overview({ title, description, onClick, isStarted, onDel
           <Button
             color={Colors.BLUE}
             onPress={onClick}
-            title={isStarted ? t(CommonConstants.OPEN) : t(CommonConstants.START)}
+            title={isStarted ? CommonConstants.OPEN : CommonConstants.START}
           />
         </View>
       </View>
