@@ -12,6 +12,7 @@ export const CommonConstants = {
     CREATE:"Create",
     START:"Start",
     OPEN:"Open",
+    SELECT_ITEM:"Select Item",
 
     //Icon Names
     EDIT_MATERIAL_ICON:"edit",

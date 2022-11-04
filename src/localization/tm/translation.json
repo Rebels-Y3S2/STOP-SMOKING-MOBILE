@@ -14,6 +14,28 @@
     "Delete Challenge": "சவாலை நீக்கு",
     "Are you sure to delete the challenge": "சவாலை நீக்குவது உறுதி",
     "Day": "நாள்",
+
+    "Reminder Title":"நினைவூட்டல் தலைப்பு",
+    "Start Date":"தொடக்க தேதி",
+    "End Date":"கடைசி தேதி",
+    "Start Time":"ஆரம்பிக்கும் நேரம்",
+    "Custom Quote":"விருப்ப மேற்கோள்",
+    "Select Challenge":"சவாலைத் தேர்ந்தெடுக்கவும்",
+    "Select Diary":"நாட்குறிப்பைத் தேர்ந்தெடுக்கவும்",
+    "Are you sure you want to delete the reminder?":"நினைவூட்டலை நிச்சயமாக நீக்க விரும்புகிறீர்களா?",
+    "No reminders to display!":"காண்பிக்க நினைவூட்டல்கள் இல்லை!",
+    "Click on the plus icon to create your first reminder!":"உங்கள் முதல் நினைவூட்டலை உருவாக்க, பிளஸ் ஐகானைக் கிளிக் செய்யவும்!",
+    "Delete Reminder":"நினைவூட்டலை நீக்கு",
+    "Successfully Edited Reminder":"நினைவூட்டல் வெற்றிகரமாகத் திருத்தப்பட்டது",
+    "Successfully Added Reminder":"நினைவூட்டல் வெற்றிகரமாக சேர்க்கப்பட்டது",
+    "Create Reminder":"நினைவூட்டலை உருவாக்கவும்",
+    "Edit Reminder":"நினைவூட்டலைத் திருத்து",
+    "Reminders":"நினைவூட்டல்கள்",
+    "Select Item":"உருப்படியைத் தேர்ந்தெடுக்கவும்",
+    "Starts On:":"தொடங்குகிறது:",
+    "Ends On:":"முடிவு:",
+    "Notifies at:":"அறிவிக்கிறது:",
+  
   
     "Cancel": "ரத்து செய்",
     "Delete": "அழி",
@@ -27,6 +49,8 @@
     "Create": "உருவாக்கு",
     "Start": "தொடங்கு",
     "Open": "திற",
+    "From": "இருந்து",
+    "To": "செய்ய",
   
     "Create Success": "வெற்றியை உருவாக்குங்கள்",
     "Edit Success": "வெற்றியைத் திருத்து"
