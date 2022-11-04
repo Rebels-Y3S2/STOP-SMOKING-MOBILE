@@ -9,7 +9,14 @@ import CreateReminder from "../pages/Reminder Management/Create Reminder/CreateR
 import UpdateReminder from "../pages/Reminder Management/Update Reminder/UpdateReminder";
 import DiaryRecords from "../pages/Diary Management/Records/DiaryRecords";
 import Challenges from "../pages/Challenge Management/challengesList/Challenges";
+// import AlertDialog from "../components/AlertDialog/AlertDialog.js";
+import CreateChallenge from "../pages/Challenge Management/Create challenge/CreateChallenge.js";
+import ViewProfile from "../pages/UserProfile/ViewProfile.js";
+import UpdateProfile from "../pages/UserProfile/UpdateProfile.js";
 import { CommonConstants } from "../util/Constants/CommonConstants.js";
+import ChallengeOverview from "../pages/Challenge Management/challengeOverview/ChallengeOverview.js";
+import ChallengeView from "../pages/Challenge Management/challengeView/ChallengeView.js";
+import EditChallenge from "../pages/Challenge Management/editchallenge/EditChallenge.js";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -24,6 +31,8 @@ const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="HomeScreen" component={Home} options={getNavigatorStyles('Home')} />
+      <Stack.Screen name="ViewProfile" component={ViewProfile} options={getNavigatorStyles('User Profile')} />
+      <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={getNavigatorStyles('Edit Profile')} />
     </Stack.Navigator>
   );
 }
@@ -31,7 +40,11 @@ const HomeStackNavigator = () => {
 const ChallengesStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="ChallengesScreen" component={Challenges} options={getNavigatorStyles('Challenges')} />
+      <Stack.Screen name={CommonConstants.CHALLENGES_SCREEN_PATH} component={Challenges} options={getNavigatorStyles('Challenges')} />
+      <Stack.Screen name={CommonConstants.CREATE_CHALLENGE_PATH} component={CreateChallenge} options={getNavigatorStyles('Create Challenge')} />
+      <Stack.Screen name={CommonConstants.CHALLENGE_OVERVIEW_PATH} component={ChallengeOverview} options={getNavigatorStyles('Challenge Overview')} />
+      <Stack.Screen name={CommonConstants.CHALLENGE_PROGRESS_PATH} component={ChallengeView} options={getNavigatorStyles('Challenge Progress')} />
+      <Stack.Screen name={CommonConstants.CHALLENGE_EDIT_PATH} component={EditChallenge} options={getNavigatorStyles('Edit Challenge')} />
     </Stack.Navigator>
   );
 }
