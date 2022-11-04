@@ -16,7 +16,6 @@ import UpdateProfile from "../pages/UserProfile/UpdateProfile.js";
 import { CommonConstants } from "../util/Constants/CommonConstants.js";
 import ChallengeOverview from "../pages/Challenge Management/challengeOverview/ChallengeOverview.js";
 import ChallengeView from "../pages/Challenge Management/challengeView/ChallengeView.js";
-import EditChallenge from "../pages/Challenge Management/editchallenge/EditChallenge.js";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -44,7 +43,6 @@ const ChallengesStackNavigator = () => {
       <Stack.Screen name={CommonConstants.CREATE_CHALLENGE_PATH} component={CreateChallenge} options={getNavigatorStyles('Create Challenge')} />
       <Stack.Screen name={CommonConstants.CHALLENGE_OVERVIEW_PATH} component={ChallengeOverview} options={getNavigatorStyles('Challenge Overview')} />
       <Stack.Screen name={CommonConstants.CHALLENGE_PROGRESS_PATH} component={ChallengeView} options={getNavigatorStyles('Challenge Progress')} />
-      <Stack.Screen name={CommonConstants.CHALLENGE_EDIT_PATH} component={EditChallenge} options={getNavigatorStyles('Edit Challenge')} />
     </Stack.Navigator>
   );
 }

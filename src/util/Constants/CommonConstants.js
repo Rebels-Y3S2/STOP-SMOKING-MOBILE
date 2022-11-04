@@ -28,7 +28,6 @@ export const CommonConstants = {
     CHALLENGE_OVERVIEW_PATH: "ChallengeOverview",
     CHALLENGES_SCREEN_PATH: "ChallengesScreen",
     CHALLENGE_PROGRESS_PATH: "ChallengeProgress",
-    CHALLENGE_EDIT_PATH: "ChallengeEdit",
 
     //Alert
     CREATE_SUCCESS_ALERT_TITLE:"Create Success",

@@ -11,8 +11,10 @@ export default function CreateChallenge() {
   const navigation = useNavigation();
 
   function handleSaveChallenge(challengeObj) {
+    console.log(challengeObj);
     addChallenge(challengeObj)
       .then(res => {
+        console.log(res)
         navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH);
       })
       .catch(err => {

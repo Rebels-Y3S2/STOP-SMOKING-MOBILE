@@ -32,11 +32,6 @@ const styles = StyleSheet.create({
     startButtonStyles: {
       marginTop: 37,
     },
-    titleContainer: {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'space-between'
-    }
   });
 
   export default styles;

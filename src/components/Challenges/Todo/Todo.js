@@ -5,7 +5,7 @@ import styles from "./styles";
 export default function Todo({ title, todoList }) {
   return (
     <View>
-      <Text style={styles.titleStyles}>{title}</Text>
+      <Text style={styles.titleStyles}>Oh ye Challenges</Text>
       <Hr />
       <View style={styles.todoListContainerStyles}>
         {todoList.map((item, index) => (
