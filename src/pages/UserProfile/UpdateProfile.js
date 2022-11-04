@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text, ScrollView, TextInput, Button } from "react-native";
 import BigHeaderBackground from "../../components/HeaderBackground/HeaderBackground.js";
 import PopupContainer from "../../components/Contaner/PopupContainer.js";
@@ -7,6 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import DropDown from '../../components/DropDown/DropDown';
 
 const UpdateProfile = () => {
+
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -16,15 +17,17 @@ const UpdateProfile = () => {
         { label: 'Other', value: 'other' },
     ]);
 
+    console.log("UpdateProfile: useEffect");
+
     return (
         <View>
             <ScrollView>
                 <BigHeaderBackground />
                 <PopupContainer firstContainer>
-                    <TextInput variant="outlined" placeholder='John Smith' style={userProfileStyles.inputContainerUpdateProfile}></TextInput>
+                    <TextInput variant="outlined" placeholder="John Smith" style={userProfileStyles.inputContainerUpdateProfile}></TextInput>
                     <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Full Name</Text>
 
-                    <TextInput variant="outlined" placeholder='johnsmith@gmail.com' style={userProfileStyles.inputContainerUpdateProfile}></TextInput>
+                    <TextInput variant="outlined" placeholder="johnsmith@gmail.com" style={userProfileStyles.inputContainerUpdateProfile}></TextInput>
                     <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Email Address</Text>
 
                     <DropDownPicker

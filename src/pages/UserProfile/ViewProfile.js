@@ -9,17 +9,20 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
 import { HStack, Provider } from '@react-native-material/core'
 import DialogBoxUserDeletion from '../../components/DialogBox/DialogBoxUserDeletion';
+import {AuthContext} from '../context';
 
 const ViewProfile = () => {
   const navigation = useNavigation();
   const [show, setShow] = useState(false);
+
+  const { signOut } = React.useContext(AuthContext);
 
   return (
     <View>
       <ScrollView>
         <BigHeaderBackground />
         <PopupContainer firstContainer>
-          <HStack m={2} spacing={5}>
+          <HStack ml={240} mt={15} spacing={5}>
             <MaterialIcons name='edit' size={30} onPress={() => navigation.navigate('UpdateProfile')} />
             <MaterialIcons name='delete' size={30} onPress={() => setShow(true)} />
           </HStack>
@@ -51,6 +54,7 @@ const ViewProfile = () => {
               </View>
             }
             title={<View><Text style={userProfileStyles.buttonTextContent}>Logout</Text></View>}
+            onPress = {() => {signOut()}}
           />
         </View>
       </ScrollView>

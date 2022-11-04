@@ -6,12 +6,20 @@ import { userProfileStyles } from "./UserProfileStyles.js";
 import { Image } from 'react-native-elements';
 import {userRequests} from '../../api/users.api.js';
 import { useNavigation } from '@react-navigation/native'
+import UpdateProfile from './UpdateProfile';
+import {AuthContext} from '../context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserLogin = () => {
 
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loggedInUserEmail, setLoggedInUserEmail] = useState('');
+    const [loggedInUserName, setLoggedInUserName] = useState('');
+    const [loggedInUserSmokingTYpe, setLoggedInUserSmokingTYpe] = useState('');
+
+    const { signIn } = React.useContext(AuthContext);
 
     const handleEmailAddress = (e) => {
         setEmail(e.nativeEvent.text);
@@ -28,16 +36,33 @@ const UserLogin = () => {
         }
         userRequests.loginUser(userdetail)
         .then((res) =>{
-          console.log(res.data)
-          navigation.navigate('UpdateProfile');
-
+          console.log(res.data.userData)
+          navigation.navigate('TabNavigator');
+          setLoggedInUserEmail(res.data.userData.email);
+          setLoggedInUserName(res.data.userData.firstName);
+          setLoggedInUserSmokingTYpe(res.data.userData.firstName);
         }).catch((error) =>{
           console.log(error)
         })
       }
 
+    const loginHandle =(email, password) => {
+        signIn(email, password);
+        userRequests.loginUser({email, password})
+        .then(async (res) =>{
+          console.log(res.data.userData);
+          await AsyncStorage.setItem('username', res.data.userData.firstName);
+          const nameeeee = await AsyncStorage.getItem('username')
+          console.log("Getting data from Asyncstorage");
+          console.log(nameeeee);
+          console.log();
+        }).catch((error) =>{
+          console.log(error)
+        })
+    }
+
     return (
-        <View>
+        <View  style={{marginTop: 40}}>
             <ScrollView>
                 <BigHeaderBackground />
                 <PopupContainer firstContainer>
@@ -55,7 +80,14 @@ const UserLogin = () => {
                     <View style={userProfileStyles.loginbuttonContainer}>
                         <Button
                             title="Login"
-                            onPress={handleSubmit}
+                            onPress={() => {loginHandle(email, password)}}
+                        >
+                        </Button>
+                    </View>
+
+                    <View style={userProfileStyles.loginbuttonContainer}>
+                        <Button
+                            title="Register"
                         >
                         </Button>
                     </View>
