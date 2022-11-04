@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { CommonConstants } from "../../../util/Constants/CommonConstants";
 import { Provider } from "@react-native-material/core";
 import DialogBox from "../../../components/DialogBox/DialogBox";
+import { useTranslation } from 'react-i18next'
 
 export default function ChallengeOverview({ route }) {
   const challengeId = route.params.id;
@@ -19,6 +20,7 @@ export default function ChallengeOverview({ route }) {
   const navigation = useNavigation();
   const progressProps = useMemo(() => getProgressProps(), [challenge]);
   const [showDelete, setShowDelete] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchChallenge();
@@ -72,23 +74,23 @@ export default function ChallengeOverview({ route }) {
     let typeVal;
     switch (type) {
       case 0: {
-        typeVal = ChallengeConstants.ONCE_A_WEEK;
+        typeVal = t(ChallengeConstants.ONCE_A_WEEK);
         break;
       }
       case 1: {
-        typeVal = ChallengeConstants.TWO_FIVE_A_WEEK;
+        typeVal = t(ChallengeConstants.TWO_FIVE_A_WEEK);
         break;
       }
       case 2: {
-        typeVal = ChallengeConstants.ONCE_A_DAY;
+        typeVal = t(ChallengeConstants.ONCE_A_DAY);
         break;
       }
       case 3: {
-        typeVal = ChallengeConstants.TWO_FIVE_A_DAY;
+        typeVal = t(ChallengeConstants.TWO_FIVE_A_DAY);
         break;
       }
       case 4: {
-        typeVal = ChallengeConstants.MORE_THAN_FIVE_A_DAY;
+        typeVal = t(ChallengeConstants.MORE_THAN_FIVE_A_DAY);
         break;
       }
     }
@@ -140,7 +142,7 @@ export default function ChallengeOverview({ route }) {
         </PopupContainer>
         <PopupContainer></PopupContainer>
         <Text style={styles.dateListTitleStyles}>
-          {ChallengeConstants.DATE_LIST_TITLE}
+          {t(ChallengeConstants.DATE_LIST_TITLE)}
         </Text>
         {challenge.tasks &&
           challenge.tasks.map((task, index) => {
@@ -158,8 +160,8 @@ export default function ChallengeOverview({ route }) {
             handleAction={handleDeleteChallenge}
             show={showDelete}
             setShow={setShowDelete}
-            title={ChallengeConstants.DELETE_CHALLENGE}
-            message={ChallengeConstants.DELETE_CHALLENGE_CONFIRM}
+            title={t(ChallengeConstants.DELETE_CHALLENGE)}
+            message={t(ChallengeConstants.DELETE_CHALLENGE_CONFIRM)}
           />
         </Provider>
       )}
