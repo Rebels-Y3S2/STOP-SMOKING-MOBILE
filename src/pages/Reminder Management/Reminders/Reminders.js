@@ -1,6 +1,6 @@
 import { HStack, Provider} from '@react-native-material/core'
 import { useNavigation } from '@react-navigation/native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useEffect } from 'react'
 import { View, Text, FlatList, Alert} from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -12,15 +12,21 @@ import { useIsFocused } from '@react-navigation/native'
 import PushNotifications from '../../../components/PushNotifications/PushNotifications'
 import {CommonConstants} from '../../../util/Constants/CommonConstants'
 import { ReminderConstants } from '../../../util/Constants/ReminderConstants'
+import { RefreshControl } from 'react-native'
 
 export default function Reminders({route}) {
-  const isFocused = useIsFocused();
+  // Navigation
   const navigation = useNavigation()
+
+  // Reminder related data
+  const isFocused = useIsFocused();
   const userId = '635b10baf383232439911869' // Will be replaced soon when auth is implemented.
   const [show, setShow] = useState(false);
   const [reminderArray, setReminderArray] = useState([]);
   const [deleteId, setDeleteId] = useState();
+  const [refreshing, setRefreshing] = useState(false);
 
+  // if route params are there alert will trigger
   if(route.params){
     if(route.params.type === CommonConstants.CREATE && route.params.success === true){
       Alert.alert(CommonConstants.CREATE_SUCCESS_ALERT_TITLE, route.params.title)
@@ -31,26 +37,49 @@ export default function Reminders({route}) {
     } 
   }
 
+  /**
+   * Sets the refreshing values
+   */
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    getReminderDetails()    
+  }, []);
+    
+  /**
+   * Called when the screen is loaded, and modified to call when screen gets focused
+   */
   useEffect(() =>{
     if(isFocused){
       getReminderDetails()
-    }
+    }    
   }, [isFocused])
 
+  /**
+   * Fetches the reminder details relating to the userId
+   */
   const getReminderDetails = () =>{
     fetchReminders(userId)
     .then((res) =>{
       setReminderArray(res.data.data)
+      setRefreshing(false)
     }).catch((error) =>{
       console.log(error)
     })
   }
 
-  const handleDeleteId = (id) =>{
-    setDeleteId(id)
+  /**
+   * Sets the reminderId that is sent to the parameter as the delete ID 
+   * @param {*} reminderId 
+   */
+  const handleDeleteId = (reminderId) =>{
+    setDeleteId(reminderId)
     setShow(true);
   }
 
+  /**
+   * Delete the reminder details relating to the deleteId passed in to the parameters
+   * deleteReminder(deleteId) API is called
+   */
   const handleDelete = () =>{
     deleteReminder(deleteId)
     .then((res) =>{
@@ -65,6 +94,12 @@ export default function Reminders({route}) {
     <>
       <FlatList
         data={reminderArray}
+        refreshControl={ 
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
         renderItem={({ item }) => 
         <Card 
           title={item.reminderTitle}
@@ -76,7 +111,7 @@ export default function Reminders({route}) {
                   <MaterialIcons 
                     name={CommonConstants.EDIT_MATERIAL_ICON} 
                     size={30} 
-                    onPress={() => navigation.navigate(CommonConstants.UPDATE_REMINDER_PATH, {itemId: item._id})} 
+                    onPress={() => navigation.navigate(CommonConstants.UPDATE_REMINDER_PATH, {reminderId: item._id})} 
                   />
                   <MaterialIcons 
                     name={CommonConstants.DELETE_MATERIAL_ICON} 
@@ -117,11 +152,10 @@ export default function Reminders({route}) {
         </Provider>
       }  
     </>
-
   ):(
     <View style={styles.message}>
-        <Text>No reminders to display!</Text>
-        <Text> Click on the plus icon to create a new reminder!</Text>
+        <Text>{ReminderConstants.NO_REMINDERS}</Text>
+        <Text>{ReminderConstants.ADD_FIRST_REMINDER}</Text>
         <MaterialIcons 
           name={CommonConstants.ADD_MATERIAL_ICON} 
           size={60} 

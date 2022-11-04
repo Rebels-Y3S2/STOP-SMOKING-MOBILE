@@ -1,18 +1,24 @@
-import { Button, Text } from '@react-native-material/core'
 import React, { useEffect, useState } from 'react'
+import { Button, Text } from '@react-native-material/core'
 import { View, ScrollView, TextInput } from 'react-native'
 import Datepicker from '../../../components/DatePicker/Datepicker.js'
 import DropDown from '../../../components/DropDown/DropDown.js'
 import CheckBox from 'expo-checkbox';
 import BigHeaderBackground from '../../../components/HeaderBackground/HeaderBackground.js'
 import PopupContainer from '../../../components/Contaner/PopupContainer.js'
-import { styles } from './UpdateReminderStyles.js'
 import { fetchReminder, updateReminder } from '../../../api/reminder.api.js'
+import { getChallenges } from '../../../api/challenge.api.js'
 import { useNavigation } from '@react-navigation/native'
 import { ReminderConstants } from '../../../util/Constants/ReminderConstants.js'
 import {CommonConstants, Colors } from '../../../util/Constants/CommonConstants.js'
+import { styles } from './UpdateReminderStyles.js'
 
 export default function UpdateReminder({route}) {
+  // Navigation values
+  const navigation = useNavigation()
+  const {reminderId} = route.params;
+
+  //Input values
   const [reminderTitle, setReminderTitle] = useState('');
   const [sDate, setSDate] = useState('')
   const [eDate, setEDate] = useState('')
@@ -21,16 +27,18 @@ export default function UpdateReminder({route}) {
   const [challenge, setChallenge] = useState('')
   const [diary, setDiary] = useState('')
 
+  // Checkbox values
   const [customQuoteCheck, setCustomQuoteCheck] = useState(false)
   const [challengeCheck, setChallengeCheck] = useState(false)
   const [diaryCheck, setDiaryCheck] = useState(false)
 
-  const navigation = useNavigation()
-  const {itemId} = route.params;
-
+  // Prefill data
   const [reminder, setReminder] = useState({})
+  const [challengeName, setChallengeName] = useState('')
+  const [challenges, setChallenges] = useState([])
+  const [challengeDropDown, setChallengeDropDown] = useState([])
 
-  const data = [ // Will be replaced soon when challenge and diary API s are integrated
+  const data = [ // Will be replaced soon when diary API s are integrated
     { label: 'Item 1', value: '1' },
     { label: 'Item 2', value: '2' },
     { label: 'Item 3', value: '3' },
@@ -41,27 +49,67 @@ export default function UpdateReminder({route}) {
     { label: 'Item 8', value: '8' },
   ];
 
+  /**
+   * Called when the screen is loaded
+   */
+  useEffect(() =>{
+    getReminderDetails()
+    getChallengesDetails()
+  },[])
+
+  /**
+   * Takes the reminder title value from the text input field and assign in to reminderTitle const
+   * @param {*} e 
+   */
   const handlReminderTitle = (e) =>{
     setReminderTitle(e.nativeEvent.text)
   }
 
+  /**
+   * Takes the custom quote value from the text input field and assign it to customQuote const
+   * @param {*} e 
+   */
   const handleCustomQuote = (e) =>{
     setCustomQuote(e.nativeEvent.text)
   }
 
-  useEffect(() =>{
-    getReminderDetails()
-  },[])
-  
+  /**
+   * Fetch the reminder details relating to the reminderId
+   */
   const getReminderDetails = () =>{
     fetchReminder(itemId)
     .then((res) =>{
       setReminder(res.data.data)
+      setChallengeName(res.data.data.challenge.name)
     }).catch((error) =>{
       console.log(error);
     })
   }
 
+  /**
+   * Fetch challenge details relating to the userId
+   */
+  const getChallengesDetails = () =>{
+    getChallenges("63632b9d0cae67041458ba21")
+    .then((res)=>{
+       // Loops the response and isolate the name and id and assign to challengeObj
+      for(let i = 0; i<res.data.data.length; i++ ){
+        const challengeObj = {
+          label:res.data.data[i].name,
+          value:res.data.data[i]._id
+        }
+        challenges.push(challengeObj) // Store challengeObj in challenges array
+      }
+      setChallengeDropDown(challenges) // set the challengeDropDown data 
+    }).catch((error) =>{
+      console.log(error)
+    })
+  }
+
+  /**
+   * Takes the reminder data that has been changed and updates the reminder details
+   * using the updateReminder(reminderId) API
+   */
   const handleSubmit = () =>{
     const newReminder = {
       userId:'635b10baf383232439911869', //Will be replaced once user auth is integrated
@@ -73,7 +121,7 @@ export default function UpdateReminder({route}) {
       challenge:challenge === '' ? reminder.challenge : challenge,
       diary:diary === '' ? reminder.diary : diary
     }
-    updateReminder(itemId, newReminder)
+    updateReminder(reminderId, newReminder)
     .then((res) =>{
       console.log(res.data)
       navigation.navigate(CommonConstants.REMINDERS_PATH, 
@@ -86,7 +134,7 @@ export default function UpdateReminder({route}) {
       console.log(error)
     })
   }
-  
+
   return (
     <View>
     <ScrollView>
@@ -133,7 +181,7 @@ export default function UpdateReminder({route}) {
           onValueChange={(quoteChk) => setCustomQuoteCheck(quoteChk)}
         />
 
-        <DropDown defaultValue={reminder.challenge} setValue={setChallenge} data={data} disable={challengeCheck}/>
+        <DropDown placeholder={challengeName} setValue={setChallenge} data={challengeDropDown} disable={challengeCheck}/>
         <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_CHALLENGE_LABEL}</Text>
         <CheckBox style={styles.checkbox}
           testID={ReminderConstants.CHALLENGE_TEST_ID}
@@ -142,7 +190,7 @@ export default function UpdateReminder({route}) {
           onValueChange={(challengeChk) => setChallengeCheck(challengeChk)}
         />
 
-        <DropDown defaultValue={reminder.diary} setValue={setDiary} data={data} disable={diaryCheck}/>
+        <DropDown placeholder={reminder.diary} setValue={setDiary} data={data} disable={diaryCheck}/>
         <Text variant='subtitle 2' style={styles.textLable}>{ReminderConstants.SELECT_DIARY_LABEL}</Text>
         <CheckBox style={styles.checkbox}
           testID={ReminderConstants.DIARY_TEST_ID}
