@@ -11,6 +11,8 @@ import DiaryRecords from "../pages/Diary Management/Records/DiaryRecords";
 import Challenges from "../pages/Challenge Management/challengesList/Challenges";
 // import AlertDialog from "../components/AlertDialog/AlertDialog.js";
 import CreateChallenge from "../pages/Challenge Management/Create challenge/CreateChallenge.js";
+import ViewProfile from "../pages/UserProfile/ViewProfile.js";
+import UpdateProfile from "../pages/UserProfile/UpdateProfile.js";
 import { CommonConstants } from "../util/Constants/CommonConstants.js";
 import ChallengeOverview from "../pages/Challenge Management/challengeOverview/ChallengeOverview.js";
 import ChallengeView from "../pages/Challenge Management/challengeView/ChallengeView.js";
@@ -28,6 +30,8 @@ const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="HomeScreen" component={Home} options={getNavigatorStyles('Home')} />
+      <Stack.Screen name="ViewProfile" component={ViewProfile} options={getNavigatorStyles('User Profile')} />
+      <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={getNavigatorStyles('Edit Profile')} />
     </Stack.Navigator>
   );
 }
