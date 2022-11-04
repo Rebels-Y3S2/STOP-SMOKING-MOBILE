@@ -1,17 +1,21 @@
 import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
-import { addChallenge } from "../../../api/challenge.api";
+import { addChallenge, editChallenge } from "../../../api/challenge.api";
 import ChallengeForm from "../../../components/Challenges/ChallengeForm/ChallengeForm";
 import ChallengeImage from "../../../components/Challenges/ChallengeImage";
 import PopupContainer from "../../../components/Contaner/PopupContainer";
 import BigHeaderBackground from "../../../components/HeaderBackground/HeaderBackground";
 import { CommonConstants } from "../../../util/Constants/CommonConstants";
 
-export default function CreateChallenge() {
+export default function EditChallenge({ route }) {
   const navigation = useNavigation();
+  const challengeId = route.params.id
+
+  console.log(challengeId)
+  console.log(route.params.id)
 
   function handleSaveChallenge(challengeObj) {
-    addChallenge(challengeObj)
+    editChallenge(challengeId, challengeObj)
       .then(res => {
         navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH);
       })
