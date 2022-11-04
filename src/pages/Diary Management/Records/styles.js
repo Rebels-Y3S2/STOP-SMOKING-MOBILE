@@ -6,9 +6,14 @@ export const styles = StyleSheet.create({
         width:'100%',
         height:"100%"
     },
-    search: {
+    search1: {
         padding: 10,
-        zIndex: 10000000,
+        zIndex: 0,
+        backgroundColor: "#EEF2F5"
+    },
+    search2: {
+        padding: 10,
+        zIndex: 10,
         backgroundColor: "#EEF2F5"
     },
     searchInputContainerStyle: {
@@ -20,6 +25,7 @@ export const styles = StyleSheet.create({
     },
     cardContainer: {
         marginTop: 160,
+        zIndex: -9999,
         backgroundColor: "#EEF2F5"
     },
     card: {
@@ -74,5 +80,5 @@ export const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: '500',
         letterSpacing: 0.15
-    }
+    }, 
 });
