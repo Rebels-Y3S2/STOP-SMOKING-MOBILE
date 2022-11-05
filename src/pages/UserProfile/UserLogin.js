@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import BigHeaderBackground from "../../components/HeaderBackground/HeaderBackground.js";
 import { View, Text, ScrollView, TextInput, Button } from "react-native";
 import PopupContainer from "../../components/Contaner/PopupContainer.js";
@@ -6,12 +6,15 @@ import { userProfileStyles } from "./UserProfileStyles.js";
 import { Image } from 'react-native-elements';
 import {userRequests} from '../../api/users.api.js';
 import { useNavigation } from '@react-navigation/native'
+import {AuthContext} from '../AuthContext';
 
 const UserLogin = () => {
 
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const {login} = useContext(AuthContext);
 
     const handleEmailAddress = (e) => {
         setEmail(e.nativeEvent.text);
@@ -21,23 +24,8 @@ const UserLogin = () => {
         setPassword(e.nativeEvent.text);
     }
 
-    const handleSubmit = () =>{
-        const userdetail = {
-          email:email,
-          password:password,
-        }
-        userRequests.loginUser(userdetail)
-        .then((res) =>{
-          console.log(res.data)
-          navigation.navigate('UpdateProfile');
-
-        }).catch((error) =>{
-          console.log(error)
-        })
-      }
-
     return (
-        <View>
+        <View  style={{marginTop: 40}}>
             <ScrollView>
                 <BigHeaderBackground />
                 <PopupContainer firstContainer>
@@ -55,7 +43,14 @@ const UserLogin = () => {
                     <View style={userProfileStyles.loginbuttonContainer}>
                         <Button
                             title="Login"
-                            onPress={handleSubmit}
+                            onPress={() => {login(email, password)}}
+                        >
+                        </Button>
+                    </View>
+
+                    <View style={userProfileStyles.loginbuttonContainer}>
+                        <Button
+                            title="Register"
                         >
                         </Button>
                     </View>

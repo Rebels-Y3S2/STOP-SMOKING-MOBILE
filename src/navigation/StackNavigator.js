@@ -19,6 +19,7 @@ import ChallengeView from "../pages/Challenge Management/challengeView/Challenge
 import EditChallenge from "../pages/Challenge Management/editchallenge/EditChallenge.js";
 import { useTranslation } from "react-i18next";
 import { ReminderConstants } from "../util/Constants/ReminderConstants.js";
+import UserLogin from "../pages/UserProfile/UserLogin";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -76,11 +77,19 @@ const MainStackNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Splash" component={Splash} />
-          <Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
+          <Stack.Screen name="Login" component={UserLogin}/>
         </Stack.Navigator>
     );
 }
-export { HomeStackNavigator, DiaryStackNavigator, RemindersStackNavigator, ChallengesStackNavigator, MainStackNavigator };
+
+const TabNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
+    </Stack.Navigator>
+);
+}
+export { HomeStackNavigator, DiaryStackNavigator, RemindersStackNavigator, ChallengesStackNavigator, MainStackNavigator, TabNavigator };
 
 function getNavigatorStyles(componentName) {
   return {
