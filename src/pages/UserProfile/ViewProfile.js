@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, ScrollView, TextInput } from "react-native";
 import BigHeaderBackground from "../../components/HeaderBackground/HeaderBackground.js";
 import PopupContainer from "../../components/Contaner/PopupContainer.js";
@@ -9,17 +9,20 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
 import { HStack, Provider } from '@react-native-material/core'
 import DialogBoxUserDeletion from '../../components/DialogBox/DialogBoxUserDeletion';
+import {AuthContext} from '../AuthContext';
 
 const ViewProfile = () => {
   const navigation = useNavigation();
   const [show, setShow] = useState(false);
+
+  const {logout, userInfo} = useContext(AuthContext);
 
   return (
     <View>
       <ScrollView>
         <BigHeaderBackground />
         <PopupContainer firstContainer>
-          <HStack m={2} spacing={5}>
+          <HStack ml={240} mt={15} spacing={5}>
             <MaterialIcons name='edit' size={30} onPress={() => navigation.navigate('UpdateProfile')} />
             <MaterialIcons name='delete' size={30} onPress={() => setShow(true)} />
           </HStack>
@@ -29,13 +32,13 @@ const ViewProfile = () => {
             style={userProfileStyles.userImageContainer}
           />
 
-          <TextInput variant="outlined" placeholder='John Smith' style={userProfileStyles.inputContainer} editable={false}></TextInput>
+          <TextInput variant="outlined" placeholder={userInfo.firstName} style={userProfileStyles.inputContainer} editable={false}></TextInput>
           <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Full Name</Text>
 
-          <TextInput variant="outlined" placeholder='johnsmith@gmail.com' style={userProfileStyles.inputContainer} editable={false}></TextInput>
+          <TextInput variant="outlined" placeholder={userInfo.email} style={userProfileStyles.inputContainer} editable={false}></TextInput>
           <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Email Address</Text>
 
-          <TextInput variant="outlined" placeholder='Normal (3 - 5 times per week)' style={userProfileStyles.inputContainer} editable={false}></TextInput>
+          <TextInput variant="outlined" placeholder={userInfo.smokingtype} style={userProfileStyles.inputContainer} editable={false}></TextInput>
           <Text variant='subtitle 2' style={userProfileStyles.textLableContainerLast}>Smoking Pattern</Text>
         </PopupContainer>
 
@@ -51,6 +54,7 @@ const ViewProfile = () => {
               </View>
             }
             title={<View><Text style={userProfileStyles.buttonTextContent}>Logout</Text></View>}
+            onPress = {() => {logout()}}
           />
         </View>
       </ScrollView>
