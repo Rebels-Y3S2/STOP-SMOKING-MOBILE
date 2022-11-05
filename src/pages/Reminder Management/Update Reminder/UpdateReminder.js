@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Text } from '@react-native-material/core';
 import { View, ScrollView, TextInput } from 'react-native';
 import Datepicker from '../../../components/DatePicker/Datepicker.js';
@@ -14,11 +14,15 @@ import {CommonConstants, Colors } from '../../../util/Constants/CommonConstants.
 import { styles } from './UpdateReminderStyles.js';
 import { fetchDiaryRecords } from '../../../api/diary.api.js';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../../AuthContext.js';
 
 export default function UpdateReminder({route}) {
   // Navigation values
   const navigation = useNavigation();
   const {reminderId} = route.params;
+
+  // User info
+  const authContext = useContext(AuthContext)
 
   //Translation
   const { t } = useTranslation();
@@ -89,7 +93,7 @@ export default function UpdateReminder({route}) {
    * Fetch challenge details relating to the userId
    */
   const getChallengesDetails = () =>{
-    getChallenges("63632b9d0cae67041458ba21")
+    getChallenges(authContext.userInfo._id)
     .then((res)=>{
        // Loops the response and isolate the name and id and assign to challengeObj
       for(let i = 0; i<res.data.data.length; i++ ){
@@ -109,7 +113,7 @@ export default function UpdateReminder({route}) {
  * Fetch diary details relating to the userId
  */
   const getDiaryDetails = () =>{
-  fetchDiaryRecords("635b10baf383232439911869")
+  fetchDiaryRecords(authContext.userInfo._id)
     .then((res)=>{
       //Loops the response and isolate the title and id and assign to diaryObj
       for(let i = 0; i<res.data.data.length; i++ ){
@@ -131,7 +135,7 @@ export default function UpdateReminder({route}) {
    */
   const handleSubmit = () =>{
     const newReminder = {
-      userId:'635b10baf383232439911869', //Will be replaced once user auth is integrated
+      userId:authContext.userInfo._id, //Will be replaced once user auth is integrated
       reminderTitle:reminderTitle === '' ? reminder.reminderTitle : reminderTitle,
       startDate:sDate === '' ? reminder.startDate : sDate,
       endDate:eDate === '' ? reminder.endDate : eDate,

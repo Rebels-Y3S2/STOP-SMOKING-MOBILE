@@ -1,6 +1,6 @@
 import { HStack, Provider} from '@react-native-material/core';
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { View, Text, FlatList, Alert} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -14,17 +14,20 @@ import {CommonConstants} from '../../../util/Constants/CommonConstants';
 import { ReminderConstants } from '../../../util/Constants/ReminderConstants';
 import { RefreshControl } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../../AuthContext';
 
 export default function Reminders({route}) {
   // Navigation
   const navigation = useNavigation();
+
+  // User information data
+  const authContext = useContext(AuthContext); 
 
   // Translations
   const { t } = useTranslation();
 
   // Reminder related data
   const isFocused = useIsFocused();
-  const userId = '635b10baf383232439911869'; // Will be replaced soon when auth is implemented.
   const [show, setShow] = useState(false);
   const [reminderArray, setReminderArray] = useState([]);
   const [deleteId, setDeleteId] = useState();
@@ -62,7 +65,7 @@ export default function Reminders({route}) {
    * Fetches the reminder details relating to the userId
    */
   const getReminderDetails = () =>{
-    fetchReminders(userId)
+    fetchReminders(authContext.userInfo._id)
     .then((res) =>{
       setReminderArray(res.data.data);
       setRefreshing(false);
@@ -107,26 +110,26 @@ export default function Reminders({route}) {
         <Card 
           title={item.reminderTitle}
           children={
-            <View>
+            <View >
               <HStack m={2} spacing={80} >
                 <Text style={styles.lable}>{t(ReminderConstants.FROM)}  :{item.startDate}</Text>
-                <HStack m={3} spacing={5}>
-                  <MaterialIcons 
-                    name={CommonConstants.EDIT_MATERIAL_ICON} 
-                    size={30} 
-                    onPress={() => navigation.navigate(CommonConstants.UPDATE_REMINDER_PATH, {reminderId: item._id})} 
-                  />
-                  <MaterialIcons 
-                    name={CommonConstants.DELETE_MATERIAL_ICON} 
-                    size={30} 
-                    onPress={()=> handleDeleteId(item._id)}  
-                  />
-                  <PushNotifications 
-                    title={item.reminderTitle}
-                    customQuote={item.customQuote}
-                    startTime={item.startTime}
-                    identifier={item._id}/>
-                </HStack>
+                  <HStack m={3} spacing={5}>
+                    <MaterialIcons 
+                      name={CommonConstants.EDIT_MATERIAL_ICON} 
+                      size={30} 
+                      onPress={() => navigation.navigate(CommonConstants.UPDATE_REMINDER_PATH, {reminderId: item._id})} 
+                    />
+                    <MaterialIcons 
+                      name={CommonConstants.DELETE_MATERIAL_ICON} 
+                      size={30} 
+                      onPress={()=> handleDeleteId(item._id)}  
+                    />
+                    <PushNotifications 
+                      title={item.reminderTitle}
+                      customQuote={item.customQuote}
+                      startTime={item.startTime}
+                      identifier={item._id}/>
+                  </HStack>
               </HStack>
                 <Text style={styles.lable}>{t(ReminderConstants.TO)} :{item.endDate}</Text>
             </View>

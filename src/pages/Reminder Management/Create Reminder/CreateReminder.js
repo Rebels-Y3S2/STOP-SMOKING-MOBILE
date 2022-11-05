@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, ScrollView, TextInput } from 'react-native';
 import { Button, Text,} from '@react-native-material/core';
 import Datepicker from '../../../components/DatePicker/Datepicker.js';
@@ -14,10 +14,19 @@ import { Colors, CommonConstants } from '../../../util/Constants/CommonConstants
 import { styles } from './CreateReminderStyles.js';
 import { fetchDiaryRecords } from '../../../api/diary.api.js';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../../AuthContext.js';
+import { NotificationContext } from '../Context/ReminderContext.js';
 
 export default function CreateReminder() {
+
+  const  notificationHandler  = useContext(NotificationContext);
+  console.log(notificationHandler)
+  
   // Navigation
   const navigation = useNavigation();
+
+  // User Info
+  const authContext = useContext(AuthContext); 
 
   // Translation
   const { t } = useTranslation();
@@ -72,7 +81,7 @@ export default function CreateReminder() {
    */
   const handleSubmit = () =>{
     const reminder = {
-      userId:'635b10baf383232439911869', //Will be replaced once user auth is integrated
+      userId: authContext.userInfo._id, //Will be replaced once user auth is integrated
       reminderTitle:reminderTitle,
       startDate:sDate,
       endDate:eDate,
@@ -81,6 +90,7 @@ export default function CreateReminder() {
       challenge:challenge,
       diary:diary
     }
+    
     addReminder(reminder)
     .then((res) =>{
       navigation.navigate(CommonConstants.REMINDERS_PATH, 
@@ -89,6 +99,11 @@ export default function CreateReminder() {
           type:CommonConstants.CREATE, success:true
         }
       )
+      // const reimnderObj = {
+      //   reminderTitle:res.data.data.reminderTitle
+
+      // }
+      notificationHandler(res.data.data);
     }).catch((error) =>{
       console.log(error);
     })
@@ -98,7 +113,7 @@ export default function CreateReminder() {
  * Fetch challenge details relating to the userId
  */
   const getChallengesDetails = () =>{
-    getChallenges("63632b9d0cae67041458ba21")
+    getChallenges(authContext.userInfo._id)
     .then((res)=>{
       // Loops the response and isolate the name and id and assign to challengeObj
       for(let i = 0; i<res.data.data.length; i++ ){
@@ -118,7 +133,7 @@ export default function CreateReminder() {
  * Fetch diary details relating to the userId
  */
    const getDiaryDetails = () =>{
-    fetchDiaryRecords("635b10baf383232439911869")
+    fetchDiaryRecords(authContext.userInfo._id)
     .then((res)=>{
       //Loops the response and isolate the titlle and id and assign to diaryObj
       for(let i = 0; i<res.data.data.length; i++ ){
