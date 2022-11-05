@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 import { View,Text,ScrollView} from "react-native";
 import BigHeaderBackground from "../components/HeaderBackground/HeaderBackground.js";
 import PopupContainer from "../components/Contaner/PopupContainer.js";
@@ -6,17 +6,12 @@ import { homestyles } from "./HomeStyles.js";
 import { Image } from 'react-native-elements';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {AuthContext} from './AuthContext';
 
 const Home = () => {
   const navigation = useNavigation();
-
-  useEffect(async () => {
-    console.log("Home page: UseEffect");
-    const nameeee = await AsyncStorage.getItem('username'); 
-    console.log("Home page: Getting data from AsyncStorage");
-    console.log(nameeee);
-  }, [])
+  
+  const {userInfo} = useContext(AuthContext);
 
   return (
     <View>
@@ -24,7 +19,7 @@ const Home = () => {
         <BigHeaderBackground/>
         <PopupContainer firstContainer style={homestyles.popupcontainerMargin}>
           <MaterialIcons name='person' size={25} onPress={() => navigation.navigate('ViewProfile')} style={homestyles.profileIcon}/>
-          <Text variant='subtitle 2' style={homestyles.welcomephrase}>Hey John !</Text>
+          <Text variant='subtitle 2' style={homestyles.welcomephrase}>Hey {userInfo.firstName} !</Text>
           <Text variant='subtitle 2' style={homestyles.imageinstruction}>Click the image to navigate to your challenge</Text>
           <Image
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu_lhDKyIPN98vfAYrx1vLeVoIbjXt6N2siWtu4cx3hm0n-YBrvzl25lngvIILvdSElz4&usqp=CAU" }}
