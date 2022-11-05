@@ -21,6 +21,8 @@ export default function PushNotifications(props) {
   const notificationListener = useRef();
   const responseListener = useRef();
   const [reminder, setReminder] = useState({})
+  const [challengeName, setChallengeName] = useState('');
+  const [diaryTitle, setDiaryTitle] = useState('');
 
   useEffect(() => {
     const getPermission = async () => {
@@ -66,20 +68,24 @@ export default function PushNotifications(props) {
     };
   }, []);
 
-  const getReminderDetails = (id) =>{
-    fetchReminder(id)
+  const getReminderDetails = () =>{
+    fetchReminder(props.identifier)
     .then((res) =>{
-      setReminder(res.data.data)
-    }).catch((err) =>{
-      console.log(err)
+      setReminder(res.data.data);
+      setChallengeName(res.data.data.challenge.name);
+      setDiaryTitle(res.data.data.diary.title);
+    }).catch((error) =>{
+      console.log(error);
     })
   }
-
   const stopNotification = async() =>{
     await Notifications.dismissAllNotificationsAsync();
   }
 
+
+
   const onClick = async () => {
+    console.log(challengeName, diaryTitle)
     getReminderDetails(props.identifier)
     let currentDay = new Date().getDay();
     let currentMonth = new Date().getMonth() + 1;
@@ -93,7 +99,13 @@ export default function PushNotifications(props) {
         identifier:props.identifier,
         content:{
           title:props.title,
-          body:props.body
+          body: challengeName && diaryTitle 
+          ? props.customQuote + ' ' + "Now lets focus on the challenge :" +  challengeName + " and also " + "Lets keep writing on the diary :" + diaryTitle 
+          : challengeName
+              ? props.customQuote + ' ' + "Now lets focus on the challenge :" + challengeName
+              : diaryTitle  
+                ? props.customQuote + ' ' + "Lets keep writing on the diary :" + diaryTitle 
+                : props.customQuote
         },
         trigger: {
           channelId:props.identifier,
