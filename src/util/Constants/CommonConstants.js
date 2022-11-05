@@ -34,6 +34,10 @@ export const CommonConstants = {
     //Alert
     CREATE_SUCCESS_ALERT_TITLE:"Create Success",
     UPDATE_SUCCESS_ALERT_TITLE:"Edit Success",
+
+    CREATE_PLUS_BUTTON: "Click the + button to create",
+    YOUR_CUSTOMIZED_CHALLENGE: "your customized challenge"
+
 }
 
 export const Colors = {

@@ -12,18 +12,7 @@ export default function ChallengeView({ route }) {
   const { t } = useTranslation();
   const { daysLeft, name, completed, tasks, onGoingDate } = route.params;
 
-  // Will change these with API keep this here for now - approve karapn @dulshan
-  function getAllowedCigs(cigCount) {
-    if (cigCount == 0) {
-      return "You are not allowed to smoke today";
-    } else if (cigCount == 1) {
-      return `You are allowed to smoke only ${cigCount} cigarrate today`;
-    } else {
-      return `You are allowed to smoke ${cigCount} cigarrates today`;
-    }
-  }
-
-  const todo = [...tasks.tasks, ...[getAllowedCigs(tasks.noOfCigs)]];
+  const todo = [...tasks.tasks,];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -39,7 +28,7 @@ export default function ChallengeView({ route }) {
           </View>
         </PopupContainer>
         <PopupContainer>
-          <Todo title={`${t(ChallengeConstants.DAY)} ${onGoingDate}`} todoList={todo} />
+          <Todo title={`${t(ChallengeConstants.DAY)} ${onGoingDate}`} todoList={tasks.tasks} />
         </PopupContainer>
       </ScrollView>
     </SafeAreaView>

@@ -52,5 +52,25 @@
   "To": "To",
 
   "Create Success": "Create Success",
-  "Edit Success": "Edit Success"
+  "Edit Success": "Edit Success",
+
+  "Easy": "Easy",
+  "Hard": "Hard",
+
+  "Click the + button to create": "Click the + button to create",
+  "your customized challenge": "your customized challenge",
+
+  "Duration": "Duration",
+  "Type": "Type",
+
+  "Drink 6L of water.": "Drink 6L of water.",
+  "Go for jog for 30 minutes.": "Go for jog for 30 minutes.",
+  "Spend some time with familiy.": "Spend some time with familiy.",
+  "Don't eat junk food.": "Don't eat junk food.",
+  "Water plants": "Water plants",
+  "Plant a tree": "Plant a tree",
+  "Read a book": "Read a book",
+  "Write about your progress in the diary": "Write about your progress in the diary",
+  "Watch a movie with your loved one": "Watch a movie with your loved one",
+  "Play cricket with your friends":  "Play cricket with your friends"
 }

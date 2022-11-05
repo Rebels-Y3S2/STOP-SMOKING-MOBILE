@@ -13,5 +13,12 @@ export const ChallengeConstants = {
     DAYS_LEFT: "Days left",
     DELETE_CHALLENGE: "Delete Challenge",
     DELETE_CHALLENGE_CONFIRM: "Are you sure to delete the challenge",
-    DAY: "Day"
+    DAY: "Day",
+
+    HARD: "Hard",
+    EASY: "Easy",
+
+    DURATION: "Duration",
+    TYPE: "Type"
+
 }

@@ -6,7 +6,7 @@ import { Button } from "react-native-paper";
 import styles from "./styles";
 import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
 import { CommonConstants } from "../../../util/Constants/CommonConstants";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 
 export default function ChallengeForm({ onSave, onCancel }) {
   const [type, setSmokingType] = useState(0);

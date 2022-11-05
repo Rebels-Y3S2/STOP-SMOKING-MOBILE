@@ -52,6 +52,26 @@
     "To": "වෙත",
   
     "Create Success": "නිර්මාණය සාර්ථකත්වය",
-    "Edit Success": "සංස්කරණය සාර්ථකත්වය"
+    "Edit Success": "සංස්කරණය සාර්ථකත්වය",
+
+    "Easy": "පහසුයි",
+    "Hard": "අමාරුයි",
+
+    "Click the + button to create": "නිර්මාණය කිරීමට + බොත්තම ක්ලික් කරන්න",
+    "your customized challenge": "ඔබේ අභිරුචි කළ අභියෝගය",
+
+    "Duration": "කාල සීමාව",
+    "Type": "වර්ගය",
+
+    "Drink 6L of water.": "වතුර ලීටර් 6 ක් බොන්න",
+    "Go for jog for 30 minutes.": "මිනිත්තු 30 ක් සඳහා ජෝග් සඳහා යන්න.",
+    "Spend some time with familiy.": "පවුලේ අය සමඟ යම් කාලයක් ගත කරන්න.",
+    "Don't eat junk food.": "කුණු කෑම කන්න එපා.",
+    "Water plants": "පැලෑටි වලට වතුර දැමීම",
+    "Plant a tree": "ගසක් සිටුවන්න",
+    "Read a book": "පොතක් කියවන්න",
+    "Write about your progress in the diary": "ඔබේ ප්‍රගතිය දිනපොතේ ලියන්න",
+    "Watch a movie with your loved one": "ඔබේ ආදරණීයයා සමඟ චිත්රපටයක් නරඹන්න",
+    "Play cricket with your friends": "ඔබේ මිතුරන් සමඟ ක්‍රිකට් ක්‍රීඩා කරන්න"
   }
   
