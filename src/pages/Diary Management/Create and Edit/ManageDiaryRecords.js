@@ -4,16 +4,16 @@ import {
   Dialog,
   DialogHeader,
   DialogContent,
-  DialogActions,
   Text,
 } from "@react-native-material/core";
 import { View, TextInput } from "react-native";
 import { VStack, HStack, Box, Divider } from "@react-native-material/core";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { styles } from "./styles";
 import { fetchDiaryRecordById } from "../../../api/diary.api";
 import { useEffect } from "react";
-// import Dialog from "react-native-dialog";
+import { useTranslation } from 'react-i18next';
+import { DiaryConstants } from '../../../util/Constants/DiaryConstants';
+import { styles } from "./styles";
 
 export default function ManageDiaryRecords(props){
   const [visible, setVisible] = useState(false);
@@ -31,6 +31,7 @@ export default function ManageDiaryRecords(props){
   } = props;
 
   const [diaryRecord, setDiaryRecord] = useState({})
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchDiaryRecordById(action.id).then((res) => {
@@ -43,7 +44,7 @@ export default function ManageDiaryRecords(props){
     <View>
       <Dialog visible={show} onDismiss={dismissHandler} style={{zIndex: 1000}}>
         <HStack spacing={action.parentKey === "add"? 0 : 25}>
-          <View><DialogHeader title={action.parentKey === "add" ? "Create Diary" : "Edit Diary"} /></View>
+          <View><DialogHeader title={action.parentKey === "add" ? `${t(DiaryConstants.CREATE_DIARY)}` : `${t(DiaryConstants.EDIT_DIARY)}`} /></View>
           <View style={styles.closeIcon}><MaterialCommunityIcons name='close'size={18} onPress={()=> setShow(false)} /></View>
         </HStack>
         <Divider />
@@ -51,36 +52,36 @@ export default function ManageDiaryRecords(props){
           <View>
             <TextInput
               variant="outlined"
-              placeholder='Diary Title'
+              placeholder={`${t(DiaryConstants.DIARY_TITLE)}`}
               style={styles.title}
               onChange={handlRecordTitle}
               defaultValue={diaryRecord?.title || ""}
               required
             />
-            <Text variant='subtitle 2' style={styles.textLable}>Diary Title</Text>
+            <Text variant='subtitle 2' style={styles.textLable}>{`${t(DiaryConstants.DIARY_TITLE)}`}</Text>
           </View>
           <View>
             <TextInput
               variant="outlined"
-              placeholder='Diary Description'
+              placeholder={`${t(DiaryConstants.DIARY_DESCRIPTION)}`}
               style={styles.des}
               onChange={handlRecordDescription}
               defaultValue={diaryRecord?.description || ""}
               required
             />
-            <Text variant='subtitle 2' style={styles.textLable}>Diary Description</Text>
+            <Text variant='subtitle 2' style={styles.textLable}>{`${t(DiaryConstants.DIARY_DESCRIPTION)}`}</Text>
           </View>
         </DialogContent>
           <VStack spacing={20}>
             <Button
-              title={<Text variant='subtitle 2' style={styles.cancelText}>Cancel</Text>}
+              title={<Text variant='subtitle 2' style={styles.cancelText}>{`${t(DiaryConstants.CANCEL)}`}</Text>}
               compact
               variant="outlined"
               onPress={dismissHandler}
               style={styles.cancelBtn}
             />
             <Button
-              title={<Text variant='subtitle 2' style={styles.saveText}>Save</Text>}
+              title={<Text variant='subtitle 2' style={styles.saveText}>{`${t(DiaryConstants.SAVE)}`}</Text>}
               compact
               variant="outlined"
               onPress={handleSubmit}
