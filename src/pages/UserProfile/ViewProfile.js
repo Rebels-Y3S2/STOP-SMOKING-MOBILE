@@ -10,12 +10,21 @@ import { useNavigation } from '@react-navigation/native'
 import { HStack, Provider } from '@react-native-material/core'
 import DialogBoxUserDeletion from '../../components/DialogBox/DialogBoxUserDeletion';
 import {AuthContext} from '../AuthContext';
+import { userRequests } from "../../api/users.api.js";
 
 const ViewProfile = () => {
   const navigation = useNavigation();
   const [show, setShow] = useState(false);
 
   const {logout, userInfo} = useContext(AuthContext);
+
+  const handleSubmit = (id) => {
+    userRequests.deleteUser(id).
+    then((res) => {
+      console.log(res);
+      logout();
+    })
+  }
 
   return (
     <View>
@@ -28,7 +37,7 @@ const ViewProfile = () => {
           </HStack>
 
           <Image
-            source={{ uri: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bWFufGVufDB8fDB8fA%3D%3D&w=1000&q=80" }}
+            source={{ uri: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" }}
             style={userProfileStyles.userImageContainer}
           />
 
@@ -66,6 +75,7 @@ const ViewProfile = () => {
             setShow={setShow}
             title='Delete Profile'
             message='Are you sure to delete your profile'
+            handlePress={() => {handleSubmit(userInfo._id)}}
           />
         </Provider>
       }

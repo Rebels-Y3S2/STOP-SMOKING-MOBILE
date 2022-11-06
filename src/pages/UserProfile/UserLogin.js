@@ -4,7 +4,6 @@ import { View, Text, ScrollView, TextInput, Button } from "react-native";
 import PopupContainer from "../../components/Contaner/PopupContainer.js";
 import { userProfileStyles } from "./UserProfileStyles.js";
 import { Image } from 'react-native-elements';
-import {userRequests} from '../../api/users.api.js';
 import { useNavigation } from '@react-navigation/native'
 import {AuthContext} from '../AuthContext';
 
@@ -51,6 +50,7 @@ const UserLogin = () => {
                     <View style={userProfileStyles.loginbuttonContainer}>
                         <Button
                             title="Register"
+                            onPress={() => navigation.navigate('UserRegistration')}
                         >
                         </Button>
                     </View>
