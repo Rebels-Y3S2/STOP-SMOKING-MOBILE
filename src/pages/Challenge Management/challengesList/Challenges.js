@@ -4,21 +4,22 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { CommonConstants } from "../../../util/Constants/CommonConstants";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { getChallenges } from "../../../api/challenge.api";
 import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
 import { useTranslation } from 'react-i18next'
+import { AuthContext } from "../../AuthContext";
 
 export default function Challenges({ route }) {
   const navigation = useNavigation()
   const [refreshing, setRefreshing] = useState(false);
   const [challenges, setChallenges] = useState([]);
   const { t } = useTranslation();
-
+  const userDetails = useContext(AuthContext);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    getChallenges("63632b9d0cae67041458ba21")      
+    getChallenges(userDetails.userInfo._id)      
     .then(res => {
       setChallenges(res.data.data);
       setRefreshing(false) 
@@ -45,13 +46,15 @@ export default function Challenges({ route }) {
   }
 
   function fetchChallenges() {
-    getChallenges("63632b9d0cae67041458ba21")
+    if (!userDetails?.isLoading) {
+      getChallenges(userDetails.userInfo._id)
       .then(res => {
         setChallenges(res.data.data);
       })
       .catch(err => {
         console.log(err)
       })
+    }
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -62,7 +65,7 @@ export default function Challenges({ route }) {
             onRefresh={onRefresh}
           />
         }>
-        {challenges.length > 0 && challenges.map((challenge, id) => (
+        {challenges && challenges.length > 0 && challenges.map((challenge, id) => (
           <ChallengeCard
             id={challenge._id}
             title={challenge.name}
@@ -73,7 +76,7 @@ export default function Challenges({ route }) {
         ))}
       </ScrollView>
 
-      {challenges.length <= 3 &&
+      {challenges && challenges.length <= 3 &&
       <View style={styles.middleTextContainer}>
         <Text style={styles.middleText}>{t(CommonConstants.CREATE_PLUS_BUTTON)}</Text>
         <Text style={styles.middleText}>{t(CommonConstants.YOUR_CUSTOMIZED_CHALLENGE)}</Text>

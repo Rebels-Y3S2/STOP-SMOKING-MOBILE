@@ -72,5 +72,17 @@
   "Read a book": "Read a book",
   "Write about your progress in the diary": "Write about your progress in the diary",
   "Watch a movie with your loved one": "Watch a movie with your loved one",
-  "Play cricket with your friends":  "Play cricket with your friends"
+  "Play cricket with your friends":  "Play cricket with your friends",
+
+  "You are not allowed to smoke today": "You are not allowed to smoke today",
+  "You are allowed to smoke only 1 cigarrate today": "You are allowed to smoke only 1 cigarrate today",
+  "You are allowed to smoke 2 cigarrates today": "You are allowed to smoke 2 cigarrates today",
+  "You are allowed to smoke 3 cigarrates today": "You are allowed to smoke 3 cigarrates today",
+  "You are allowed to smoke 4 cigarrates today": "You are allowed to smoke 4 cigarrates today",
+  "You are allowed to smoke 5 cigarrates today": "You are allowed to smoke 5 cigarrates today",
+  "You are allowed to smoke 6 cigarrates today": "You are allowed to smoke 6 cigarrates today",
+
+  "Choose an option": "Choose an option"
+
+
 }

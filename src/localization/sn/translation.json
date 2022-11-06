@@ -10,7 +10,7 @@
     "How long do you want to follow this challenge": "ඔබට කොපමණ කාලයක් මෙම අභියෝගය අනුගමනය කිරීමට අවශ්‍යද",
     "How often do you smoke?": "ඔබ කොපමණ වාරයක් දුම් පානය කරනවාද?",
     "Challenge Overview": "අභියෝග දළ විශ්ලේෂණය",
-    "Days left": "දින ඉතිරිව ඇත",
+    "Days left": "දින ඇත",
     "Delete Challenge": "අභියෝගය මකන්න",
     "Are you sure to delete the challenge": "අභියෝගය මකා දැමීමට ඔබට විශ්වාසද",
     "Day": "දින",
@@ -72,6 +72,16 @@
     "Read a book": "පොතක් කියවන්න",
     "Write about your progress in the diary": "ඔබේ ප්‍රගතිය දිනපොතේ ලියන්න",
     "Watch a movie with your loved one": "ඔබේ ආදරණීයයා සමඟ චිත්රපටයක් නරඹන්න",
-    "Play cricket with your friends": "ඔබේ මිතුරන් සමඟ ක්‍රිකට් ක්‍රීඩා කරන්න"
+    "Play cricket with your friends": "ඔබේ මිතුරන් සමඟ ක්‍රිකට් ක්‍රීඩා කරන්න",
+
+    "You are not allowed to smoke today": "අද ඔබට දුම් පානය කිරීමට අවසර නැත",
+    "You are allowed to smoke only 1 cigarrate today": "අද ඔබට සිගරට් 1ක් පමණක් පානය කිරීමට අවසර ඇත",
+    "You are allowed to smoke 2 cigarrates today": "අද ඔබට සිගරට් 2ක් පමණක් පානය කිරීමට අවසර ඇත",
+    "You are allowed to smoke 3 cigarrates today": "අද ඔබට සිගරට් 3ක් පමණක් පානය කිරීමට අවසර ඇත",
+    "You are allowed to smoke 4 cigarrates today": "අද ඔබට සිගරට් 4ක් පමණක් පානය කිරීමට අවසර ඇත",
+    "You are allowed to smoke 5 cigarrates today": "අද ඔබට සිගරට් 5ක් පමණක් පානය කිරීමට අවසර ඇත",
+    "You are allowed to smoke 6 cigarrates today": "අද ඔබට සිගරට් 6ක් පමණක් පානය කිරීමට අවසර ඇත",
+
+    "Choose an option": "විකල්පයක් තෝරන්න"
   }
   
