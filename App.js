@@ -7,18 +7,19 @@
  */
 
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { MainStackNavigator } from './src/navigation/StackNavigator.js';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { MainStackNavigator } from './src/navigation/StackNavigator.js';
+// import { SafeAreaProvider } from 'react-native-safe-area-context';
 import './src/localization/i18n';
+import {AuthProvider} from './src/pages/AuthContext';
+import {AppNav} from './src/navigation/AppNav';
 
 const App = () => {
+
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <MainStackNavigator />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <AuthProvider>
+      <AppNav/>
+    </AuthProvider> 
   );
 };
 

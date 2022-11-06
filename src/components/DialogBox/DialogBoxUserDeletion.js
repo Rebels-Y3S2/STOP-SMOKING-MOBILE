@@ -36,7 +36,7 @@ export default function DialogBoxUserDeletion(props){
             title="Ok"
             compact
             variant="text"
-            onPress={dismissHandler}
+            onPress={props.handlePress}
           />
         </DialogActions>
       </Dialog>

@@ -62,4 +62,8 @@ export const homestyles = StyleSheet.create({
         marginBottom: 30,
         font: 'Roboto',
     },
+    profileIcon: {
+        marginLeft: 280,
+        marginTop: 10
+    }
 })

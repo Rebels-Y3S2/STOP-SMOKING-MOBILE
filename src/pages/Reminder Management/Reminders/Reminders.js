@@ -123,7 +123,7 @@ export default function Reminders({route}) {
                   />
                   <PushNotifications 
                     title={item.reminderTitle}
-                    body={item.customQuote}
+                    customQuote={item.customQuote}
                     startTime={item.startTime}
                     identifier={item._id}/>
                 </HStack>

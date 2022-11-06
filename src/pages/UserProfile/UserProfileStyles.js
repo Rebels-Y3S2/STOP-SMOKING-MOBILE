@@ -45,9 +45,9 @@ export const userProfileStyles = StyleSheet.create({
         height: 150,
         marginLeft: 90,
         marginRight: 90,
-        marginTop: 30,
+        marginTop: 20,
         borderRadius: 150,
-        marginBottom: 30,
+        marginBottom: 20,
     },
     textLableContainerLast: {
         marginLeft:'5%',
