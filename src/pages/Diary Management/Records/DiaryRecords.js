@@ -194,10 +194,10 @@ export default function DiaryRecords() {
             <>
               <View>
                 <HStack m={0} spacing={1} >
-                  <Text style={styles.lable}>{row.description}</Text>
+                  <Text style={styles.lable}>{row.description + " " + row.isFavorite}</Text>
                 </HStack>
                 <HStack m={0} spacing={240} style={styles.btns}>
-                  <View key={row._id}>
+                  <View key={index}>
                     <TouchableOpacity key={index}
                       onPress={(e) => {
                         handleLike(index, !getLike(index));
@@ -206,9 +206,9 @@ export default function DiaryRecords() {
                       value={row.isFavorite}
                     >
                       <MaterialCommunityIcons
-                        name={getLike(index) ? `${t(DiaryIconsConstants.HEART)}` : `${t(DiaryIconsConstants.HEART_OUTLINE)}`}
+                        name={row.isFavorite ? `${t(DiaryIconsConstants.HEART)}` : `${t(DiaryIconsConstants.HEART_OUTLINE)}`}
                         size={28}
-                        color={getLike(index) ? `${t(DiaryColorsConstants.LIGHT_BLUE)}` : `${t(DiaryColorsConstants.LIGHT_BLUE)}`}
+                        color={row.isFavorite ? `${t(DiaryColorsConstants.LIGHT_BLUE)}` : `${t(DiaryColorsConstants.LIGHT_BLUE)}`}
                       />
                         </TouchableOpacity>
                       </View>
@@ -257,9 +257,9 @@ export default function DiaryRecords() {
                         value={row.isFavorite}
                       >
                         <MaterialCommunityIcons
-                          name={getLike(index) ? `${t(DiaryIconsConstants.HEART)}` : `${t(DiaryIconsConstants.HEART_OUTLINE)}`}
+                          name={row.isFavorite ? `${t(DiaryIconsConstants.HEART)}` : `${t(DiaryIconsConstants.HEART_OUTLINE)}`}
                           size={28}
-                          color={getLike(index) ? `${t(DiaryColorsConstants.LIGHT_BLUE)}` : `${t(DiaryColorsConstants.LIGHT_BLUE)}`}
+                          color={row.isFavorite ? `${t(DiaryColorsConstants.LIGHT_BLUE)}` : `${t(DiaryColorsConstants.LIGHT_BLUE)}`}
                         />
                           </TouchableOpacity>
                         </View>

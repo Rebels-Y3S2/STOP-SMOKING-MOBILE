@@ -9,11 +9,11 @@ import {
 import { View, TextInput } from "react-native";
 import { VStack, HStack, Box, Divider } from "@react-native-material/core";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { styles } from "../../../components/DialogBox/styles";
 import { fetchDiaryRecordById } from "../../../api/diary.api";
 import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import { DiaryConstants } from '../../../util/Constants/DiaryConstants';
+import { styles } from "./styles";
 
 export default function ManageDiaryRecords(props){
   const [visible, setVisible] = useState(false);

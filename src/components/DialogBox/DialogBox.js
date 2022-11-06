@@ -51,7 +51,7 @@ export default function DialogBox({handleAction, setShow, show, title, message})
               style={styles.cancelBtn}
             />
             <Button
-              title={<Text variant='subtitle 2' style={styles.saveText}>{`${t(CommonConstants.SAVE)}`}</Text>}
+              title={<Text variant='subtitle 2' style={styles.saveText}>{`${t(CommonConstants.DELETE)}`}</Text>}
               compact
               variant="outlined"
               onPress={()=> dismissHandler(CommonConstants.OK)}
