@@ -35,7 +35,10 @@
     "Starts On:":  "ආරම්භ වන්නේ:",
     "Ends On:":"අවසන් වන්නේ:",
     "Notifies at:":"දැනුම් දෙන්නේ:",
-  
+    "Lets keep writing on the diary :":"දිනපොතේ දිගටම ලියමු:",
+    "Now lets focus on the challenge :":"දැන් අපි අභියෝගය කෙරෙහි අවධානය යොමු කරමු:",
+    "and also":"සහ",
+
     "Cancel": "අවලංගු කරන්න",
     "Delete": "මකන්න",
     "Ok": "හරි",
@@ -82,6 +85,19 @@
     "You are allowed to smoke 5 cigarrates today": "අද ඔබට සිගරට් 5ක් පමණක් පානය කිරීමට අවසර ඇත",
     "You are allowed to smoke 6 cigarrates today": "අද ඔබට සිගරට් 6ක් පමණක් පානය කිරීමට අවසර ඇත",
 
-    "Choose an option": "විකල්පයක් තෝරන්න"
+    "Choose an option": "විකල්පයක් තෝරන්න",
+    
+    "RECORDS": "වාර්තා",
+    "FAVORITES": "ප්රියතම",
+    "TITLE_MUST_BE_3_50_CHARACTERS_LONG": "මාතෘකාව අක්ෂර 3-50ක් දිග විය යුතුය",
+    "SEARCH_HERE": "මෙහි සොයන්න...",
+    "DELETE_DIARY": "වාර්තාව මකන්න",
+    "ARE_YOU_SURE_TO_DELETE_THE_DIARY": "වාර්තාව මකා දැමීමට ඔබට විශ්වාසද?",
+    "CREATE_DIARY": "දිනපොත සාදන්න",
+    "EDIT_DIARY": "දිනපොත සංස්කරණය කරන්න",
+    "DIARY_TITLE": "දිනපොත මාතෘකාව",
+    "DIARY_DESCRIPTION": "දිනපොත විස්තරය",
+    "CANCEL": "අවලංගු කරන්න",
+    "SAVE": "සුරකින්න"
   }
   

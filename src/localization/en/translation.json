@@ -35,6 +35,9 @@
   "Starts On:":  "Starts On:",
   "Ends On:":"Ends On:",
   "Notifies at:":"Notifies at:",
+  "Lets keep writing on the diary :":"Lets keep writing on the diary :",
+  "Now lets focus on the challenge :":"Now lets focus on the challenge :",
+  "and also":"and also",
 
   "Cancel": "Cancel",
   "Delete": "Delete",
@@ -82,7 +85,18 @@
   "You are allowed to smoke 5 cigarrates today": "You are allowed to smoke 5 cigarrates today",
   "You are allowed to smoke 6 cigarrates today": "You are allowed to smoke 6 cigarrates today",
 
-  "Choose an option": "Choose an option"
+  "Choose an option": "Choose an option",
 
-
+  "RECORDS": "Records",
+  "FAVORITES": "Favorites",
+  "TITLE_MUST_BE_3_50_CHARACTERS_LONG": "Title must be 3-50 Characters Long",
+  "SEARCH_HERE": "Search Here...",
+  "DELETE_DIARY": "Delete Diary",
+  "ARE_YOU_SURE_TO_DELETE_THE_DIARY": "Are you sure to delete the diary?",
+  "CREATE_DIARY": "Create Diary",
+  "EDIT_DIARY": "Edit Diary",
+  "DIARY_TITLE": "Diary Title",
+  "DIARY_DESCRIPTION": "Diary Desription",
+  "CANCEL": "Cancel",
+  "SAVE": "Save"
 }

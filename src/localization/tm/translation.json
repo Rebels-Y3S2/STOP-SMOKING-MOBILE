@@ -35,6 +35,9 @@
     "Starts On:":"தொடங்குகிறது:",
     "Ends On:":"முடிவு:",
     "Notifies at:":"அறிவிக்கிறது:",
+    "Lets keep writing on the diary :":"நாட்குறிப்பில் தொடர்ந்து எழுதுவோம்:",
+    "Now lets focus on the challenge :":"இப்போது சவாலில் கவனம் செலுத்தலாம்:",
+    "and also":"மேலும்",
   
   
     "Cancel": "ரத்து செய்",
@@ -83,6 +86,19 @@
     "You are allowed to smoke 5 cigarrates today": "இன்று நீங்கள் 5 சிகரெட் மட்டுமே புகைக்க அனுமதிக்கப்படுகிறீர்கள்",
     "You are allowed to smoke 6 cigarrates today": "இன்று நீங்கள் 6 சிகரெட் மட்டுமே புகைக்க அனுமதிக்கப்படுகிறீர்கள்",
 
-    "Choose an option": "ஒரு விருப்பத்தை தேர்வு செய்யவும்"
+    "Choose an option": "ஒரு விருப்பத்தை தேர்வு செய்யவும்",
+    
+    "RECORDS": "பதிவுகள்",
+    "FAVORITES": "பிடித்தவை",
+    "TITLE_MUST_BE_3_50_CHARACTERS_LONG": "தலைப்பு 3-50 எழுத்துகள் நீளமாக இருக்க வேண்டும்",
+    "SEARCH_HERE": "இங்கே தேடவும்...",
+    "DELETE_DIARY": "டைரியை நீக்கு",
+    "ARE_YOU_SURE_TO_DELETE_THE_DIARY": "டைரியை நீக்குவது உறுதி?",
+    "CREATE_DIARY": "நாட்குறிப்பை உருவாக்கவும்",
+    "EDIT_DIARY": "டைரியைத் திருத்தவும்",
+    "DIARY_TITLE": "டைரி தலைப்பு",
+    "DIARY_DESCRIPTION": "நாட்குறிப்பு விளக்கம்",
+    "CANCEL": "ரத்து செய்",
+    "SAVE": "சேமிக்கவும்"
   }
   
