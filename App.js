@@ -13,12 +13,15 @@ import React from 'react';
 import './src/localization/i18n';
 import {AuthProvider} from './src/pages/AuthContext';
 import {AppNav} from './src/navigation/AppNav';
+import NotificationProvider from './src/pages/Reminder Management/Context/ReminderContext';
 
 const App = () => {
 
   return (
     <AuthProvider>
+      <NotificationProvider>
       <AppNav/>
+      </NotificationProvider>
     </AuthProvider> 
   );
 };

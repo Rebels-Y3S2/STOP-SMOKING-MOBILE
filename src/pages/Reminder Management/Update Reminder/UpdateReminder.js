@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Text } from '@react-native-material/core';
 import { View, ScrollView, TextInput } from 'react-native';
 import Datepicker from '../../../components/DatePicker/Datepicker.js';
@@ -14,11 +14,19 @@ import {CommonConstants, Colors } from '../../../util/Constants/CommonConstants.
 import { styles } from './UpdateReminderStyles.js';
 import { fetchDiaryRecords } from '../../../api/diary.api.js';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../../AuthContext.js';
+import { NotificationContext } from '../Context/ReminderContext.js';
 
 export default function UpdateReminder({route}) {
   // Navigation values
   const navigation = useNavigation();
   const {reminderId} = route.params;
+
+  // Notification Handler
+  const notificationHandler = useContext(NotificationContext);
+
+  // User info
+  const authContext = useContext(AuthContext)
 
   //Translation
   const { t } = useTranslation();
@@ -45,6 +53,8 @@ export default function UpdateReminder({route}) {
   const [diaryTitle, setDiaryTitle] = useState('');
   const [diaries] = useState([]);
   const [diaryDropDown, setDiaryDropDown] = useState([]);
+  const [challengeLength, setChallengeLength] = useState(null)
+  const [diaryLength, setDiaryLength] = useState(null)
 
   /**
    * Called when the screen is loaded
@@ -89,8 +99,9 @@ export default function UpdateReminder({route}) {
    * Fetch challenge details relating to the userId
    */
   const getChallengesDetails = () =>{
-    getChallenges("63632b9d0cae67041458ba21")
+    getChallenges(authContext.userInfo._id)
     .then((res)=>{
+      setChallengeLength(res.data.length)
        // Loops the response and isolate the name and id and assign to challengeObj
       for(let i = 0; i<res.data.data.length; i++ ){
         const challengeObj = {
@@ -109,8 +120,9 @@ export default function UpdateReminder({route}) {
  * Fetch diary details relating to the userId
  */
   const getDiaryDetails = () =>{
-  fetchDiaryRecords("635b10baf383232439911869")
+  fetchDiaryRecords(authContext.userInfo._id)
     .then((res)=>{
+      setDiaryLength(res.data.length)
       //Loops the response and isolate the title and id and assign to diaryObj
       for(let i = 0; i<res.data.data.length; i++ ){
         const diaryObj = {
@@ -131,7 +143,7 @@ export default function UpdateReminder({route}) {
    */
   const handleSubmit = () =>{
     const newReminder = {
-      userId:'635b10baf383232439911869', //Will be replaced once user auth is integrated
+      userId:authContext.userInfo._id, //Will be replaced once user auth is integrated
       reminderTitle:reminderTitle === '' ? reminder.reminderTitle : reminderTitle,
       startDate:sDate === '' ? reminder.startDate : sDate,
       endDate:eDate === '' ? reminder.endDate : eDate,
@@ -148,6 +160,7 @@ export default function UpdateReminder({route}) {
           type:CommonConstants.UPDATE, success:true
         }
       )
+      notificationHandler(res.data.data);
     }).catch((error) =>{
       console.log(error);
     })
@@ -199,22 +212,22 @@ export default function UpdateReminder({route}) {
           onValueChange={(quoteChk) => setCustomQuoteCheck(quoteChk)}
         />
 
-        <DropDown placeholder={challengeName} setValue={setChallenge} data={challengeDropDown} disable={challengeCheck}/>
+        <DropDown placeholder={challengeLength === 0 ? ReminderConstants.NO_CHALLENGES : challengeName} setValue={setChallenge} data={challengeDropDown} disable={challengeCheck}/>
         <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_CHALLENGE_LABEL)}</Text>
         <CheckBox style={styles.checkbox}
           testID={ReminderConstants.CHALLENGE_TEST_ID}
           disabled={false}
           value={challengeCheck}
-          onValueChange={(challengeChk) => setChallengeCheck(challengeChk)}
+          onValueChange={challengeLength === 0 ? () => setChallengeCheck(false) : (challengeChk) => setChallengeCheck(challengeChk)}
         />
 
-        <DropDown placeholder={diaryTitle} setValue={setDiary} data={diaryDropDown} disable={diaryCheck}/>
+        <DropDown placeholder={diaryLength === 0 ? ReminderConstants.NO_DIARIES :diaryTitle} setValue={setDiary} data={diaryDropDown} disable={diaryCheck}/>
         <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_DIARY_LABEL)}</Text>
         <CheckBox style={styles.checkbox}
           testID={ReminderConstants.DIARY_TEST_ID}
           disabled={false}
           value={diaryCheck}
-          onValueChange={(diaryChk) => setDiaryCheck(diaryChk)}
+          onValueChange={diaryLength === 0 ? () => setDiaryCheck(false) : (diaryChk) => setDiaryCheck(diaryChk)}
         />
 
         <Button title={t(CommonConstants.CANCEL)} style={styles.button} onPress={() => navigation.goBack()} variant="outlined" color={Colors.GRAY} />

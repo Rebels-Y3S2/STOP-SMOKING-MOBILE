@@ -56,5 +56,14 @@ export const styles = StyleSheet.create({
       borderRadius: 5,
       paddingHorizontal: 8,
     },
+    errorLable:{
+      marginLeft:'5%',
+      fontSize: 12,
+      lineHeight: 16,
+      font: 'Roboto',
+      fontStyle: 'normal',
+      fontWeight: '500',
+      color: 'red'
+    }
   })
   
