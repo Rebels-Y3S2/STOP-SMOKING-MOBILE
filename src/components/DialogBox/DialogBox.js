@@ -9,9 +9,11 @@ import {
 } from "@react-native-material/core";
 import { View } from "react-native";
 import {CommonConstants} from "../../util/Constants/CommonConstants";
+import { useTranslation } from "react-i18next";
 
 export default function DialogBox({handleAction, setShow, show, title, message}){
   const [visible, setVisible] = useState(false);
+  const { t } = useTranslation();
   const dismissHandler = (type) =>{
     switch(type){
       case CommonConstants.OK:{
@@ -39,13 +41,13 @@ export default function DialogBox({handleAction, setShow, show, title, message})
         </DialogContent>
         <DialogActions>
           <Button
-            title={CommonConstants.CANCEL}
+            title={t(CommonConstants.CANCEL)}
             compact
             variant={CommonConstants.VARIANT_TEXT}
             onPress={() => dismissHandler(CommonConstants.CANCEL)}
           />
           <Button
-            title={CommonConstants.OK}
+            title={t(CommonConstants.OK)}
             compact
             variant={CommonConstants.VARIANT_TEXT}
             onPress={()=> dismissHandler(CommonConstants.OK)}
