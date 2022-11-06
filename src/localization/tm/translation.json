@@ -53,6 +53,19 @@
     "To": "செய்ய",
   
     "Create Success": "வெற்றியை உருவாக்குங்கள்",
-    "Edit Success": "வெற்றியைத் திருத்து"
+    "Edit Success": "வெற்றியைத் திருத்து",
+
+    "RECORDS": "பதிவுகள்",
+    "FAVORITES": "பிடித்தவை",
+    "TITLE_MUST_BE_3_50_CHARACTERS_LONG": "தலைப்பு 3-50 எழுத்துகள் நீளமாக இருக்க வேண்டும்",
+    "SEARCH_HERE": "இங்கே தேடவும்...",
+    "DELETE_DIARY": "டைரியை நீக்கு",
+    "ARE_YOU_SURE_TO_DELETE_THE_DIARY": "டைரியை நீக்குவது உறுதி?",
+    "CREATE_DIARY": "நாட்குறிப்பை உருவாக்கவும்",
+    "EDIT_DIARY": "டைரியைத் திருத்தவும்",
+    "DIARY_TITLE": "டைரி தலைப்பு",
+    "DIARY_DESCRIPTION": "நாட்குறிப்பு விளக்கம்",
+    "CANCEL": "ரத்து செய்",
+    "SAVE": "சேமிக்கவும்"
   }
   

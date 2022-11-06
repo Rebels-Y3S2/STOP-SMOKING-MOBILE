@@ -52,6 +52,19 @@
     "To": "වෙත",
   
     "Create Success": "නිර්මාණය සාර්ථකත්වය",
-    "Edit Success": "සංස්කරණය සාර්ථකත්වය"
+    "Edit Success": "සංස්කරණය සාර්ථකත්වය",
+
+    "RECORDS": "වාර්තා",
+    "FAVORITES": "ප්රියතම",
+    "TITLE_MUST_BE_3_50_CHARACTERS_LONG": "මාතෘකාව අක්ෂර 3-50ක් දිග විය යුතුය",
+    "SEARCH_HERE": "මෙහි සොයන්න...",
+    "DELETE_DIARY": "වාර්තාව මකන්න",
+    "ARE_YOU_SURE_TO_DELETE_THE_DIARY": "වාර්තාව මකා දැමීමට ඔබට විශ්වාසද?",
+    "CREATE_DIARY": "දිනපොත සාදන්න",
+    "EDIT_DIARY": "දිනපොත සංස්කරණය කරන්න",
+    "DIARY_TITLE": "දිනපොත මාතෘකාව",
+    "DIARY_DESCRIPTION": "දිනපොත විස්තරය",
+    "CANCEL": "අවලංගු කරන්න",
+    "SAVE": "සුරකින්න"
   }
   
