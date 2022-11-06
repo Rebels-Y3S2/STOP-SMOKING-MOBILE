@@ -21,12 +21,10 @@ const UserRegistration = () => {
     const [pic, setPic] = useState('https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg');
     const [smokingtype, setSmokingtype] = useState('');
     
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: 'Normal (3 - 5 times per week)', value: 'normal' },
-        { label: 'Average (10 - 15 times per week)', value: 'average' },
-        { label: 'Extereme (20 - 25 times per week)', value: 'extereme' },
+        { label: 'Normal (3 - 5 times per week)', value: 'Normal (3 - 5 times per week)' },
+        { label: 'Average (10 - 15 times per week)', value: 'Average (10 - 15 times per week)' },
+        { label: 'Extereme (20 - 25 times per week)', value: 'Extereme (20 - 25 times per week)' },
         { label: 'Other', value: 'other' },
     ]);
 
@@ -43,7 +41,7 @@ const UserRegistration = () => {
     }
 
     const handleSmokingType = (e) =>{
-        setPassword(e.nativeEvent.value)
+        setSmokingType(e.nativeEvent.text)
     }
 
     const handleSubmit = () =>{
@@ -52,11 +50,12 @@ const UserRegistration = () => {
           email:email,
           password:password,
           pic:"https://www.datocms-assets.com/55010/1631448989-1609827493259134-modelo.jpg?auto=format%2Ccompress&cs=srgb",
-          smokingtype: "normal"
+          smokingtype: smokingtype
         }
         userRequests.addUser(user)
         .then((res) =>{
           console.log(res.data)
+          navigation.navigate('Login')
         }).catch((error) =>{
           console.log(error)
         })
@@ -86,7 +85,7 @@ const UserRegistration = () => {
       };
 
     return (
-        <View>
+        <View style={{marginTop: 40}}>
             <ScrollView>
                 <BigHeaderBackground />
                 <PopupContainer firstContainer>
@@ -119,6 +118,7 @@ const UserRegistration = () => {
                         <Button
                             title="Cancel"
                             color="#B6B3B3"
+                            onPress={() => navigation.navigate('Login')}
                         >
                         </Button>
                     </View>

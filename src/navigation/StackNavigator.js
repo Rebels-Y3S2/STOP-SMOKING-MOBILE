@@ -20,6 +20,7 @@ import EditChallenge from "../pages/Challenge Management/editchallenge/EditChall
 import { useTranslation } from "react-i18next";
 import { ReminderConstants } from "../util/Constants/ReminderConstants.js";
 import UserLogin from "../pages/UserProfile/UserLogin";
+import UserRegistration from "../pages/UserProfile/UserRegistration";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -78,6 +79,7 @@ const MainStackNavigator = () => {
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Login" component={UserLogin}/>
+          <Stack.Screen name="UserRegistration" component={UserRegistration}/>
         </Stack.Navigator>
     );
 }
