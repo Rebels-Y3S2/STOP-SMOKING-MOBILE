@@ -197,7 +197,7 @@ export default function DiaryRecords() {
                   <Text style={styles.lable}>{row.description}</Text>
                 </HStack>
                 <HStack m={0} spacing={240} style={styles.btns}>
-                  <View key={index}>
+                  <View key={row._id}>
                     <TouchableOpacity key={index}
                       onPress={(e) => {
                         handleLike(index, !getLike(index));

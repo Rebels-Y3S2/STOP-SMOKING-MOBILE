@@ -8,6 +8,7 @@ const useMap = initialValue => {
           setMap(prevMap => {
             const nextMap = new Map(prevMap);
             nextMap.set(key, value);
+            console.log(nextMap)
             return nextMap;
           }),
         remove: (key, value) =>
