@@ -52,6 +52,9 @@ export default function CreateReminder() {
   const [challengeLength, setChallengeLength] = useState(null)
   const [diaryLength, setDiaryLength] = useState(null)
 
+  // validation
+  const [validation, setValidation] = useState("")
+
   /**
    * Takes the reminder title value from the text input field and assign in to reminderTitle const
    * @param {*} e 
@@ -83,7 +86,7 @@ export default function CreateReminder() {
    */
   const handleSubmit = () =>{
     const reminder = {
-      userId: authContext.userInfo._id, //Will be replaced once user auth is integrated
+      userId: authContext.userInfo._id,
       reminderTitle:reminderTitle,
       startDate:sDate,
       endDate:eDate,
@@ -91,20 +94,25 @@ export default function CreateReminder() {
       customQuote:customQuote,
       challenge:challenge,
       diary:diary
+    }    
+    if(reminder.reminderTitle === "" || reminder.startDate === "" || reminder.endDate === "" || reminder.startTime === ""){
+      setValidation("The Reminder Title, Start Date, End Date and Start Time fields cannot be left empty!")
+    }else{
+      addReminder(reminder)
+      .then((res) =>{
+        navigation.navigate(CommonConstants.REMINDERS_PATH, 
+          {
+            title:ReminderConstants.REMINDER_CREATE_SUCCESS, 
+            type:CommonConstants.CREATE, success:true
+          }
+        )
+        notificationHandler(res.data.data);
+      }).catch((error) =>{
+        console.log(error);
+      })
     }
-    addReminder(reminder)
-    .then((res) =>{
-      navigation.navigate(CommonConstants.REMINDERS_PATH, 
-        {
-          title:ReminderConstants.REMINDER_CREATE_SUCCESS, 
-          type:CommonConstants.CREATE, success:true
-        }
-      )
-      notificationHandler(res.data.data);
-    }).catch((error) =>{
-      console.log(error);
-    })
   }
+  
 
 /**
  * Fetch challenge details relating to the userId
@@ -126,6 +134,7 @@ export default function CreateReminder() {
       console.log(error);
     })
   }
+
 
   /**
  * Fetch diary details relating to the userId
@@ -153,65 +162,73 @@ export default function CreateReminder() {
       <ScrollView>
         <BigHeaderBackground/>
         <PopupContainer  firstContainer>
-          <TextInput 
-            placeholder={t(ReminderConstants.REMINDER_TITLE_LABEL)}
-            style={styles.input} 
-            onChange={handlReminderTitle}
-          />
-          <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.REMINDER_TITLE_LABEL)}</Text>
-          
-          <Datepicker
-            setText={setSDate}
-            lable={t(ReminderConstants.START_DATE_LABEL)}
-            mode={CommonConstants.DATE} 
-          />
+              <>
+                <TextInput 
+                  placeholder={t(ReminderConstants.REMINDER_TITLE_LABEL)}
+                  style={styles.input} 
+                  onChange={handlReminderTitle}
+                />
+                <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.REMINDER_TITLE_LABEL)}</Text>
+                
+                <Datepicker
+                  setText={setSDate}
+                  lable={t(ReminderConstants.START_DATE_LABEL)}
+                  mode={CommonConstants.DATE} 
+                />
 
-          <Datepicker
-            setText={setEDate} 
-            lable={t(ReminderConstants.END_DATE_LABEL)} 
-            mode={CommonConstants.DATE}
-          />
+                <Datepicker
+                  setText={setEDate} 
+                  lable={t(ReminderConstants.END_DATE_LABEL)} 
+                  mode={CommonConstants.DATE}
+                />
+                
+                <Datepicker
+                  setText={setSTime} 
+                  lable={t(ReminderConstants.START_TIME_LABEL)}
+                  mode={CommonConstants.TIME} 
+                />
+                
+                <TextInput 
+                  placeholder={t(ReminderConstants.CUSTOM_QUOTE_LABEL)} 
+                  editable={customQuoteCheck} 
+                  onChange={handleCustomQuote} 
+                  style={styles.input}
+                />
 
-          <Datepicker
-            setText={setSTime} 
-            lable={t(ReminderConstants.START_TIME_LABEL)}
-            mode={CommonConstants.TIME} 
-          />
+                <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.CUSTOM_QUOTE_LABEL)} </Text>
+                <CheckBox style={styles.checkbox}
+                  testID={ReminderConstants.QUOTE_TEST_ID}
+                  disabled={false}
+                  value={customQuoteCheck}
+                  onValueChange={(quoteChk) => setCustomQuoteCheck(quoteChk)}
+                />
 
-          <TextInput 
-            placeholder={t(ReminderConstants.CUSTOM_QUOTE_LABEL)} 
-            editable={customQuoteCheck} 
-            onChange={handleCustomQuote} 
-            style={styles.input}
-          />
-          <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.CUSTOM_QUOTE_LABEL)} </Text>
-          <CheckBox style={styles.checkbox}
-            testID={ReminderConstants.QUOTE_TEST_ID}
-            disabled={false}
-            value={customQuoteCheck}
-            onValueChange={(quoteChk) => setCustomQuoteCheck(quoteChk)}
-          />
+                <DropDown placeholder={challengeLength === 0 ? ReminderConstants.NO_CHALLENGES : ReminderConstants.SELECT_CHALLENGE_LABEL} setValue={setChallenge} data={challengeDropDown} disable={challengeCheck}/>
+                <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_CHALLENGE_LABEL)}</Text>
+                <CheckBox style={styles.checkbox}
+                  testID={ReminderConstants.CHALLENGE_TEST_ID}
+                  disabled={false}
+                  value={challengeCheck}
+                  onValueChange={challengeLength === 0 ? () => setChallengeCheck(false) : (challengeChk) => setChallengeCheck(challengeChk)}
+                />
 
-          <DropDown placeholder={challengeLength === 0 ? ReminderConstants.NO_CHALLENGES : ReminderConstants.SELECT_CHALLENGE_LABEL} setValue={setChallenge} data={challengeDropDown} disable={challengeCheck}/>
-          <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_CHALLENGE_LABEL)}</Text>
-          <CheckBox style={styles.checkbox}
-            testID={ReminderConstants.CHALLENGE_TEST_ID}
-            disabled={false}
-            value={challengeCheck}
-            onValueChange={challengeLength === 0 ? () => setChallengeCheck(false) : (challengeChk) => setChallengeCheck(challengeChk)}
-          />
-
-          <DropDown placeholder={diaryLength === 0 ? ReminderConstants.NO_DIARIES : ReminderConstants.SELECT_DIARY_LABEL} setValue={setDiary} data={diaryDropDown} disable={diaryCheck}/>
-          <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_DIARY_LABEL)}</Text>
-          <CheckBox style={styles.checkbox}
-            testID={ReminderConstants.DIARY_TEST_ID}
-            disabled={false}
-            value={diaryCheck}
-            onValueChange={diaryLength === 0 ? () => setDiaryCheck(false) : (diaryChk) => setDiaryCheck(diaryChk)}
-          />
-
-          <Button title={t(CommonConstants.CANCEL)} style={styles.button} onPress={() => navigation.goBack()} variant="outlined" color={Colors.GRAY} />
-          <Button title={t(CommonConstants.SAVE)} style={styles.button} onPress={handleSubmit} color={Colors.BLUE} />
+                <DropDown placeholder={diaryLength === 0 ? ReminderConstants.NO_DIARIES : ReminderConstants.SELECT_DIARY_LABEL} setValue={setDiary} data={diaryDropDown} disable={diaryCheck}/>
+                <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_DIARY_LABEL)}</Text>
+                <CheckBox style={styles.checkbox}
+                  testID={ReminderConstants.DIARY_TEST_ID}
+                  disabled={false}
+                  value={diaryCheck}
+                  onValueChange={diaryLength === 0 ? () => setDiaryCheck(false) : (diaryChk) => setDiaryCheck(diaryChk)}
+                />
+                <View style={{padding:20}}>
+                 {
+                  validation &&
+                  <Text variant='subtitle 2' style={styles.errorLable}>{validation}</Text>
+                  }
+                </View>
+                <Button title={t(CommonConstants.CANCEL)} style={styles.button} onPress={() => navigation.goBack()} variant="outlined" color={Colors.GRAY} />
+                <Button title={t(CommonConstants.SAVE)} style={styles.button} onPress={handleSubmit} color={Colors.BLUE} />
+              </>
           <View style={{marginBottom:10}}></View>
         </PopupContainer>
         <View style={{marginBottom:125}}></View>
@@ -219,5 +236,7 @@ export default function CreateReminder() {
     </View>
   );
 }
+        
+
 
 

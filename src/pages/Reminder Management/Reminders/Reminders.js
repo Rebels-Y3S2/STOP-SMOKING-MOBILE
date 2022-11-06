@@ -9,7 +9,6 @@ import Card from '../../../components/Card/Card';
 import DialogBox from '../../../components/DialogBox/DialogBox';
 import { styles } from './RemindersStyles';
 import { useIsFocused } from '@react-navigation/native';
-import PushNotifications from '../../../components/PushNotifications/PushNotifications';
 import {CommonConstants} from '../../../util/Constants/CommonConstants';
 import { ReminderConstants } from '../../../util/Constants/ReminderConstants';
 import { RefreshControl } from 'react-native';
@@ -90,7 +89,7 @@ export default function Reminders({route}) {
   const handleDelete = () =>{
     deleteReminder(deleteId)
     .then((res) =>{
-      getReminderDetails(userId);
+      getReminderDetails(authContext.userInfo._id);
     }).catch((error)=>{
       console.log(error);
     })
