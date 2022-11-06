@@ -13,6 +13,7 @@ import ViewProfile from "../pages/UserProfile/ViewProfile.js";
 import UpdateProfile from "../pages/UserProfile/UpdateProfile.js";
 import { CommonConstants } from "../util/Constants/CommonConstants.js";
 import UserLogin from "../pages/UserProfile/UserLogin";
+import UserRegistration from "../pages/UserProfile/UserRegistration";
 
 const Stack = createNativeStackNavigator();
 const screenOptionStyle = {
@@ -64,6 +65,7 @@ const MainStackNavigator = () => {
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Login" component={UserLogin}/>
+          <Stack.Screen name="UserRegistration" component={UserRegistration}/>
         </Stack.Navigator>
     );
 }

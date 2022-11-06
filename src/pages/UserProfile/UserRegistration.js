@@ -43,7 +43,7 @@ const UserRegistration = () => {
     }
 
     const handleSmokingType = (e) =>{
-        setPassword(e.nativeEvent.value)
+        setPassword(e.nativeEvent.text)
     }
 
     const handleSubmit = () =>{
@@ -52,11 +52,12 @@ const UserRegistration = () => {
           email:email,
           password:password,
           pic:"https://www.datocms-assets.com/55010/1631448989-1609827493259134-modelo.jpg?auto=format%2Ccompress&cs=srgb",
-          smokingtype: "normal"
+          smokingtype: "Normal (3 - 5 times per week)"
         }
         userRequests.addUser(user)
         .then((res) =>{
           console.log(res.data)
+          navigation.navigate('Login')
         }).catch((error) =>{
           console.log(error)
         })
@@ -86,7 +87,7 @@ const UserRegistration = () => {
       };
 
     return (
-        <View>
+        <View style={{marginTop: 40}}>
             <ScrollView>
                 <BigHeaderBackground />
                 <PopupContainer firstContainer>
@@ -119,6 +120,7 @@ const UserRegistration = () => {
                         <Button
                             title="Cancel"
                             color="#B6B3B3"
+                            onPress={() => navigation.navigate('Login')}
                         >
                         </Button>
                     </View>
