@@ -24,6 +24,9 @@ export const ReminderConstants = {
     DELETE_REMINDER_CONFIRMATION:"Are you sure you want to delete the reminder?",
     NO_REMINDERS:"No reminders to display!",
     ADD_FIRST_REMINDER:"Click on the plus icon to create your first reminder!",
+    FOCUS_ON_CHALLENGE:"Now lets focus on the challenge :",
+    REMIND_TO_RECORD_DIARY:"Lets keep writing on the diary :",
+
 
     // Titles
     DELETE_REMINDER_TITLE:"Delete Reminder",

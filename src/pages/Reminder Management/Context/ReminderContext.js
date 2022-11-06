@@ -7,6 +7,8 @@ import storage from "@react-native-async-storage/async-storage";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { fetchReminder } from '../../../api/reminder.api';
 import { CommonConstants } from '../../../util/Constants/CommonConstants';
+import { ReminderConstants } from '../../../util/Constants/ReminderConstants';
+import { useTranslation } from 'react-i18next';
 
 export const NotificationContext = React.createContext();
 
@@ -27,6 +29,8 @@ export default function NotificationProvider({children}) {
   const [reminder, setReminder] = useState({})
   const [challengeName, setChallengeName] = useState('');
   const [diaryTitle, setDiaryTitle] = useState('');
+
+  const {t} = useTranslation();
 
   useEffect(() => {
     const getPermission = async () => {
@@ -91,11 +95,11 @@ export default function NotificationProvider({children}) {
           content:{
             title:reminderObj.reminderTitle,
             body: reminderObj.challengeName !== null && reminderObj.diaryTitle 
-            ? reminderObj.customQuote + ' ' + "Now lets focus on the challenge :" +  challengeName + " and also " + "Lets keep writing on the diary :" + diaryTitle 
+            ? reminderObj.customQuote + ' ' + t(ReminderConstants.FOCUS_ON_CHALLENGE) +  challengeName + t(" and also ") + t(ReminderConstants.REMIND_TO_RECORD_DIARY) + diaryTitle 
             : challengeName
-                ? reminderObj.customQuote + ' ' + "Now lets focus on the challenge :" + challengeName
+                ? reminderObj.customQuote + ' ' + t(ReminderConstants.FOCUS_ON_CHALLENGE)  + challengeName
                 : diaryTitle  
-                  ? reminderObj.customQuote + ' ' + "Lets keep writing on the diary :" + diaryTitle 
+                  ? reminderObj.customQuote + ' ' + t(ReminderConstants.REMIND_TO_RECORD_DIARY)  + diaryTitle 
                   : reminderObj.customQuote
           },
           trigger: {
