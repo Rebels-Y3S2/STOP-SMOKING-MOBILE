@@ -19,7 +19,7 @@ export const resources = {
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v3',
   resources,
-  lng: 'en',  // change this to sn , tm to change language
+  lng: 'sn',  // change this to sn , tm to change language
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,

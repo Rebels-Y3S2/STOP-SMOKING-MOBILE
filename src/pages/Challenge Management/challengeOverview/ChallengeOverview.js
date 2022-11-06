@@ -101,7 +101,7 @@ export default function ChallengeOverview({ route }) {
     deleteChallenge(challengeId)
       .then(res => {
         console.log(res);
-        navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH);
+        navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH, {refresh: true});
       })
       .catch(err => {
         console.log(err)
@@ -149,7 +149,7 @@ export default function ChallengeOverview({ route }) {
             return (
               <View>
                 <Hr />
-                <DateList date={task.date} tasks={task.tasks} />
+                <DateList date={task.date.split('T')[0]} tasks={task.tasks} />
               </View>
             );
           })}

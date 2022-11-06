@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Text, View } from "react-native";
 
 import DropDown from "../../DropDown/DropDown";
@@ -6,13 +6,15 @@ import { Button } from "react-native-paper";
 import styles from "./styles";
 import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
 import { CommonConstants } from "../../../util/Constants/CommonConstants";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
+import { AuthContext } from "../../../pages/AuthContext";
 
 export default function ChallengeForm({ onSave, onCancel }) {
+  const userDetails = useContext(AuthContext);
   const [type, setSmokingType] = useState(0);
   const [duration, setDuration] = useState(0);
   const { t } = useTranslation();
-  const userId = "63632b9d0cae67041458ba21";
+  const userId = userDetails.userInfo._id;
 
   const smokingTypeOptions = [
     { label: t(ChallengeConstants.MORE_THAN_FIVE_A_DAY), value: 4 },

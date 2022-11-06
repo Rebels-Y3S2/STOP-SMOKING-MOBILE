@@ -1,7 +1,10 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import styles from "./styles";
+import { useTranslation } from 'react-i18next'
 
 export default function DateList({ date, tasks }) {
+  const { t } = useTranslation();
+
   return (
     <View>
       <View style={styles.contentContainer}>
@@ -11,7 +14,7 @@ export default function DateList({ date, tasks }) {
         />
         <View style={styles.textContainer}>
           <Text style={styles.titleStyles}>{date}</Text>
-          {tasks.map(task => <Text>{"\u2B24" + " "}{task}</Text>)}
+          {tasks.map(task => <Text>{"\u2B24" + " "}{t(task)}</Text>)}
         </View>
       </View>
     </View>

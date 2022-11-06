@@ -57,6 +57,36 @@
   "Create Success": "Create Success",
   "Edit Success": "Edit Success",
 
+  "Easy": "Easy",
+  "Hard": "Hard",
+
+  "Click the + button to create": "Click the + button to create",
+  "your customized challenge": "your customized challenge",
+
+  "Duration": "Duration",
+  "Type": "Type",
+
+  "Drink 6L of water.": "Drink 6L of water.",
+  "Go for jog for 30 minutes.": "Go for jog for 30 minutes.",
+  "Spend some time with familiy.": "Spend some time with familiy.",
+  "Don't eat junk food.": "Don't eat junk food.",
+  "Water plants": "Water plants",
+  "Plant a tree": "Plant a tree",
+  "Read a book": "Read a book",
+  "Write about your progress in the diary": "Write about your progress in the diary",
+  "Watch a movie with your loved one": "Watch a movie with your loved one",
+  "Play cricket with your friends":  "Play cricket with your friends",
+
+  "You are not allowed to smoke today": "You are not allowed to smoke today",
+  "You are allowed to smoke only 1 cigarrate today": "You are allowed to smoke only 1 cigarrate today",
+  "You are allowed to smoke 2 cigarrates today": "You are allowed to smoke 2 cigarrates today",
+  "You are allowed to smoke 3 cigarrates today": "You are allowed to smoke 3 cigarrates today",
+  "You are allowed to smoke 4 cigarrates today": "You are allowed to smoke 4 cigarrates today",
+  "You are allowed to smoke 5 cigarrates today": "You are allowed to smoke 5 cigarrates today",
+  "You are allowed to smoke 6 cigarrates today": "You are allowed to smoke 6 cigarrates today",
+
+  "Choose an option": "Choose an option",
+
   "RECORDS": "Records",
   "FAVORITES": "Favorites",
   "TITLE_MUST_BE_3_50_CHARACTERS_LONG": "Title must be 3-50 Characters Long",

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
-import { addChallenge, editChallenge } from "../../../api/challenge.api";
+import { editChallenge } from "../../../api/challenge.api";
 import ChallengeForm from "../../../components/Challenges/ChallengeForm/ChallengeForm";
 import ChallengeImage from "../../../components/Challenges/ChallengeImage";
 import PopupContainer from "../../../components/Contaner/PopupContainer";
@@ -11,13 +11,10 @@ export default function EditChallenge({ route }) {
   const navigation = useNavigation();
   const challengeId = route.params.id
 
-  console.log(challengeId)
-  console.log(route.params.id)
-
   function handleSaveChallenge(challengeObj) {
     editChallenge(challengeId, challengeObj)
       .then(res => {
-        navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH);
+        navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH, {refresh: true});
       })
       .catch(err => {
         console.log(err);
