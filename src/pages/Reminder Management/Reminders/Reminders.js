@@ -112,26 +112,25 @@ export default function Reminders({route}) {
           children={
             <View >
               <HStack m={2} spacing={80} >
-                <Text style={styles.lable}>{t(ReminderConstants.FROM)}  :{item.startDate}</Text>
-                  <HStack m={3} spacing={5}>
-                    <MaterialIcons 
-                      name={CommonConstants.EDIT_MATERIAL_ICON} 
-                      size={30} 
-                      onPress={() => navigation.navigate(CommonConstants.UPDATE_REMINDER_PATH, {reminderId: item._id})} 
-                    />
-                    <MaterialIcons 
-                      name={CommonConstants.DELETE_MATERIAL_ICON} 
-                      size={30} 
-                      onPress={()=> handleDeleteId(item._id)}  
-                    />
-                    <PushNotifications 
-                      title={item.reminderTitle}
-                      customQuote={item.customQuote}
-                      startTime={item.startTime}
-                      identifier={item._id}/>
+                <View>
+                  <Text style={styles.lable}>{t(ReminderConstants.FROM)}  :  {item.startDate}</Text>
+                  <Text style={styles.lable}>{t(ReminderConstants.TO)}       :  {item.endDate}</Text>
+                </View>
+                <View style={styles.iconContainer}>
+                  <HStack m={2} spacing={5}>
+                      <MaterialIcons 
+                        name={CommonConstants.EDIT_MATERIAL_ICON} 
+                        size={30} 
+                        onPress={() => navigation.navigate(CommonConstants.UPDATE_REMINDER_PATH, {reminderId: item._id})} 
+                      />
+                      <MaterialIcons 
+                        name={CommonConstants.DELETE_MATERIAL_ICON} 
+                        size={30} 
+                        onPress={()=> handleDeleteId(item._id)}  
+                      />
                   </HStack>
+                  </View>
               </HStack>
-                <Text style={styles.lable}>{t(ReminderConstants.TO)} :{item.endDate}</Text>
             </View>
           }
         />

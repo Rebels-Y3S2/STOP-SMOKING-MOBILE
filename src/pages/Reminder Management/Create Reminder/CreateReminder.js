@@ -19,8 +19,8 @@ import { NotificationContext } from '../Context/ReminderContext.js';
 
 export default function CreateReminder() {
 
-  const  notificationHandler  = useContext(NotificationContext);
-  console.log(notificationHandler)
+  // Notification handler
+  const  notificationHandler  = useContext(NotificationContext);;
   
   // Navigation
   const navigation = useNavigation();
@@ -46,9 +46,11 @@ export default function CreateReminder() {
   const [diaryCheck, setDiaryCheck] = useState(false);
 
   const [challenges] = useState([]);
-  const [challengeDropDown, setChallengeDropDown] = useState([]);
+  const [challengeDropDown, setChallengeDropDown] = useState([null]);
   const [diaries] = useState([]);
   const [diaryDropDown, setDiaryDropdown] = useState([]);
+  const [challengeLength, setChallengeLength] = useState(null)
+  const [diaryLength, setDiaryLength] = useState(null)
 
   /**
    * Takes the reminder title value from the text input field and assign in to reminderTitle const
@@ -90,7 +92,6 @@ export default function CreateReminder() {
       challenge:challenge,
       diary:diary
     }
-    
     addReminder(reminder)
     .then((res) =>{
       navigation.navigate(CommonConstants.REMINDERS_PATH, 
@@ -99,10 +100,6 @@ export default function CreateReminder() {
           type:CommonConstants.CREATE, success:true
         }
       )
-      // const reimnderObj = {
-      //   reminderTitle:res.data.data.reminderTitle
-
-      // }
       notificationHandler(res.data.data);
     }).catch((error) =>{
       console.log(error);
@@ -115,6 +112,7 @@ export default function CreateReminder() {
   const getChallengesDetails = () =>{
     getChallenges(authContext.userInfo._id)
     .then((res)=>{
+      setChallengeLength(res.data.length)
       // Loops the response and isolate the name and id and assign to challengeObj
       for(let i = 0; i<res.data.data.length; i++ ){
         const challengeObj = {
@@ -135,6 +133,7 @@ export default function CreateReminder() {
    const getDiaryDetails = () =>{
     fetchDiaryRecords(authContext.userInfo._id)
     .then((res)=>{
+      setDiaryLength(res.data.length)
       //Loops the response and isolate the titlle and id and assign to diaryObj
       for(let i = 0; i<res.data.data.length; i++ ){
         const diaryObj = {
@@ -193,22 +192,22 @@ export default function CreateReminder() {
             onValueChange={(quoteChk) => setCustomQuoteCheck(quoteChk)}
           />
 
-          <DropDown setValue={setChallenge} data={challengeDropDown} disable={challengeCheck}/>
+          <DropDown placeholder={challengeLength === 0 ? ReminderConstants.NO_CHALLENGES : ReminderConstants.SELECT_CHALLENGE_LABEL} setValue={setChallenge} data={challengeDropDown} disable={challengeCheck}/>
           <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_CHALLENGE_LABEL)}</Text>
           <CheckBox style={styles.checkbox}
             testID={ReminderConstants.CHALLENGE_TEST_ID}
             disabled={false}
             value={challengeCheck}
-            onValueChange={(challengeChk) => setChallengeCheck(challengeChk)}
+            onValueChange={challengeLength === 0 ? () => setChallengeCheck(false) : (challengeChk) => setChallengeCheck(challengeChk)}
           />
 
-          <DropDown setValue={setDiary} data={diaryDropDown} disable={diaryCheck}/>
+          <DropDown placeholder={diaryLength === 0 ? ReminderConstants.NO_DIARIES : ReminderConstants.SELECT_DIARY_LABEL} setValue={setDiary} data={diaryDropDown} disable={diaryCheck}/>
           <Text variant='subtitle 2' style={styles.textLable}>{t(ReminderConstants.SELECT_DIARY_LABEL)}</Text>
           <CheckBox style={styles.checkbox}
             testID={ReminderConstants.DIARY_TEST_ID}
             disabled={false}
             value={diaryCheck}
-            onValueChange={(diaryChk) => setDiaryCheck(diaryChk)}
+            onValueChange={diaryLength === 0 ? () => setDiaryCheck(false) : (diaryChk) => setDiaryCheck(diaryChk)}
           />
 
           <Button title={t(CommonConstants.CANCEL)} style={styles.button} onPress={() => navigation.goBack()} variant="outlined" color={Colors.GRAY} />

@@ -12,7 +12,8 @@ export const styles = StyleSheet.create({
         font: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '400',
-        color: '#000000'
+        color: '#000000',
+        padding:2
     },
     message:{
         position:'absolute',
@@ -29,8 +30,7 @@ export const styles = StyleSheet.create({
         height:"100%"
     },
     iconContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        position: "absolute",
+        right: 10
     }
 });

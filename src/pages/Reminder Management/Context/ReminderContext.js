@@ -72,38 +72,12 @@ export default function NotificationProvider({children}) {
     };
   }, []);
 
-  const getReminderDetails = async (reminderId) =>{
-    await fetchReminder(reminderId)
-    .then((res) =>{
-      setReminder(res.data.data);
-      if(res.data.data.challenge !== null){
-        setChallengeName(res.data.data.challenge.name);
-        setDiaryTitle(res.data.data.diary.title);
-      }
-      console.log(res.data.data.challenge)
-    }).catch((error) =>{
-      console.log(error);
-    })
-  }
   const stopNotification = async() =>{
     await Notifications.dismissAllNotificationsAsync();
   }
 
   const notificationHandler = async (reminderObj) => {
-    console.log(reminderObj)
-      // fetchReminder(reminderId)
-      // .then((res) =>{
-      //   setReminder(res.data.data);
-      //   if(res.data.data.challenge !== null){
-      //     setChallengeName(res.data.data.challenge.name);
-      //     setDiaryTitle(res.data.data.diary.title);
-      //   }
-      //   console.log(res.data.data.challenge)
-      // }).catch((error) =>{
-      //   console.log(error);
-      // })
-      // getReminderDetails(reminderId)
-      let currentDay = new Date().getDay();
+      let currentDay = new Date().getDate();
       let currentMonth = new Date().getMonth() + 1;
       let currentYear = new Date().getFullYear();
       let currentDate = currentDay + '/' + currentMonth + '/' + currentYear;

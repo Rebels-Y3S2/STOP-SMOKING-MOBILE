@@ -12,6 +12,8 @@ export const ReminderConstants = {
     NOTIFIES_AT:"Notifies at:",
     FROM:"From",
     TO:"To",
+    NO_CHALLENGES:"No Challenges",
+    NO_DIARIES:"No Diaries",
 
     // Test IDs
     CHALLENGE_TEST_ID:"challenge",
