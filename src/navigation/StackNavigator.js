@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from "../pages/home.js";
+import Home from "../pages/Home.js";
 import Diary from "../pages/Diary";
 import Splash from "../pages/Splash";
 import BottomTabNavigator from "./TabNavigator";
@@ -21,8 +21,15 @@ import { useTranslation } from "react-i18next";
 import { ReminderConstants } from "../util/Constants/ReminderConstants.js";
 import UserLogin from "../pages/UserProfile/UserLogin";
 import UserRegistration from "../pages/UserProfile/UserRegistration";
+import { Button, Text, View } from "react-native";
+import { IconButton } from "@react-native-material/core";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
+import { LocaleContext } from "../localization/LangProvider.js";
+// import CustomMenu from "../components/Menu/CustomMenu.js";
 
 const Stack = createNativeStackNavigator();
+
 const screenOptionStyle = {
   headerStyle: {
     backgroundColor: "#9AC4F8",
@@ -34,9 +41,10 @@ const screenOptionStyle = {
 
 
 const HomeStackNavigator = () => {
+
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="HomeScreen" component={Home} options={getNavigatorStyles('Home')} />
+      <Stack.Screen name="HomeScreen" component={Home} options={getNavigatorStylesHome('Home')} />
       <Stack.Screen name="ViewProfile" component={ViewProfile} options={getNavigatorStyles('User Profile')} />
       <Stack.Screen name="UpdateProfile" component={UpdateProfile} options={getNavigatorStyles('Edit Profile')} />
     </Stack.Navigator>
@@ -93,7 +101,7 @@ const TabNavigator = () => {
 }
 export { HomeStackNavigator, DiaryStackNavigator, RemindersStackNavigator, ChallengesStackNavigator, MainStackNavigator, TabNavigator };
 
-function getNavigatorStyles(componentName) {
+function getNavigatorStyles(componentName, headerR) {
   return {
     title: componentName,
     headerStyle: {
@@ -109,5 +117,30 @@ function getNavigatorStyles(componentName) {
       letterSpacing: '0.15px',
       color: '#FFFFFF'
     }
+  };
+}
+function getNavigatorStylesHome(componentName) {
+  const { showLocaleModal, setShowLocaleModal } = useContext(LocaleContext);
+  return {
+    title: componentName,
+    headerStyle: {
+      backgroundColor: '#1658CD',
+      borderColor: '#1658CD'
+    },
+    headerTitleStyle: {
+      font: 'Roboto',
+      fontStyle: 'normal',
+      fontWeight: '500',
+      fontSize: 20,
+      lineHeight: '24px',
+      letterSpacing: '0.15px',
+      color: '#FFFFFF'
+    }
+    ,
+    headerRight: () => 
+
+        <IconButton onPress={() => setShowLocaleModal(true)} icon={props => <Icon name="menu" {...props} />} />
+
+      
   };
 }
