@@ -26,9 +26,6 @@ export default function NotificationProvider({children}) {
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
-  const [reminder, setReminder] = useState({})
-  const [challengeName, setChallengeName] = useState('');
-  const [diaryTitle, setDiaryTitle] = useState('');
 
   const {t} = useTranslation();
 
@@ -76,11 +73,10 @@ export default function NotificationProvider({children}) {
     };
   }, []);
 
-  const stopNotification = async() =>{
-    await Notifications.dismissAllNotificationsAsync();
-  }
-
   const notificationHandler = async (reminderObj) => {
+    if(reminderObj.deleteId){
+      await Notifications.cancelScheduledNotificationAsync(reminderObj.deleteId)
+    }else{
       let currentDay = new Date().getDate();
       let currentMonth = new Date().getMonth() + 1;
       let currentYear = new Date().getFullYear();
@@ -94,12 +90,12 @@ export default function NotificationProvider({children}) {
           identifier:reminderObj._id,
           content:{
             title:reminderObj.reminderTitle,
-            body: reminderObj.challengeName !== null && reminderObj.diaryTitle 
-            ? reminderObj.customQuote + ' ' + t(ReminderConstants.FOCUS_ON_CHALLENGE) +  challengeName + t(" and also ") + t(ReminderConstants.REMIND_TO_RECORD_DIARY) + diaryTitle 
-            : challengeName
-                ? reminderObj.customQuote + ' ' + t(ReminderConstants.FOCUS_ON_CHALLENGE)  + challengeName
-                : diaryTitle  
-                  ? reminderObj.customQuote + ' ' + t(ReminderConstants.REMIND_TO_RECORD_DIARY)  + diaryTitle 
+            body: reminderObj.challenge !== null && reminderObj.diary !== null
+            ? reminderObj.customQuote + ' ' + t(ReminderConstants.FOCUS_ON_CHALLENGE) +  reminderObj.challenge.name + t(" and also ") + t(ReminderConstants.REMIND_TO_RECORD_DIARY) + reminderObj.diary.title 
+            : reminderObj.challenge !== null
+                ? reminderObj.customQuote + ' ' + t(ReminderConstants.FOCUS_ON_CHALLENGE)  + reminderObj.challenge.name
+                : reminderObj.diary !== null
+                  ? reminderObj.customQuote + ' ' + t(ReminderConstants.REMIND_TO_RECORD_DIARY)  + reminderObj.diary.title
                   : reminderObj.customQuote
           },
           trigger: {
@@ -110,10 +106,11 @@ export default function NotificationProvider({children}) {
           }
         });
       }else{
-        console.log("not good")
+        console.log("NOT_SUCCESSFULL")
         await Notifications.cancelScheduledNotificationAsync(reminderObj._id)
       }
     }
+  }
 
       return (
         <NotificationContext.Provider value={notificationHandler}>

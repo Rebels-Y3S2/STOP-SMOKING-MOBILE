@@ -6,7 +6,7 @@ import DropDown from '../../../components/DropDown/DropDown.js';
 import CheckBox from 'expo-checkbox';
 import BigHeaderBackground from '../../../components/HeaderBackground/HeaderBackground.js';
 import PopupContainer from '../../../components/Contaner/PopupContainer.js';
-import { addReminder } from '../../../api/reminder.api.js';
+import { addReminder, fetchReminder } from '../../../api/reminder.api.js';
 import { getChallenges } from '../../../api/challenge.api.js';
 import { useNavigation } from '@react-navigation/native';
 import { ReminderConstants } from '../../../util/Constants/ReminderConstants.js';
@@ -106,7 +106,12 @@ export default function CreateReminder() {
             type:CommonConstants.CREATE, success:true
           }
         )
-        notificationHandler(res.data.data);
+        fetchReminder(res.data.data._id)
+        .then((res) =>{
+          notificationHandler(res.data.data);
+        }).catch((error) =>{
+          console.log(error)
+        })
       }).catch((error) =>{
         console.log(error);
       })
