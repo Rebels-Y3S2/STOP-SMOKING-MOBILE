@@ -168,8 +168,8 @@ export default function Reminders({route}) {
     </>
   ):(
     <View style={styles.message}>
-        <Text>{ReminderConstants.NO_REMINDERS}</Text>
-        <Text>{ReminderConstants.ADD_FIRST_REMINDER}</Text>
+        <Text>{t(ReminderConstants.NO_REMINDERS)}</Text>
+        <Text>{t(ReminderConstants.ADD_FIRST_REMINDER)}</Text>
         <MaterialIcons 
           name={CommonConstants.ADD_MATERIAL_ICON} 
           size={60} 
