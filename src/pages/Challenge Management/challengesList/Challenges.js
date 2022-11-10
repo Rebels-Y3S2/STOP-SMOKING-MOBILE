@@ -1,4 +1,4 @@
-import { RefreshControl, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { RefreshControl, ActivityIndicator, SafeAreaView, ScrollView, Text, View } from "react-native";
 import ChallengeCard from "../../../components/Challenges/ChallengeCard/ChallengeCard";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from "@react-navigation/native";
@@ -12,7 +12,7 @@ import { AuthContext } from "../../AuthContext";
 
 export default function Challenges({ route }) {
   const navigation = useNavigation()
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(true);
   const [challenges, setChallenges] = useState([]);
   const { t } = useTranslation();
   const userDetails = useContext(AuthContext);
@@ -47,9 +47,11 @@ export default function Challenges({ route }) {
 
   function fetchChallenges() {
     if (!userDetails?.isLoading) {
+     // setRefreshing(true);
       getChallenges(userDetails.userInfo._id)
       .then(res => {
         setChallenges(res.data.data);
+        setRefreshing(false);
       })
       .catch(err => {
         console.log(err)

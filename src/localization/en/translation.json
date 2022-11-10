@@ -98,5 +98,11 @@
   "DIARY_TITLE": "Diary Title",
   "DIARY_DESCRIPTION": "Diary Desription",
   "CANCEL": "Cancel",
-  "SAVE": "Save"
+  "SAVE": "Save",
+
+  "Home": "Home",
+  "Challenges": "Challenges",
+  "Diary": "Diary",
+
+  "User Profile": "User Profile"
 }

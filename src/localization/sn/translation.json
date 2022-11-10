@@ -9,7 +9,7 @@
     "These are the challnges you will have to do": "ඔබට කළ යුතු අභියෝග මේවාය",
     "How long do you want to follow this challenge": "ඔබට කොපමණ කාලයක් මෙම අභියෝගය අනුගමනය කිරීමට අවශ්‍යද",
     "How often do you smoke?": "ඔබ කොපමණ වාරයක් දුම් පානය කරනවාද?",
-    "Challenge Overview": "අභියෝග දළ විශ්ලේෂණය",
+    "Challenge Overview": "අභියෝග විශ්ලේෂණය",
     "Days left": "දින ඇත",
     "Delete Challenge": "අභියෝගය මකන්න",
     "Are you sure to delete the challenge": "අභියෝගය මකා දැමීමට ඔබට විශ්වාසද",
@@ -50,7 +50,7 @@
     "Update": "යාවත්කාලීන කරන්න",
     "Create": "නිර්මාණය කරන්න",
     "Start": "ආරම්භ කරන්න",
-    "Open": "විවෘත",
+    "Open": "විවෘත කරන්න",
     "From": "සිට",
     "To": "වෙත",
   
@@ -87,17 +87,26 @@
 
     "Choose an option": "විකල්පයක් තෝරන්න",
     
-    "RECORDS": "වාර්තා",
-    "FAVORITES": "ප්රියතම",
-    "TITLE_MUST_BE_3_50_CHARACTERS_LONG": "මාතෘකාව අක්ෂර 3-50ක් දිග විය යුතුය",
-    "SEARCH_HERE": "මෙහි සොයන්න...",
-    "DELETE_DIARY": "වාර්තාව මකන්න",
-    "ARE_YOU_SURE_TO_DELETE_THE_DIARY": "වාර්තාව මකා දැමීමට ඔබට විශ්වාසද?",
-    "CREATE_DIARY": "දිනපොත සාදන්න",
-    "EDIT_DIARY": "දිනපොත සංස්කරණය කරන්න",
-    "DIARY_TITLE": "දිනපොත මාතෘකාව",
-    "DIARY_DESCRIPTION": "දිනපොත විස්තරය",
-    "CANCEL": "අවලංගු කරන්න",
-    "SAVE": "සුරකින්න"
+    "Records": "වාර්තා",
+    "Favorites": "ප්රියතම",
+    "Title must be 3-50 Characters Long": "මාතෘකාව අක්ෂර 3-50ක් දිග විය යුතුය",
+    "Search Here...": "මෙහි සොයන්න...",
+    "Delete Diary": "වාර්තාව මකන්න",
+    "Are you sure to delete the diary?": "වාර්තාව මකා දැමීමට ඔබට විශ්වාසද?",
+    "Create Diary": "දිනපොත සාදන්න",
+    "Edit Diary": "දිනපොත සංස්කරණය කරන්න",
+    "Diary Title": "දිනපොත මාතෘකාව",
+    "Diary Desription": "දිනපොත විස්තරය",
+
+    "Home": "නිවස",
+    "Challenges": "අභියෝග",
+    "Diary": "දිනපොත",
+
+    "User Profile": "පරිශීලක පැතිකඩ",
+    "Edit Profile": "පැතිකඩ සංස්කරණය",
+  
+    "Challenge Progress": "අභියෝග ප්‍රගතිය",
+    "Create Challenge": "අභියෝගයක් සාදන්න",
+    "Edit Challenge": "අභියෝගය සංස්කරණය"
   }
   
