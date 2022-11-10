@@ -12,6 +12,8 @@ export const CommonConstants = {
     CREATE:"Create",
     START:"Start",
     OPEN:"Open",
+    SELECT_ITEM:"Select Item",
+    DELETE:"Delete",
 
     //Icon Names
     EDIT_MATERIAL_ICON:"edit",
@@ -28,10 +30,24 @@ export const CommonConstants = {
     CHALLENGE_OVERVIEW_PATH: "ChallengeOverview",
     CHALLENGES_SCREEN_PATH: "ChallengesScreen",
     CHALLENGE_PROGRESS_PATH: "ChallengeProgress",
+    CHALLENGE_EDIT_PATH: "ChallengeEdit",
 
     //Alert
     CREATE_SUCCESS_ALERT_TITLE:"Create Success",
     UPDATE_SUCCESS_ALERT_TITLE:"Edit Success",
+    DELETE_SUCCESS_ALERT_TITLE:"Delete Success",
+    DELETE_SUCCESS_ALERT_MESSAGE:"The Reminder has been deleted successfully!",
+
+    CREATE_PLUS_BUTTON: "Click the + button to create",
+    YOUR_CUSTOMIZED_CHALLENGE: "your customized challenge",
+
+    DIARY: "Diary",
+    HOME: "Home",
+    CHALLENGES: "Challenges",
+    REMINDERS: "Reminders",
+
+    USER_PROFILE: "User Profile",
+    EDIT_PROFILE: "Edit Challenge"
 }
 
 export const Colors = {

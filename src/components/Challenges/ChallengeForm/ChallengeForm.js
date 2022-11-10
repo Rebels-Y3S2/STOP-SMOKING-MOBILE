@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Text, View } from "react-native";
 
 import DropDown from "../../DropDown/DropDown";
@@ -6,18 +6,22 @@ import { Button } from "react-native-paper";
 import styles from "./styles";
 import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
 import { CommonConstants } from "../../../util/Constants/CommonConstants";
+import { useTranslation } from 'react-i18next';
+import { AuthContext } from "../../../pages/AuthContext";
 
 export default function ChallengeForm({ onSave, onCancel }) {
+  const userDetails = useContext(AuthContext);
   const [type, setSmokingType] = useState(0);
   const [duration, setDuration] = useState(0);
-  const userId = "63632b9d0cae67041458ba21";
+  const { t } = useTranslation();
+  const userId = userDetails.userInfo._id;
 
   const smokingTypeOptions = [
-    { label: ChallengeConstants.MORE_THAN_FIVE_A_DAY, value: 4 },
-    { label: ChallengeConstants.TWO_FIVE_A_DAY, value: 3 },
-    { label: ChallengeConstants.ONCE_A_DAY, value: 2 },
-    { label: ChallengeConstants.TWO_FIVE_A_WEEK, value: 1 },
-    { label: ChallengeConstants.ONCE_A_WEEK, value: 0 },
+    { label: t(ChallengeConstants.MORE_THAN_FIVE_A_DAY), value: 4 },
+    { label: t(ChallengeConstants.TWO_FIVE_A_DAY), value: 3 },
+    { label: t(ChallengeConstants.ONCE_A_DAY), value: 2 },
+    { label: t(ChallengeConstants.TWO_FIVE_A_WEEK), value: 1 },
+    { label: t(ChallengeConstants.ONCE_A_WEEK), value: 0 },
   ];
 
   const durationOptions = [
@@ -37,7 +41,7 @@ export default function ChallengeForm({ onSave, onCancel }) {
         setValue={setSmokingType}
       />
       <Text variant="subtitle 2" style={styles.textLable}>
-        {CommonConstants.SMOKING_TYPE_SPAN}
+        {t(ChallengeConstants.SMOKING_TYPE_SPAN)}
       </Text>
 
       <DropDown
@@ -46,16 +50,15 @@ export default function ChallengeForm({ onSave, onCancel }) {
         setValue={setDuration}
       />
       <Text variant="subtitle 2" style={styles.textLable}>
-        {ChallengeConstants.CHALLENGE_DURATION_SPAN}
+        {t(ChallengeConstants.CHALLENGE_DURATION_SPAN)}
       </Text>
 
       <Button mode="outlined" onPress={onCancel} style={styles.button1}>
-        {CommonConstants.CANCEL}
-        Cancel
+        {t(CommonConstants.CANCEL)}
       </Button>
 
       <Button mode="contained" onPress={handleOnSave} style={styles.button2}>
-        {CommonConstants.SAVE}
+        {t(CommonConstants.SAVE)}
       </Button>
     </View>
   );

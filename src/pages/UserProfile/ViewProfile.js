@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, ScrollView, TextInput } from "react-native";
 import BigHeaderBackground from "../../components/HeaderBackground/HeaderBackground.js";
 import PopupContainer from "../../components/Contaner/PopupContainer.js";
@@ -9,34 +9,50 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
 import { HStack, Provider } from '@react-native-material/core'
 import DialogBoxUserDeletion from '../../components/DialogBox/DialogBoxUserDeletion';
+import {AuthContext} from '../AuthContext';
+import { userRequests } from "../../api/users.api.js";
+import { useTranslation } from 'react-i18next'
+import { UserConstants } from "../../util/Constants/UserConstants.js";
 
 const ViewProfile = () => {
   const navigation = useNavigation();
   const [show, setShow] = useState(false);
+
+  const { t } = useTranslation();
+
+  const {logout, userInfo} = useContext(AuthContext);
+
+  const handleSubmit = (id) => {
+    userRequests.deleteUser(id).
+    then((res) => {
+      console.log(res);
+      logout();
+    })
+  }
 
   return (
     <View>
       <ScrollView>
         <BigHeaderBackground />
         <PopupContainer firstContainer>
-          <HStack m={2} spacing={5}>
+          <HStack ml={240} mt={15} spacing={5}>
             <MaterialIcons name='edit' size={30} onPress={() => navigation.navigate('UpdateProfile')} />
             <MaterialIcons name='delete' size={30} onPress={() => setShow(true)} />
           </HStack>
 
           <Image
-            source={{ uri: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bWFufGVufDB8fDB8fA%3D%3D&w=1000&q=80" }}
+            source={{ uri: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" }}
             style={userProfileStyles.userImageContainer}
           />
 
-          <TextInput variant="outlined" placeholder='John Smith' style={userProfileStyles.inputContainer} editable={false}></TextInput>
-          <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Full Name</Text>
+          <TextInput variant="outlined" placeholder={userInfo.firstName} style={userProfileStyles.inputContainer} editable={false}></TextInput>
+          <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>{t(UserConstants.FULL_NAME)}</Text>
 
-          <TextInput variant="outlined" placeholder='johnsmith@gmail.com' style={userProfileStyles.inputContainer} editable={false}></TextInput>
-          <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Email Address</Text>
+          <TextInput variant="outlined" placeholder={userInfo.email} style={userProfileStyles.inputContainer} editable={false}></TextInput>
+          <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>{t(UserConstants.EMAIL_ADDRESS)}</Text>
 
-          <TextInput variant="outlined" placeholder='Normal (3 - 5 times per week)' style={userProfileStyles.inputContainer} editable={false}></TextInput>
-          <Text variant='subtitle 2' style={userProfileStyles.textLableContainerLast}>Smoking Pattern</Text>
+          <TextInput variant="outlined" placeholder={userInfo.smokingtype} style={userProfileStyles.inputContainer} editable={false}></TextInput>
+          <Text variant='subtitle 2' style={userProfileStyles.textLableContainerLast}>{t(UserConstants.SMOKING_PATTERN)}</Text>
         </PopupContainer>
 
         <View style={userProfileStyles.buttonContainer}>
@@ -50,7 +66,8 @@ const ViewProfile = () => {
                 />
               </View>
             }
-            title={<View><Text style={userProfileStyles.buttonTextContent}>Logout</Text></View>}
+            title={<View><Text style={userProfileStyles.buttonTextContent}>{t(UserConstants.LOGOUT)}</Text></View>}
+            onPress = {() => {logout()}}
           />
         </View>
       </ScrollView>
@@ -60,8 +77,9 @@ const ViewProfile = () => {
           <DialogBoxUserDeletion
             show={show}
             setShow={setShow}
-            title='Delete Profile'
-            message='Are you sure to delete your profile'
+            title={t(UserConstants.DELETE_PROFILE)}
+            message={t(UserConstants.ARE_YOU_SURE_TO_DELETE_YOUR_PROFILE)}
+            handlePress={() => {handleSubmit(userInfo._id)}}
           />
         </Provider>
       }

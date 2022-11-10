@@ -2,9 +2,12 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from '@react-navigation/native'
 import styles from "./styles";
 import { CommonConstants } from "../../../util/Constants/CommonConstants";
+import { useTranslation } from 'react-i18next'
+import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
 
 export default function ChallengeCard({ image, title, duration, type, id }) {
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   return (
     <View style={styles.cardContainer}>
@@ -16,8 +19,8 @@ export default function ChallengeCard({ image, title, duration, type, id }) {
         />
         <View style={styles.textContainer}>
           <Text style={styles.titleStyles}>{title}</Text>
-          <Text>Duration : {duration}</Text>
-          <Text>Type : {type}</Text>
+          <Text>{t(ChallengeConstants.DURATION)} : {duration}</Text>
+          <Text>{t(ChallengeConstants.TYPE)} : {type}</Text>
         </View>
       </View>
       </TouchableOpacity>

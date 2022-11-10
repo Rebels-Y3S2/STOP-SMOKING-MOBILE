@@ -6,14 +6,14 @@ export const styles = StyleSheet.create({
         top:560,
         left:"80%",
         color: '#1658CD',
-        backgroundColor:'white',
         boxShadow:'-8px 4px 24px rgba(0, 0, 0, 0.25)'
     },
     lable:{
         font: 'Roboto',
         fontStyle: 'normal',
         fontWeight: '400',
-        color: '#000000'
+        color: '#000000',
+        padding:2
     },
     message:{
         position:'absolute',
@@ -28,5 +28,9 @@ export const styles = StyleSheet.create({
         position:"absolute", 
         width:'100%', 
         height:"100%"
+    },
+    iconContainer: {
+        position: "absolute",
+        right: 10
     }
 });

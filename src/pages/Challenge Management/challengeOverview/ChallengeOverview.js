@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { View, SafeAreaView, ScrollView, Text } from "react-native";
 import PopupContainer from "../../../components/Contaner/PopupContainer";
 import BigHeaderBackground from "../../../components/HeaderBackground/HeaderBackground";
@@ -7,69 +7,120 @@ import DateList from "../../../components/Challenges/DateList/DateList";
 import Hr from "../../../components/HorizontalLine/Hr";
 import styles from "./styles";
 import { ChallengeConstants } from "../../../util/Constants/ChallengeConstants";
-import { getChallenge } from "../../../api/challenge.api";
+import { deleteChallenge, getChallenge, startChallenge } from "../../../api/challenge.api";
 import { useNavigation } from "@react-navigation/native";
 import { CommonConstants } from "../../../util/Constants/CommonConstants";
+import { Provider } from "@react-native-material/core";
+import DialogBox from "../../../components/DialogBox/DialogBox";
+import { useTranslation } from 'react-i18next'
 
-export default function ChallengeOverview({route}) {
-  const challengeId = route.params.id
+export default function ChallengeOverview({ route }) {
+  const challengeId = route.params.id;
   const [challenge, setChallenge] = useState({});
   const navigation = useNavigation();
+  const progressProps = useMemo(() => getProgressProps(), [challenge]);
+  const [showDelete, setShowDelete] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
-    fetchChallenge()
-  }, []);
+    fetchChallenge();
+  }, [challengeId]);
 
-  function handleOnClick() {
-    navigation.navigate(CommonConstants.CHALLENGE_PROGRESS_PATH);
+  function getProgressProps() {
+    const props = {};
+    if (challenge.name) {
+      if (!challenge.isStarted) {
+        props.daysLeft = challenge.duration;
+        props.tasks = challenge.tasks[0];
+        props.completed = 0;
+        props.onGoingDate = 1;
+      } else {
+        const onGoingDate =
+          (new Date(challenge.startDate.split("T")[0]) -
+            new Date(challenge.tasks[0].date.split("T")[0])) /
+          (1000 * 60 * 60 * 24);
+        const daysLeft = challenge.duration - onGoingDate;
+        props.daysLeft = daysLeft;
+        props.completed = (challenge.duration - daysLeft) / 100;
+        props.tasks = challenge.tasks[onGoingDate];
+        props.onGoingDate = onGoingDate + 1;
+      }
+      props.name = challenge.name;
+    }
+    return props;
   }
 
-  // function getProgressProps() 
-  //   const props;
-  //   if (!challenge.isStarted || challenge.startDate) {
-  //     props.daysLeft = challenge.duration;
-  //     props.tasks = challenge.task[0];
-  //   } else {
-  //     const new Date(challenge.startDate.split('T')[0]) - new Date(challenge.tasks[0].date.split('T')[0]))/ (1000 * 60 * 60 * 24)
-  //   }
-  // }
+  function handleOnClick() {
+    if (!challenge.isStarted) {
+      startChallenge(challengeId)
+        .then((res) => {
+          navigation.navigate(
+            CommonConstants.CHALLENGE_PROGRESS_PATH,
+            progressProps
+          );
+        })
+        .then((err) => {
+          console.log(err);
+        });
+    } else {
+      navigation.navigate(
+        CommonConstants.CHALLENGE_PROGRESS_PATH,
+        progressProps
+      );
+    }
+  }
 
   function getChallengeType(type) {
     let typeVal;
-    switch(type) {
+    switch (type) {
       case 0: {
-        typeVal = ChallengeConstants.ONCE_A_WEEK;
+        typeVal = t(ChallengeConstants.ONCE_A_WEEK);
         break;
       }
       case 1: {
-        typeVal = ChallengeConstants.TWO_FIVE_A_WEEK;
+        typeVal = t(ChallengeConstants.TWO_FIVE_A_WEEK);
         break;
       }
       case 2: {
-        typeVal = ChallengeConstants.ONCE_A_DAY;
+        typeVal = t(ChallengeConstants.ONCE_A_DAY);
         break;
       }
       case 3: {
-        typeVal = ChallengeConstants.TWO_FIVE_A_DAY;
+        typeVal = t(ChallengeConstants.TWO_FIVE_A_DAY);
         break;
       }
       case 4: {
-        typeVal = ChallengeConstants.MORE_THAN_FIVE_A_DAY;
+        typeVal = t(ChallengeConstants.MORE_THAN_FIVE_A_DAY);
         break;
       }
     }
     return typeVal;
   }
 
+  function handleDeleteChallenge() {
+    deleteChallenge(challengeId)
+      .then(res => {
+        console.log(res);
+        navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH, {refresh: true});
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   function fetchChallenge() {
     getChallenge(challengeId)
-    .then((res) => {
-      console.log(res.data.data)
-      const { duration, isStarted, name, tasks, type, startDate } = res.data.data
-      setChallenge({ duration, isStarted, name, tasks, type, startDate });
-    })
-    .catch((err) => console.log(err))
+      .then((res) => {
+        const { duration, isStarted, name, tasks, type, startDate } =
+          res.data.data;
+        setChallenge({ duration, isStarted, name, tasks, type, startDate });
+      })
+      .catch((err) => console.log(err));
   }
+
+  function handleEditChallenge() {
+    navigation.navigate(CommonConstants.CHALLENGE_EDIT_PATH, {id: challengeId});
+  } 
 
   return (
     <SafeAreaView style={styles.container}>
@@ -78,27 +129,42 @@ export default function ChallengeOverview({route}) {
         <PopupContainer firstContainer>
           <Overview
             title={challenge.name}
-            description={
-              `This is a ${challenge.duration} days challenge for people who smoke ${getChallengeType(challenge.type)}.`
-            } // Will change this string when localization is done. keep this here for now
+            description={`This is a ${
+              challenge.duration
+            } days challenge for people who smoke ${getChallengeType(
+              challenge.type
+            )}.`} // Will change this string when localization is done. keep this here for now
             isStarted={challenge.isStarted}
             onClick={handleOnClick}
+            onDelete={() => setShowDelete(true)}
+            onEdit={handleEditChallenge}
           />
         </PopupContainer>
         <PopupContainer></PopupContainer>
         <Text style={styles.dateListTitleStyles}>
-          {ChallengeConstants.DATE_LIST_TITLE}
+          {t(ChallengeConstants.DATE_LIST_TITLE)}
         </Text>
-        { challenge.tasks && challenge.tasks.map((task, index) =>{
+        {challenge.tasks &&
+          challenge.tasks.map((task, index) => {
             return (
               <View>
-                <Hr/>
-                <DateList date={task.date} tasks={task.tasks}/>
+                <Hr />
+                <DateList date={task.date.split('T')[0]} tasks={task.tasks} />
               </View>
-            )
-        } )}
+            );
+          })}
       </ScrollView>
+      {showDelete && (
+        <Provider>
+          <DialogBox
+            handleAction={handleDeleteChallenge}
+            show={showDelete}
+            setShow={setShowDelete}
+            title={t(ChallengeConstants.DELETE_CHALLENGE)}
+            message={t(ChallengeConstants.DELETE_CHALLENGE_CONFIRM)}
+          />
+        </Provider>
+      )}
     </SafeAreaView>
   );
 }
-

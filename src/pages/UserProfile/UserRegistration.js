@@ -10,6 +10,9 @@ import { Provider } from '@react-native-material/core'
 import DialogBoxQuickGuide from '../../components/DialogBox/DialogBoxQuickGuide';
 import {userRequests} from '../../api/users.api.js';
 import DropDown from '../../components/DropDown/DropDown';
+import { useTranslation } from 'react-i18next'
+import { UserConstants } from "../../util/Constants/UserConstants.js";
+import { CommonConstants } from "../../util/Constants/CommonConstants.js";
 
 const UserRegistration = () => {
 
@@ -20,13 +23,13 @@ const UserRegistration = () => {
     const [password, setPassword] = useState('');
     const [pic, setPic] = useState('https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg');
     const [smokingtype, setSmokingtype] = useState('');
+
+    const { t } = useTranslation();
     
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: 'Normal (3 - 5 times per week)', value: 'normal' },
-        { label: 'Average (10 - 15 times per week)', value: 'average' },
-        { label: 'Extereme (20 - 25 times per week)', value: 'extereme' },
+        { label: 'Normal (3 - 5 times per week)', value: 'Normal (3 - 5 times per week)' },
+        { label: 'Average (10 - 15 times per week)', value: 'Average (10 - 15 times per week)' },
+        { label: 'Extereme (20 - 25 times per week)', value: 'Extereme (20 - 25 times per week)' },
         { label: 'Other', value: 'other' },
     ]);
 
@@ -43,7 +46,7 @@ const UserRegistration = () => {
     }
 
     const handleSmokingType = (e) =>{
-        setPassword(e.nativeEvent.value)
+        setSmokingType(e.nativeEvent.text)
     }
 
     const handleSubmit = () =>{
@@ -52,11 +55,12 @@ const UserRegistration = () => {
           email:email,
           password:password,
           pic:"https://www.datocms-assets.com/55010/1631448989-1609827493259134-modelo.jpg?auto=format%2Ccompress&cs=srgb",
-          smokingtype: "normal"
+          smokingtype: smokingtype
         }
         userRequests.addUser(user)
         .then((res) =>{
           console.log(res.data)
+          navigation.navigate('Login')
         }).catch((error) =>{
           console.log(error)
         })
@@ -86,7 +90,7 @@ const UserRegistration = () => {
       };
 
     return (
-        <View>
+        <View style={{marginTop: 40}}>
             <ScrollView>
                 <BigHeaderBackground />
                 <PopupContainer firstContainer>
@@ -100,39 +104,40 @@ const UserRegistration = () => {
                         <MaterialIcons name='camera' size={40} onPress={onUploadImgToCloudinary} style={userProfileStyles.cameraIcon}/>  
                     </View>
                     
-                    <TextInput variant="outlined" placeholder='your name' style={userProfileStyles.inputContainer} onChange={handleFirstName}></TextInput>
-                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Enter your Full Name</Text>
+                    <TextInput variant="outlined" placeholder={t(UserConstants.PLACEHOLDER_NAME)} style={userProfileStyles.inputContainer} onChange={handleFirstName}></TextInput>
+                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>{t(UserConstants.ENTER_NAME)}</Text>
 
-                    <TextInput variant="outlined" placeholder='example@gmail.com' style={userProfileStyles.inputContainer} onChange={handleEmailAddress}></TextInput>
-                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Enter your Email Address</Text>
+                    <TextInput variant="outlined" placeholder={t(UserConstants.PLACEHOLDER_EMAIL)} style={userProfileStyles.inputContainer} onChange={handleEmailAddress}></TextInput>
+                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>{t(UserConstants.ENTER_EMAIL)}</Text>
 
                     <TextInput variant="outlined" placeholder='.........' style={userProfileStyles.inputContainer} secureTextEntry={true}></TextInput>
-                    <Text variant='password' style={userProfileStyles.textLableContainer}>Enter your Password</Text>
+                    <Text variant='password' style={userProfileStyles.textLableContainer}>{t(UserConstants.ENTER_PASSWORD)}</Text>
 
                     <TextInput variant="outlined" placeholder='.........' style={userProfileStyles.inputContainer} secureTextEntry={true} onChange={handlePassword}></TextInput>
-                    <Text variant='password' style={userProfileStyles.textLableContainer}>Confirm your password</Text>
+                    <Text variant='password' style={userProfileStyles.textLableContainer}>{t(UserConstants.CONFIRM_PASSWORD)}</Text>
 
                     <DropDown setValue={setSmokingtype} data={items} disable={true} onChange={handleSmokingType}/>
-                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainerLast}>How often do you smoke?</Text>
+                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainerLast}>{t(UserConstants.HOW_OFTEN_DO_YOU_SMOKE)}</Text>
 
                     <View style={userProfileStyles.cancelbuttonContainer}>
                         <Button
-                            title="Cancel"
+                            title={t(CommonConstants.CANCEL)}
                             color="#B6B3B3"
+                            onPress={() => navigation.navigate('Login')}
                         >
                         </Button>
                     </View>
 
                     <View style={userProfileStyles.editbuttonContainer}>
                         <Button
-                            title="Submit"
+                            title={t(UserConstants.SUBMIT)}
                             onPress={handleSubmit}
                         >
                         </Button>
                     </View>
 
-                    <Text variant='subtitle 2' style={userProfileStyles.privacyPolicy}>Click here to see the Privacy Policy</Text>
-                    <Text variant='subtitle 2' style={userProfileStyles.agreement}>By Clicking on Submit, you agree to our terms and conditions</Text>
+                    <Text variant='subtitle 2' style={userProfileStyles.privacyPolicy}>{t(UserConstants.PRIVACY_POLICY)}</Text>
+                    <Text variant='subtitle 2' style={userProfileStyles.agreement}>{t(UserConstants.TERMS_CONDITIONS)}</Text>
                 </PopupContainer>
             </ScrollView>
             {
@@ -142,9 +147,7 @@ const UserRegistration = () => {
                         show={show}
                         setShow={setShow}
                         title='Quick Guide'
-                        message='This app will help the user to stop smoking, by providing some challenges.
-                        User needs to register into the app by providing some details, to use the app.
-                        User can Login to the application using email address and password.'
+                        message={t(UserConstants.QUICK_GUIDE)}
                     />
                 </Provider>
             }

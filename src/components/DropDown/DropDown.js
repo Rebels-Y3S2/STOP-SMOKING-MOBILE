@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next';
 import {Dropdown} from 'react-native-element-dropdown'
+import { CommonConstants } from '../../util/Constants/CommonConstants';
 import { styles } from './DropDownStyles';
 
+
 export default function DropDown({disable = true, data = [], setValue, placeholder}) {
+  const { t } = useTranslation();
     const [value, setValue_] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
-    const placeholderValue = placeholder ? placeholder : 'Select item';
-    
+    const placeholderValue = placeholder ? placeholder : CommonConstants.SELECT_ITEM;
   return (
     <Dropdown
         style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
@@ -19,7 +22,7 @@ export default function DropDown({disable = true, data = [], setValue, placehold
         labelField="label"
         disable={!disable}
         valueField="value"
-        placeholder={!isFocus && placeholderValue}
+        placeholder={!isFocus && t(placeholderValue)}
         value={value}
         onChange={item => {
           setValue_(item.value);
