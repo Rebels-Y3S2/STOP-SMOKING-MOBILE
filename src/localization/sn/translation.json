@@ -110,6 +110,38 @@
   
     "Challenge Progress": "අභියෝග ප්‍රගතිය",
     "Create Challenge": "අභියෝගයක් සාදන්න",
-    "Edit Challenge": "අභියෝගය සංස්කරණය"
+    "Edit Challenge": "අභියෝගය සංස්කරණය",
+
+    "Hey": "ආයුබෝවන්",
+    "Click the image to navigate to your challenge": "ඔබගේ අභියෝගයට සැරිසැරීමට රූපය ක්ලික් කරන්න",
+    "No more cigarettes": "තවත් සිගරට් නැත",
+    "Let's stop smoking...": "දුම්පානය නතර කරමු...",
+    "Smoking causing nearly 8 million deaths in 2022.": "දුම්පානය නිසා 2022 දී මිලියන 8 කට ආසන්න පිරිසක් මිය යනවා.",
+    "90% of new smokers become addicted by age 25": "නව දුම් පානය කරන්නන්ගෙන් 90% ක් වයස අවුරුදු 25 දී ඇබ්බැහි වේ",
+    "Smoking is a major risk factor that threatens the health of people worldwide": "දුම්පානය ලොව පුරා මිනිසුන්ගේ සෞඛ්‍යයට තර්ජනයක් වන ප්‍රධාන අවදානම් සාධකයකි",
+
+    "Full Name": "සම්පූර්ණ නම",
+    "Email Address": "විද්යුත් තැපැල් ලිපිනය",
+    "Smoking Pattern":"දුම්පාන රටාව",
+    "Logout": "පිටවීම",
+    "Delete Profile": "පැතිකඩ මකන්න",
+    "Are you sure to delete your profile": "ඔබගේ පැතිකඩ මකා දැමීමට ඔබට විශ්වාසද",
+    "Normal (3 - 5 times per week)": "සාමාන්‍ය (සතියකට 3-5 වතාවක්)",
+    "Average (10 - 15 times per week)": "සාමාන්‍යය (සතියකට 10-15 වතාවක්)",
+    "Extereme (20 - 25 times per week)": "Extereme (සතියකට 20 - 25 වතාවක්)",
+    "Other": "වෙනත්",
+    "Enter your Email Address": "ඔබගේ විද්‍යුත් තැපැල් ලිපිනය ඇතුලත් කරන්න",
+    "Enter your Password": "ඔබගේ මුරපදය ඇතුලත් කරන්න",
+    "Enter your Full Name": "ඔබේ සම්පූර්ණ නම ඇතුලත් කරන්න",
+    "Confirm your Password": "ඔබගේ මුරපදය තහවුරු කරන්න",
+    "Login": "ඇතුල් වන්න",
+    "Register": "ලියාපදිංචි කරන්න",
+    "Forgot Password ?": "මුරපදය අමතක වුණා ද ?",
+    "example@gmail.com": "example@gmail.com",
+    "your name": "ඔබගේ නම",
+    "Submit": "ඉදිරිපත් කරන්න",
+    "Click here to see the Privacy Policy": "රහස්‍යතා ප්‍රතිපත්තිය බැලීමට මෙතන ක්ලික් කරන්න",
+    "By Clicking on Submit, you agree to our terms and conditions": "ඉදිරිපත් කිරීම මත ක්ලික් කිරීමෙන්, ඔබ අපගේ නියමයන් සහ කොන්දේසි වලට එකඟ වේ",
+    "This app will help the user to stop smoking, by providing some challenges. User needs to register into the app by providing some details, to use the app. User can Login to the application using email address and password.": "මෙම යෙදුම දුම්පානය නැවැත්වීමට පරිශීලකයාට යම් යම් අභියෝග ලබා දීමෙන් උපකාරී වනු ඇත. යෙදුම භාවිතා කිරීමට, පරිශීලකයාට යම් විස්තර ලබා දීමෙන් යෙදුමට ලියාපදිංචි විය යුතුය. පරිශීලකයාට විද්‍යුත් තැපැල් ලිපිනය සහ මුරපදය භාවිතයෙන් යෙදුමට පුරනය විය හැක."
   }
   
