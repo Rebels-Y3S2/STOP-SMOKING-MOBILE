@@ -6,12 +6,16 @@ import { userProfileStyles } from "./UserProfileStyles.js";
 import { Image } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native'
 import {AuthContext} from '../AuthContext';
+import { useTranslation } from 'react-i18next'
+import { UserConstants } from "../../util/Constants/UserConstants.js";
 
 const UserLogin = () => {
 
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const { t } = useTranslation();
 
     const {login} = useContext(AuthContext);
 
@@ -28,11 +32,11 @@ const UserLogin = () => {
             <ScrollView>
                 <BigHeaderBackground />
                 <PopupContainer firstContainer>
-                    <TextInput variant="outlined" placeholder='example@gmail.com' style={userProfileStyles.inputContainer} onChange={handleEmailAddress}></TextInput>
-                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Enter your Email Address</Text>
+                    <TextInput variant="outlined" placeholder={t(UserConstants.PLACEHOLDER_EMAIL)} style={userProfileStyles.inputContainer} onChange={handleEmailAddress}></TextInput>
+                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>{t(UserConstants.ENTER_EMAIL)}</Text>
 
                     <TextInput variant="outlined" placeholder='.........' style={userProfileStyles.inputContainer} secureTextEntry={true} onChange={handlePassword}></TextInput>
-                    <Text variant='password' style={userProfileStyles.textLableContainer}>Enter your Password</Text>
+                    <Text variant='password' style={userProfileStyles.textLableContainer}>{t(UserConstants.ENTER_PASSWORD)}</Text>
 
                     <Image
                         source={{ uri: "https://www.tcnorth.com/wp-content/uploads/2017/03/iStock-615524918-1080x675.jpg" }}
@@ -41,7 +45,7 @@ const UserLogin = () => {
 
                     <View style={userProfileStyles.loginbuttonContainer}>
                         <Button
-                            title="Login"
+                            title={t(UserConstants.LOGIN)}
                             onPress={() => {login(email, password)}}
                         >
                         </Button>
@@ -49,13 +53,13 @@ const UserLogin = () => {
 
                     <View style={userProfileStyles.loginbuttonContainer}>
                         <Button
-                            title="Register"
+                            title={t(UserConstants.REGISTER)}
                             onPress={() => navigation.navigate('UserRegistration')}
                         >
                         </Button>
                     </View>
 
-                    <Text variant='subtitle 2' style={userProfileStyles.forgotPasswordStyle}>Forgot Password?</Text>
+                    <Text variant='subtitle 2' style={userProfileStyles.forgotPasswordStyle}>{t(UserConstants.FORGOT_PASSWORD)}</Text>
 
                 </PopupContainer>
             </ScrollView>

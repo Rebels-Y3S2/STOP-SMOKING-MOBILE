@@ -11,10 +11,14 @@ import { HStack, Provider } from '@react-native-material/core'
 import DialogBoxUserDeletion from '../../components/DialogBox/DialogBoxUserDeletion';
 import {AuthContext} from '../AuthContext';
 import { userRequests } from "../../api/users.api.js";
+import { useTranslation } from 'react-i18next'
+import { UserConstants } from "../../util/Constants/UserConstants.js";
 
 const ViewProfile = () => {
   const navigation = useNavigation();
   const [show, setShow] = useState(false);
+
+  const { t } = useTranslation();
 
   const {logout, userInfo} = useContext(AuthContext);
 
@@ -42,13 +46,13 @@ const ViewProfile = () => {
           />
 
           <TextInput variant="outlined" placeholder={userInfo.firstName} style={userProfileStyles.inputContainer} editable={false}></TextInput>
-          <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Full Name</Text>
+          <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>{t(UserConstants.FULL_NAME)}</Text>
 
           <TextInput variant="outlined" placeholder={userInfo.email} style={userProfileStyles.inputContainer} editable={false}></TextInput>
-          <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Email Address</Text>
+          <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>{t(UserConstants.EMAIL_ADDRESS)}</Text>
 
           <TextInput variant="outlined" placeholder={userInfo.smokingtype} style={userProfileStyles.inputContainer} editable={false}></TextInput>
-          <Text variant='subtitle 2' style={userProfileStyles.textLableContainerLast}>Smoking Pattern</Text>
+          <Text variant='subtitle 2' style={userProfileStyles.textLableContainerLast}>{t(UserConstants.SMOKING_PATTERN)}</Text>
         </PopupContainer>
 
         <View style={userProfileStyles.buttonContainer}>
@@ -62,7 +66,7 @@ const ViewProfile = () => {
                 />
               </View>
             }
-            title={<View><Text style={userProfileStyles.buttonTextContent}>Logout</Text></View>}
+            title={<View><Text style={userProfileStyles.buttonTextContent}>{t(UserConstants.LOGOUT)}</Text></View>}
             onPress = {() => {logout()}}
           />
         </View>
@@ -73,8 +77,8 @@ const ViewProfile = () => {
           <DialogBoxUserDeletion
             show={show}
             setShow={setShow}
-            title='Delete Profile'
-            message='Are you sure to delete your profile'
+            title={t(UserConstants.DELETE_PROFILE)}
+            message={t(UserConstants.ARE_YOU_SURE_TO_DELETE_YOUR_PROFILE)}
             handlePress={() => {handleSubmit(userInfo._id)}}
           />
         </Provider>

@@ -7,6 +7,9 @@ import {AuthContext} from '../AuthContext';
 import { userRequests } from "../../api/users.api.js";
 import { useNavigation } from '@react-navigation/native'
 import DropDown from '../../components/DropDown/DropDown';
+import { useTranslation } from 'react-i18next'
+import { UserConstants } from "../../util/Constants/UserConstants.js";
+import { CommonConstants } from "../../util/Constants/CommonConstants.js";
 
 const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
@@ -16,6 +19,8 @@ const UpdateProfile = () => {
     const navigation = useNavigation();
     const {userInfo} = useContext(AuthContext);
     const [refreshing, setRefreshing] = React.useState(false);
+
+    const { t } = useTranslation();
 
     const [email, setEmail] = useState(userInfo.email);
     const [firstName, setFirstName] = useState(userInfo.firstName);
@@ -73,17 +78,17 @@ const UpdateProfile = () => {
                 <BigHeaderBackground />
                 <PopupContainer firstContainer>
                     <TextInput variant="outlined" placeholder={userInfo.firstName} style={userProfileStyles.inputContainerUpdateProfile} onChange={handleFirstName}></TextInput>
-                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Full Name</Text>
+                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>{t(UserConstants.FULL_NAME)}</Text>
 
                     <TextInput variant="outlined" placeholder={userInfo.email} style={userProfileStyles.inputContainerUpdateProfile} onChange={handleEmailAddress}></TextInput>
-                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>Email Address</Text>
+                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainer}>{t(UserConstants.EMAIL_ADDRESS)}</Text>
 
                     <DropDown setValue={setSmokingType} data={items} disable={true} onChange={handleSmokingType}/>
-                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainerLast}>Smoking Pattern</Text>
+                    <Text variant='subtitle 2' style={userProfileStyles.textLableContainerLast}>{t(UserConstants.SMOKING_PATTERN)}</Text>
 
                     <View style={userProfileStyles.cancelbuttonContainer}>
                         <Button
-                            title="Cancel"
+                            title={t(CommonConstants.CANCEL)}
                             color="#B6B3B3"
                             onPress={() => {navigation.navigate('ViewProfile')}}
                         >
@@ -92,7 +97,7 @@ const UpdateProfile = () => {
 
                     <View style={userProfileStyles.editbuttonContainer}>
                         <Button
-                            title="Edit"
+                            title={t(CommonConstants.EDIT)}
                             onPress={() => handleSubmit()}
                         >
                         </Button>

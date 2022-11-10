@@ -110,6 +110,38 @@
   
     "Challenge Progress": "சவால் முன்னேற்றம்",
     "Create Challenge": "சவாலை உருவாக்கவும்",
-    "Edit Challenge": "சவாலைத் திருத்தவும்"
+    "Edit Challenge": "சவாலைத் திருத்தவும்",
+
+    "Hey": "வணக்கம்",
+    "Click the image to navigate to your challenge": "உங்கள் சவாலுக்கு செல்ல படத்தின் மீது கிளிக் செய்யவும்",
+    "No more cigarettes": "இனி சிகரெட் வேண்டாம்",
+    "Let's stop smoking...": "புகை பிடிப்பதை நிறுத்துவோம்...",
+    "Smoking causing nearly 8 million deaths in 2022.": "2022 இல் புகைபிடிப்பதால் கிட்டத்தட்ட 8 மில்லியன் இறப்புகள் ஏற்படுகின்றன.",
+    "90% of new smokers become addicted by age 25": "புதிய புகைப்பிடிப்பவர்களில் 90% பேர் 25 வயதிற்குள் அடிமையாகிறார்கள்",
+    "Smoking is a major risk factor that threatens the health of people worldwide": "உலகெங்கிலும் உள்ள மக்களின் ஆரோக்கியத்தை அச்சுறுத்தும் முக்கிய ஆபத்து காரணி புகைபிடித்தல்",
+
+    "Full Name": "முழு பெயர்",
+    "Email Address": "மின்னஞ்சல் முகவரி",
+    "Smoking Pattern":"புகைபிடிக்கும் முறை",
+    "Logout": "வெளியேறு",
+    "Delete Profile": "சுயவிவரத்தை நீக்கு",
+    "Are you sure to delete your profile": "உங்கள் சுயவிவரத்தை நீக்குவது உறுதியா",
+    "Normal (3 - 5 times per week)": "இயல்பானது (வாரத்திற்கு 3-5 முறை)",
+    "Average (10 - 15 times per week)": "சராசரி (வாரத்திற்கு 10 - 15 முறை)",
+    "Extereme (20 - 25 times per week)": "எக்ஸ்டெரீம் (வாரத்திற்கு 20 - 25 முறை)",
+    "Other": "மற்றவை",
+    "Enter your Email Address": "உங்கள் மின்னஞ்சல் முகவரியை உள்ளிடவும்",
+    "Enter your Password": "உங்கள் கடவுச்சொல்லை உள்ளிடவும்",
+    "Enter your Full Name": "உங்கள் முழுப் பெயரை உள்ளிடவும்",
+    "Confirm your Password": "உங்கள் கடவுச்சொல்லை உறுதிப்படுத்தவும்",
+    "Login": "உள்நுழை",
+    "Register": "பதிவு செய்",
+    "Forgot Password ?": "கடவுச்சொல்லை மறந்துவிட்டீர்களா ?",
+    "example@gmail.com": "example@gmail.com",
+    "your name": "உங்கள் பெயர்",
+    "Submit": "சமர்ப்பிக்கவும்",
+    "Click here to see the Privacy Policy": "தனியுரிமைக் கொள்கையைப் பார்க்க இங்கே கிளிக் செய்யவும்",
+    "By Clicking on Submit, you agree to our terms and conditions": "சமர்ப்பி என்பதைக் கிளிக் செய்வதன் மூலம், எங்கள் விதிமுறைகள் மற்றும் நிபந்தனைகளை ஏற்கிறீர்கள்",
+    "This app will help the user to stop smoking, by providing some challenges. User needs to register into the app by providing some details, to use the app. User can Login to the application using email address and password.": "இந்த பயன்பாடு சில சவால்களை வழங்குவதன் மூலம், புகைபிடிப்பதை நிறுத்த பயனருக்கு உதவும். பயன்பாட்டைப் பயன்படுத்த, பயனர் சில விவரங்களை வழங்குவதன் மூலம் பயன்பாட்டில் பதிவு செய்ய வேண்டும். பயனர் மின்னஞ்சல் முகவரி மற்றும் கடவுச்சொல்லைப் பயன்படுத்தி பயன்பாட்டில் உள்நுழையலாம்."
   }
   
