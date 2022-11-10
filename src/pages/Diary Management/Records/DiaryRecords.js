@@ -1,6 +1,6 @@
 import { HStack, Provider, Text } from '@react-native-material/core';
 import { useNavigation } from '@react-navigation/native';
-import React, { createRef, useState } from 'react';
+import React, { createRef, useContext, useState } from 'react';
 import { View, TouchableOpacity   } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Card from '../../../components/Card/Card';
@@ -18,8 +18,10 @@ import { useEffect } from 'react';
 import useMap from '../../../hooks/useMap';
 import { DiaryColorsConstants, DiaryConstants, DiaryIconsConstants } from '../../../util/Constants/DiaryConstants';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../../AuthContext';
 
 export default function DiaryRecords() {
+  const authContext = useContext(AuthContext); 
   const input = createRef();
   const navigation = useNavigation()
   const [show, setShow] = useState(false);
@@ -46,7 +48,7 @@ export default function DiaryRecords() {
   }, []);
 
   const getAllDiaryResponses = () => {
-    const userId = '635b10baf383232439911869'
+    const userId = authContext.userInfo._id;
     fetchDiaryRecords(userId).then((data) => {
         setRecordResponseList(data.data?.data)
     })
@@ -96,7 +98,7 @@ export default function DiaryRecords() {
   const handleSubmit = async (event) => {
     const checkTitle = checkTitleValidity(recordTitle);
     const diary = {
-        userId:'635b10baf383232439911869',
+        userId: authContext.userInfo._id,
         title: recordTitle,
         description: recordDesc,
         isFavorite: false
@@ -194,7 +196,7 @@ export default function DiaryRecords() {
             <>
               <View>
                 <HStack m={0} spacing={1} >
-                  <Text style={styles.lable}>{row.description + " " + row.isFavorite}</Text>
+                  <Text style={styles.lable}>{row.description}</Text>
                 </HStack>
                 <HStack m={0} spacing={240} style={styles.btns}>
                   <View key={index}>
