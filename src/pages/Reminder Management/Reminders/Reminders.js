@@ -30,7 +30,7 @@ export default function Reminders({route}) {
   const [show, setShow] = useState(false);
   const [reminderArray, setReminderArray] = useState([]);
   const [deleteId, setDeleteId] = useState();
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(true);
 
   // if route params are there alert will trigger
   if(route.params){

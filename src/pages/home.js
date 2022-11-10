@@ -35,7 +35,7 @@ const Home = () => {
         <BigHeaderBackground/>
         <PopupContainer firstContainer style={homestyles.popupcontainerMargin}>
           <MaterialIcons name='person' size={25} onPress={() => navigation.navigate('ViewProfile')} style={homestyles.profileIcon}/>
-          <Text variant='subtitle 2' style={homestyles.welcomephrase}>Hey {userInfo.firstName} !</Text>
+          <Text variant='subtitle 2' style={homestyles.welcomephrase}>Hey {userInfo ? userInfo.firstName : 'Stranger'} !</Text>
           <Text variant='subtitle 2' style={homestyles.imageinstruction}>Click the image to navigate to your challenge</Text>
           <Image
             source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu_lhDKyIPN98vfAYrx1vLeVoIbjXt6N2siWtu4cx3hm0n-YBrvzl25lngvIILvdSElz4&usqp=CAU" }}

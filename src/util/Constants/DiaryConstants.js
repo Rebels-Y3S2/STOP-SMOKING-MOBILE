@@ -1,4 +1,5 @@
 export const DiaryConstants = {
+    DIARY: "Diary",
     RECORDS: "Records",
     FAVORITES: "Favorites",
     TITLE_MUST_BE_3_50_CHARACTERS_LONG: "Title must be 3-50 Characters Long",

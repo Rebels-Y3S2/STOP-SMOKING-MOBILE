@@ -33,14 +33,22 @@ export default function LanguageSelection({ onClose, handleSelection }) {
     onClose();
   }
 
+  function getValue(locale) {
+    if (locale == "tm") {
+      return "தமிழ்";
+    }
+    if (locale == "sn") {
+      return "සිංහල";
+    }
+    if (locale == "en") {
+      return "English";
+    }
+  }
+
   return (
     <>
-      <View style={{ zIndex: 1000, marginTop: -520}}>
-        <Dialog
-          visible={true}
-          onDismiss={dismissHandler}
-          
-        >
+      <View style={{ zIndex: 1000, marginTop: -520 }}>
+        <Dialog visible={true} onDismiss={dismissHandler}>
           <HStack spacing={25}>
             <View>
               <DialogHeader title={`Change language`} />
@@ -56,14 +64,14 @@ export default function LanguageSelection({ onClose, handleSelection }) {
           <Divider />
           <DialogContent>
             {/* <View style={styles.container}> */}
-              <FlatList
-                data={[{ key: "en" }, { key: "tm" }, { key: "sn" }]}
-                renderItem={({ item }) => (
-                  <TouchableOpacity onPress={() => handleSelection(item.key)}>
-                    <Text style={styles.item}>{item.key}</Text>
-                  </TouchableOpacity>
-                )}
-              />
+            <FlatList
+              data={[{ key: "en" }, { key: "tm" }, { key: "sn" }]}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => handleSelection(item.key)}>
+                  <Text style={styles.item}>{getValue(item.key)}</Text>
+                </TouchableOpacity>
+              )}
+            />
             {/* </View> */}
           </DialogContent>
         </Dialog>
