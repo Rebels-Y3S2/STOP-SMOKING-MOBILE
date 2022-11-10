@@ -14,6 +14,7 @@ import { ReminderConstants } from '../../../util/Constants/ReminderConstants';
 import { RefreshControl } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../../AuthContext';
+import { NotificationContext } from '../Context/ReminderContext';
 
 export default function Reminders({route}) {
   // Navigation
@@ -21,6 +22,7 @@ export default function Reminders({route}) {
 
   // User information data
   const authContext = useContext(AuthContext); 
+  const notificationHandler = useContext(NotificationContext);
 
   // Translations
   const { t } = useTranslation();
@@ -31,6 +33,7 @@ export default function Reminders({route}) {
   const [reminderArray, setReminderArray] = useState([]);
   const [deleteId, setDeleteId] = useState();
   const [refreshing, setRefreshing] = useState(true);
+  const [deleteStatus, setDeleteStatus] = useState(false);
 
   // if route params are there alert will trigger
   if(route.params){
@@ -43,6 +46,11 @@ export default function Reminders({route}) {
     } 
   }
 
+  if(deleteStatus === true) {
+    Alert.alert(t(CommonConstants.DELETE_SUCCESS_ALERT_TITLE), t(CommonConstants.DELETE_SUCCESS_ALERT_MESSAGE));
+    setDeleteStatus(false);
+  }
+  
   /**
    * Sets the refreshing values
    */
@@ -90,6 +98,8 @@ export default function Reminders({route}) {
     deleteReminder(deleteId)
     .then((res) =>{
       getReminderDetails(authContext.userInfo._id);
+      notificationHandler({deleteId: deleteId})
+      setDeleteStatus(true);
     }).catch((error)=>{
       console.log(error);
     })

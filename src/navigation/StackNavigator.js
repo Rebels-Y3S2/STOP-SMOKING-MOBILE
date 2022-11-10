@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../pages/Home.js";
+import Home from "../pages/home.js";
 import Splash from "../pages/Splash";
 import BottomTabNavigator from "./TabNavigator";
 import Reminders from "../pages/Reminder Management/Reminders/Reminders";

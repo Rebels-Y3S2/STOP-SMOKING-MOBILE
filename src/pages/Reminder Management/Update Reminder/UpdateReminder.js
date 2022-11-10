@@ -160,7 +160,12 @@ export default function UpdateReminder({route}) {
           type:CommonConstants.UPDATE, success:true
         }
       )
-      notificationHandler(res.data.data);
+      fetchReminder(res.data.data._id)
+      .then((res) =>{
+        notificationHandler(res.data.data);
+      }).catch((error) =>{
+        console.log(error)
+      })
     }).catch((error) =>{
       console.log(error);
     })
