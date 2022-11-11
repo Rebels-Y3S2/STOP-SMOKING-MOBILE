@@ -308,7 +308,7 @@ export default function DiaryRecords() {
         </View>
         <ScrollView style={styles.scrollView}>
           <View style={styles.cardContainer}>
-            {recordResponseList?.filter((rec) => {
+            {recordResponseList?.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).filter((rec) => {
                   if (search === "") {
                       return rec;
                   } else if (rec.title.toLowerCase().includes(search.toLowerCase())) {
