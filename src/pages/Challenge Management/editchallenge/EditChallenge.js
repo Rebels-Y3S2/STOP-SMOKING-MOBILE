@@ -12,6 +12,7 @@ export default function EditChallenge({ route }) {
   const challengeId = route.params.id
 
   function handleSaveChallenge(challengeObj) {
+    console.log(challengeId, challengeObj)
     editChallenge(challengeId, challengeObj)
       .then(res => {
         navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH, {refresh: true});

@@ -29,12 +29,14 @@ export default function Challenges({ route }) {
     })
   }, []);
   
-  if (route?.params?.refresh) {
-    fetchChallenges();
-  }
+  useEffect(() => {
+    if (route?.params?.refresh) {
+   fetchChallenges();
+    }
+  },[route])
 
   useEffect(() => {
-    fetchChallenges();
+   fetchChallenges();
   },[])
 
   function getType(duration) {
@@ -47,7 +49,6 @@ export default function Challenges({ route }) {
 
   function fetchChallenges() {
     if (!userDetails?.isLoading) {
-     // setRefreshing(true);
       getChallenges(userDetails.userInfo._id)
       .then(res => {
         setChallenges(res.data.data);
