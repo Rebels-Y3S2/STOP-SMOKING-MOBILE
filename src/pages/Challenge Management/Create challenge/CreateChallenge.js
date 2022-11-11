@@ -13,7 +13,6 @@ export default function CreateChallenge() {
   function handleSaveChallenge(challengeObj) {
     addChallenge(challengeObj)
       .then(res => {
-        console.log(res)
         navigation.navigate(CommonConstants.CHALLENGES_SCREEN_PATH, {refresh: true});
       })
       .catch(err => {
