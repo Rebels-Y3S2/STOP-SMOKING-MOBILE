@@ -16,6 +16,9 @@ import { AppNav } from "./src/navigation/AppNav";
 import NotificationProvider from "./src/pages/Reminder Management/Context/ReminderContext";
 import { MenuProvider } from "react-native-popup-menu";
 import { LangProvider } from "./src/localization/LangProvider";
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 const App = () => {
   return (
